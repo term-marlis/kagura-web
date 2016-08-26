@@ -1,0 +1,44 @@
+{% extends "creator_layout.html" %}
+
+{% block meta %}
+<title>新規登録 - クリエイター</title>
+<meta property="og:title" content="新規登録 - クリエイター">
+{% endblock %}
+
+{% block body %}
+  <div class="ui center aligned stackable signup grid">
+    <div class="five wide column">
+      <div class="ui black message">
+        Creator Signup
+      </div>
+      <form class="ui large form" action="{{ url_for('creator.signup') }}" method="post">
+        {{ form.hidden_tag() }}
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            {{ form.username(placeholder='nickname') }}
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="mail icon"></i>
+            {{ form.email(placeholder='e-mail') }}
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            {{ form.password(placeholder='password') }}
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            {{ form.password_confirm(placeholder='retype password') }}
+          </div>
+        </div>
+        {{ form.submit(class='ui fluid large gold submit button') }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

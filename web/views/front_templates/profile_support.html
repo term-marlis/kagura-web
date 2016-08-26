@@ -1,0 +1,92 @@
+{% extends "profile_layout.html" %}
+
+{% block meta %}
+<title>サポートプロジェクト - マイページ</title>
+<meta name="keywords" content="クラウドファンディング,音楽,WIZY,ウィジー,共創,クラウドクリエイティング,レコチョク">
+<meta name="description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:title" content="サポートプロジェクト - マイページ">
+<meta property="og:description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:image" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:site_name" content="WIZY（ウィジー）">
+<meta property="og:type" content="article">
+<meta name="twitter:image:src" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+{% endblock %}
+
+{% block container %}
+  <div class="ui top attached tabular menu">
+    <a class="item" href="{{ url_for('front.profile_favorite') }}">お気に入り</a>
+    <a class="active item" data-tab="support">サポート履歴</a>
+    <div class="right menu">
+      <a class="item" href="{{ url_for('front.profile_edit') }}">設定</a>
+    </div>
+  </div>
+  <div class="ui tab bottom attached segment active" data-tab="support">
+    {% if supports %}
+      <div class="ui divided items">
+        {% for support in supports %}
+          <div class="item">
+            <div class="image">
+              <a href="{{ url_for('front.project',project_id=support.project_id) }}">
+                <img class="ui image" src="{{ support.project_image|to_cdn('project') }}">
+              </a>
+              <h6 class="ui center aligned header">
+                {{ support.project_status_text }}
+                {% if support.project_status == 2 %}
+                  <br/>{{ support.project_end_time|format_datetime }}まで
+                {% endif %}
+              </h6>
+            </div>
+            <div class="content">
+              <div class="gold header">
+                <a href="{{ url_for('front.project',project_id=support.project_id) }}">{{ support.project_title }}</a>
+              </div>
+              <div class="meta">{{ support.item_name }}</div>
+              <div class="extra">
+                {% if support.status == 1 %}{# 未決済の場合は色を変える #}
+                  <div class="ui orange label">{{ support.status|codec('support_status') }}</div>
+                {% else %}
+                  <div class="ui blue label">{{ support.status|codec('support_status') }}</div>
+                {% endif %}
+                {{ support.amount|grouped_number }}円
+              </div>
+              {% if support.shipping_address %}
+                <div class="extra">
+                  <div class="ui label">お届け先</div>
+                  〒{{ support.shipping_address }}
+                </div>
+              {% endif %}
+              <div class="extra">
+                <div class="ui label">決済番号</div>
+                {{ support.order_id }}
+              </div>
+              {% if support.status == 1 and support.payment_term %}{# pendingの場合は支払い情報を表示する #}
+                <div class="description">
+                  <div class="ui orange message">
+                    <div class="header">
+                      {{ support.payment_type|codec('payment_type') }}
+                      {% if support.payment_cvs_name %}({{ support.payment_cvs_name }}){% endif %}
+                    </div>
+                    <p>お客様番号/確認コード：{{ support.payment_code }}<br/>
+                      ({{ support.payment_term|format_datetime }}まで)</p>
+                  </div>
+                  {% if (support.payment_type == 'cvs') %}
+                  <a href="https://www.gmo-pg.com/service/convenience_store/various_user/" target="_blank"><i class="external icon"></i>コンビニでのお支払い方法はこちら</a>
+                  {% else %}
+                  <a href="http://www.pay-easy.jp/where/list_atm.php#list" target="_blank"><i class="external icon"></i>取引金融機関はこちら</a>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>まだサポートしたプロジェクトがありません</p>
+    {% endif %}
+
+  </div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

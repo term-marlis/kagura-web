@@ -1,0 +1,167 @@
+{% extends "creator_layout.html" %}
+
+{% block meta %}
+<title>プロジェクト確認 - クリエイター</title>
+<meta property="og:title" content="プロジェクト確認 - クリエイター">
+{% endblock %}
+
+{% block body %}
+  <div class="ui container">
+    <div class="ui stackable grid">
+      <div class="sixteen wide column">
+        <a href="{{ url_for('creator.home') }}"
+           class="ui right floated tiny basic gold button">
+          <i class="icon chevron left"></i>Back
+        </a>
+        <div class="ui huge breadcrumb">
+          <a class="section" href="{{ url_for('creator.home') }}">My Projects</a>
+          <i class="right chevron icon divider"></i>
+          <div class="active section">{{ project.title }}</div>
+        </div>
+        <div class="ui divider"></div>
+      </div>
+    </div>
+    <div class="sixteen wide column">
+      <div class="ui pointing secondary menu">
+        <a class="item active" data-tab="first"><i class="ui setting icon"></i>プロジェクト設定</a>
+        <a class="item" data-tab="second"><i class="ui camera retro icon"></i>活動報告</a>
+      </div>
+      <div class="ui basic tab segment active" data-tab="first">
+        <div class="ui stackable grid">
+          <div class="six wide column">
+            <div class="ui basic segment">
+              <img class="ui centered medium rounded image" src="{{ project.image|to_cdn('project') }}">
+            </div>
+          </div>
+          <div class="ten wide column">
+            <div class="ui secondary raised clearing segment">
+              <h2 class="header">{{ project.title }}</h2>
+              <pre>{{ project.summary }}</pre>
+              <table class="ui very basic table">
+                <thead>
+                <tr>
+                  <th>タイプ</th>
+                  <th>目標</th>
+                  <th>ステータス</th>
+                  <th>終了日時</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>{{ project.type|codec('type') }}</td>
+                  <td>{{ project.target_amount }}円</td>
+                  <td>{{ project.target_status|codec('target_status') }}</td>
+                  <td>{{ project.end_time|format_datetime }}</td>
+                </tr>
+                </tbody>
+              </table>
+              {# public_status = 1:公開前,2:公開中(募集期間中),3:公開中(募集終了),4:非公開 #}
+              {# is_approval = 0:未承認,1:承認済み,2:非承認,3:未申請 #}
+              {% if project.public_status == 1 and project.is_approval in (2,3) %}
+                <div class="ui right floated tiny basic red delete button" data-pid="{{ project.id }}">
+                  <i class="icon delete"></i>削除
+                </div>
+              {% else %}
+                <div class="ui right floated tiny basic red button">
+                  削除できません
+                </div>
+              {% endif %}
+              {% if project.is_approval != 0 %}{# 申請中は編集できない #}
+                <a href="{{ url_for('creator.project_edit_basic',project_id=project.id) }}"
+                   class="ui right floated tiny basic button">
+                  <i class="icon edit"></i>編集
+                </a>
+              {% else %}
+                <div class="ui right floated tiny basic red button">
+                  編集できません
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui basic tab clearing segment" data-tab="second">
+        <table class="ui stackable gold table">
+          <thead>
+          <tr>
+            <th>タイトル</th>
+            <th>公開範囲</th>
+            <th colspan="2">更新日時</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% if reports %}
+            {% for report in reports %}
+              <tr>
+                <td>
+                  <a href="{{ url_for('creator.project_report',project_id=project.id,report_id=report.id) }}">{{ report.title }}</a>
+                </td>
+                <td>
+                  {% if report.accessible == 'all' %}
+                    <i class="ui icon unlock"></i>全体に公開
+                  {% elif report.accessible == 'supporter' %}
+                    <i class="ui icon lock"></i>サポーターに限定
+                  {% else %}
+                    <i class="ui icon lock"></i>非公開
+                  {% endif %}
+                </td>
+                <td>{{ report.update_date|format_datetime }}</td>
+                <td class="right aligned">
+                  <div class="ui red tiny basic delete button" data-pid="{{ project.id }}" data-rid="{{ report.id }}">
+                    <i class="delete icon"></i>削除
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan="2">まだ活動報告がありません</td>
+            </tr>
+          {% endif %}
+          </tbody>
+        </table>
+        <a href="{{ url_for('creator.project_report',project_id=project.id) }}"
+           class="ui right floated tiny gold button">
+          <i class="icon plus"></i>活動報告を書く
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="ui small modal">
+    <div class="header">確認</div>
+    <div class="content">本当に削除してもよろしいですか？</div>
+    <div class="actions">
+      <div class="ui approve gold button">OK</div>
+      <div class="ui cancel basic button">Cancel</div>
+    </div>
+    {{ form.hidden_tag() }}
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $(document).ready(function () {
+      $('.menu .item').tab();
+      $('.delete.button').click(function () {
+        var project_id = this.dataset.pid;
+        var report_id = this.dataset.rid;
+        $('.ui.modal').modal({
+          onApprove: function () {
+            $.ajax({
+              type: 'POST',
+              url: '/api/delete',
+              data: {id: project_id, report_id: report_id},
+              headers: {
+                'X-CSRFToken': $('#csrf_token').val()
+              }
+            }).done(function (msg) {
+              console.log(msg);
+              location.reload();
+            });
+            return false;
+          }
+        }).modal('show');
+      });
+    });
+  </script>
+{% endblock %}

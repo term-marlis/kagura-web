@@ -1,0 +1,34 @@
+{% extends 'top_layout.html' %}
+
+{% block meta %}
+<title>ページが見つかりません | 【WIZY（ウィジー）】アーティストとファンによる共創・体験型の音楽クラウドファンディングプラットフォーム</title>
+<meta name="keywords" content="クラウドファンディング,音楽,WIZY,ウィジー,共創,クラウドクリエイティング,レコチョク">
+<meta name="description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:title" content="ページが見つかりません | 【WIZY（ウィジー）】アーティストとファンによる共創・体験型の音楽クラウドファンディングプラットフォーム">
+<meta property="og:description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:image" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+<meta property="og:url" content="">
+<meta property="og:site_name" content="WIZY（ウィジー）">
+<meta property="og:type" content="article">
+<meta name="twitter:image:src" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+{% endblock %}
+
+{% block style %}
+  <link rel="stylesheet" href="{{ 'theme/css/top.css'|to_cdn }}" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+  <section class="toparea">
+    <div class="headline">
+      <div class="center titlebox">
+        <h2>{{ message }}</h2>
+        <div>
+          <a href="{{ url_for('front.home') }}" class="btn btn-1 btn-1a icon-arrow-right">
+            <span>トップへ戻る</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="mask"></div>
+  </section>
+{% endblock %}

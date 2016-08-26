@@ -1,0 +1,292 @@
+{% extends "creator_project_edit_layout.html" %}
+
+{% block meta %}
+<title>プロジェクト編集(アイテム) - クリエイター</title>
+<meta property="og:title" content="プロジェクト編集(アイテム) - クリエイター">
+{% endblock %}
+
+{% block container %}
+  <div class="sixteen wide column">
+    <div class="ui pointing secondary menu">
+      <a class="item disabled" href="{{ url_for('creator.project_edit_basic',project_id=project.id) }}"><i
+          class="ui camera retro icon"></i>基本情報</a>
+      <a class="item active" href="{{ url_for('creator.project_edit_item',project_id=project.id) }}"><i
+          class="ui gift icon"></i>アイテム</a>
+      <a class="item disabled" href="{{ url_for('creator.project_edit_detail',project_id=project.id) }}"><i
+          class="ui setting icon"></i>詳細情報</a>
+      <a class="item disabled" href="{{ url_for('creator.project_edit_faq',project_id=project.id) }}"><i
+          class="ui help circle icon"></i>FAQ</a>
+    </div>
+    <div class="ui stackable grid">
+      <div class="ui ten wide column">
+        {% for item in items %}
+          {% if item.id == item_id %}
+            <div class="ui clearing segment">
+              <form class="ui form" method="post"
+                    action="{{ url_for('creator.project_edit_item',project_id=project.id,item_id=item_id) }}">
+                {{ item_form.hidden_tag() }}
+                <div class="ui three fields">
+                  <div class="ui field">
+                    {{ item_form.name.label }}
+                    {{ item_form.name(placeholder='Item Name') }}
+                  </div>
+                  <div class="ui field">
+                    {{ item_form.price.label }}
+                    {{ item_form.price }}
+                  </div>
+                  <div class="ui field">
+                    {{ item_form.deliver_date.label }}
+                    {{ item_form.deliver_date }}
+                  </div>
+                </div>
+                <div class="ui three fields">
+                  <div class="ui field">
+                    {{ item_form.limit.label }}
+                    {{ item_form.limit(placeholder='制限なし') }}
+                  </div>
+                  <div class="ui field">
+                    {{ item_form.limit_user.label }}
+                    {{ item_form.limit_user(placeholder='制限なし') }}
+                  </div>
+                  <div class="ui field">
+                    <div class="ui checkbox">
+                      {{ item_form.shipping }}
+                      {{ item_form.shipping.label }}
+                    </div>
+                  </div>
+                </div>
+                <div class="ui field">
+                  {{ item_form.description.label }}
+                  {{ item_form.description(rows='3', placeholder='Item Description') }}
+                </div>
+                {{ item_form.submit(class='ui right floated gold button') }}
+              </form>
+            </div>
+          {% else %}
+            <div class="ui clearing segment">
+              <h5>Item{{ loop.index }}: {{ item.name }}</h5>
+              <div class="ui red right floated small basic delete button" data-iid="{{ item.id }}">
+                <i class="delete icon"></i>削除
+              </div>
+              <a class="ui right floated small basic button"
+                 href="{{ url_for('creator.project_edit_item',project_id=project.id, item_id=item.id) }}">
+                <i class="edit icon"></i>編集</a>
+            </div>
+          {% endif %}
+        {% endfor %}
+        {% if item_id %}
+          <a class="ui right floated small gold button"
+             href="{{ url_for('creator.project_edit_item',project_id=project.id) }}">
+            <i class="add icon"></i>追加</a>
+        {% else %}
+          <div class="ui clearing segment">
+            <form class="ui form" method="post"
+                  action="{{ url_for('creator.project_edit_item',project_id=project.id) }}">
+              {{ item_form.hidden_tag() }}
+              <div class="ui three fields">
+                <div class="ui field">
+                  {{ item_form.name.label }}
+                  {{ item_form.name(placeholder='Item Name') }}
+                </div>
+                <div class="ui field">
+                  {{ item_form.price.label }}
+                  {{ item_form.price }}
+                </div>
+                <div class="ui field">
+                  {{ item_form.deliver_date.label }}
+                  {{ item_form.deliver_date }}
+                </div>
+              </div>
+              <div class="ui three fields">
+                <div class="ui field">
+                  {{ item_form.limit.label }}
+                  {{ item_form.limit(placeholder='制限なし') }}
+                </div>
+                <div class="ui field">
+                  {{ item_form.limit_user.label }}
+                  {{ item_form.limit_user(placeholder='制限なし') }}
+                </div>
+                <div class="ui field">
+                  <div class="ui checkbox">
+                    {{ item_form.shipping }}
+                    {{ item_form.shipping.label }}
+                  </div>
+                </div>
+              </div>
+              <div class="ui field">
+                {{ item_form.description.label }}
+                {{ item_form.description(rows='3', placeholder='Item Description') }}
+              </div>
+              {{ item_form.submit(class='ui right floated gold button') }}
+            </form>
+          </div>
+        {% endif %}
+      </div>
+      {% if item_id %}
+        <div class="ui six wide column">
+          <form id="image_form" class="ui form" method="post"
+                action="{{ url_for('creator.project_edit_item',project_id=project.id,item_id=item_id) }}"
+                enctype="multipart/form-data">
+            <h5 class="ui header">イメージ
+              {{ item_form.hidden_tag() }}
+              <label for="image" class="ui field">
+                <img class="ui centered small image" src="{{ item_form.image.data|to_cdn('item') }}">
+                {{ item_form.image(style="display:none", accept='image/*') }}
+              </label>
+            </h5>
+          </form>
+          <h5 class="ui header">サポーターへの質問
+            <div class="ui right floated basic mini add_question gold button"><i class="add icon"></i>追加</div>
+          </h5>
+          {% for question in questions %}
+            <div class="ui clearing segment">
+              <h5 class="ui header">
+                {{ question.description }}
+              </h5>
+              <div class="ui right floated basic mini red delete button"
+                   data-iid="{{ item_id }}" data-qid="{{ question.id }}"><i class="remove icon"></i>削除
+              </div>
+              <div class="ui right floated basic mini edit_question button"
+                   data-pid="{{ project.id }}" data-iid="{{ item_id }}" data-qid="{{ question.id }}">
+                <i class="edit icon"></i>編集
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  {% if item_id %}
+    <div class="ui small question modal">
+      <div class="header">サポーターへの質問</div>
+      <div class="content">
+        <form id="question_form" class="ui form" method="post"
+              action="{{ url_for('creator.project_edit_item_question',project_id=project.id,item_id=item_id) }}">
+          {{ question_form.hidden_tag() }}
+          {{ question_form.question_id }}
+          <div class="ui field">
+            {{ question_form.description.label }}
+            {{ question_form.description(placeholder='購入時に表示される質問内容') }}
+          </div>
+          <div id="type_field" class="ui field">
+            {{ question_form.type.label }}
+            {{ question_form.type(class='ui dropdown') }}
+          </div>
+          <div class="ui field">
+            {{ question_form.format.label }}
+            {{ question_form.format }}
+          </div>
+          <div class="ui flowing popup top left transition hidden">
+            <div class="ui three column divided center aligned grid">
+              <div class="column">
+                <h4 class="ui header">テキスト</h4>
+                <p>回答書式は使用しない</p>
+              </div>
+              <div class="column">
+                <h4 class="ui header">数値</h4>
+                <p>必須の場合のみ。カンマ区切りで範囲指定可能</p>
+                <p>例) 5,20</p>
+              </div>
+              <div class="column">
+                <h4 class="ui header">選択</h4>
+                <p>必須の場合のみ。カンマ区切りで選択肢を指定可能</p>
+                <p>例) A,B,C</p>
+              </div>
+            </div>
+          </div>
+          <div class="ui checkbox">
+            {{ question_form.required }}
+            {{ question_form.required.label }}
+          </div>
+        </form>
+      </div>
+      <div class="actions">
+        <div class="ui approve small gold button">追加</div>
+        <div class="ui cancel small button">キャンセル</div>
+      </div>
+    </div>
+  {% endif %}
+  <div class="ui small delete modal">
+    <div class="header">確認</div>
+    <div class="content">本当に削除してもよろしいですか？</div>
+    <div class="actions">
+      <div class="ui approve gold button">OK</div>
+      <div class="ui cancel basic button">Cancel</div>
+    </div>
+    {{ form.hidden_tag() }}
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $(document).ready(function () {
+      $('.question.modal').modal({
+        closable: false,
+        onApprove: function () {
+          $('#question_form').submit();
+        }
+      });
+      $('.add_question.button').click(function () {
+        $('input#question_id').val(null);
+        $('input#description').val('Tシャツのサイズ');
+        $('#type.ui.dropdown').dropdown('set selected', 'select');
+        $('input#format').val('S,M,L');
+        $('div.ui.checkbox').checkbox('set checked');
+        $('.question.modal').modal('show');
+      });
+      $('.edit_question.button').click(function () {
+        var project_id = this.dataset.pid;
+        var item_id = this.dataset.iid;
+        var question_id = this.dataset.qid;
+        $.get('/api/questions/' + project_id + '/' + item_id + '/' + question_id, function (data) {
+          $('input#question_id').val(data.id);
+          $('input#description').val(data.description);
+          $('#type.ui.dropdown').dropdown('set selected', data.type);
+          $('input#format').val(data.format);
+          if (data.is_required) {
+            $('div.ui.checkbox').checkbox('set checked');
+          } else {
+            $('div.ui.checkbox').checkbox('set unchecked');
+          }
+          $('.question.modal').modal('show');
+        });
+      });
+      $('#question_form').find('#format').popup({
+        popup: $('.ui.popup'),
+        on: 'click'
+      });
+      $('.delete.button').click(function () {
+        var item_id = this.dataset.iid;
+        var question_id = this.dataset.qid;
+        $('.ui.delete.modal').modal({
+          onApprove: function () {
+            $.ajax({
+              type: 'POST',
+              url: '/api/delete',
+              data: {id:{{ project.id }}, item_id: item_id, question_id: question_id},
+              headers: {
+                'X-CSRFToken': $('#csrf_token').val()
+              }
+            }).done(function (msg) {
+              console.log(msg);
+              if (question_id) {
+                location.reload();
+              } else {
+                location.href = '{{ url_for('creator.project_edit_item',project_id=project.id) }}';
+              }
+            });
+            return false;
+          }
+        }).modal('show');
+      });
+      $('#image').change(function () {
+        var file_name = $(this).val().toLowerCase();
+        if (file_name.endsWith('.png') || file_name.endsWith('.jpg')
+            || file_name.endsWith('.jpeg') || file_name.endsWith('.gif')) {
+          $('#image_form').submit();
+        }
+        $(this).val('');
+      });
+    });
+  </script>
+{% endblock %}

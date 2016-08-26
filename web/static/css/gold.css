@@ -1,0 +1,63 @@
+body {
+  background-color: #f6f6f6;
+}
+.ui.secondary.menu.main {
+  min-height: 72px;
+}
+.ui.secondary.menu a.gold_button,
+.ui.secondary.menu div.gold_button {
+  background-color: #c5ac69;
+  opacity: 0.9;
+}
+.ui.secondary.menu a.gold_button:hover,
+.ui.secondary.menu div.gold_button:hover {
+  background-color: #d6bd7a;
+}
+.ui.secondary.menu a.dark_gold_button,
+.ui.secondary.menu div.dark_gold_button {
+  background-color: #13110a;
+  color: #c5ac69;
+  opacity: 0.9;
+}
+.ui.secondary.menu a.dark_gold_button:hover,
+.ui.secondary.menu div.dark_gold_button:hover {
+  background-color: #39331e;
+  color: #f8df9c;
+}
+.ui.footer.segment {
+  background-color: #262626;
+  color: #f6f6f6;
+  opacity: 0.9;
+  padding: 5em 0;
+}
+.ui.gold a {
+  color: #c5ac69;
+}
+.ui.gold a:hover {
+  color: #d6bd7a;
+}
+.ui.gold.button {
+  background-color: #c5ac69;
+  color: #f6f6f6;
+}
+.ui.gold.button:hover {
+  background-color: #d6bd7a;
+}
+.ui.gold.basic.button {
+  box-shadow: 0 0 0 1px #c5ac69 inset !important;
+  color: #c5ac69 !important;
+}
+.ui.gold.label {
+  background-color: #c5ac69;
+  color: #f6f6f6;
+}
+.ui.gold.label.dark {
+  background-color: #13110a;
+  color: #c5ac69;
+}
+.ui.center.aligned.grid {
+  min-height: 400px;
+}
+.ui.center.aligned.grid.login {
+  padding-top: 4em;
+}

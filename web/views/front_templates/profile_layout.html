@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <div class="ui container">
+    <div class="ui stackable two column grid">
+      <div class="six wide column">
+        <img class="ui centered bordered small circular image" src="{{ profile.image|to_cdn('profile') }}">
+      </div>
+      <div class="ten wide column">
+        <div class="ui stackable two column grid">
+          <div class="four wide column">
+            <h3 class="ui header">{{ profile.nickname }}</h3>
+          </div>
+          <div class="twelve wide column">
+            {% if profile.twitter %}
+              <a href="https://twitter.com/{{ profile.twitter }}" target="_blank">
+                <i class="circular inverted ct_i_twit twitter icon"></i></a>
+            {% endif %}
+            {% if profile.facebook %}
+              <a href="https://www.facebook.com/{{ profile.facebook }}" target="_blank">
+                <i class="circular inverted ct_i_fb facebook f icon"></i></a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="ui  segment">
+          <h4 class="header">プロフィール</h4>
+          {% if profile.introduction %}
+            <pre>{{ profile.introduction|format_profile }}</pre>
+          {% else %}
+            <p>プロフィールが入力されていません。</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="sixteen wide column">
+        {% block container %}{% endblock %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

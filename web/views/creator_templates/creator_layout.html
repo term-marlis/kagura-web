@@ -1,0 +1,104 @@
+<!doctype html>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta name="robots" content="noarchive">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+
+<meta name="keywords" content="クラウドファンディング,音楽,WIZY,ウィジー,共創,クラウドクリエイティング,レコチョク">
+<meta name="description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+{% block meta %}{% endblock %}
+<meta property="og:description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:image" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+<meta property="og:url" content="{{ url_for('front.home') }}">
+<meta property="og:site_name" content="WIZY（ウィジー）">
+<meta property="og:type" content="article">
+<meta name="twitter:image:src" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+
+{% include 'fragment/icon.html' %}
+<link rel=stylesheet type=text/css href="{{ 'semantic/2.2.2/semantic.min.css'|to_cdn }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/gold.min.css') }}">
+<style>
+  body {
+    background-color: #f9f6f0;
+  }
+</style>
+
+<header>
+  <div class="ui secondary main menu">
+    <div class="ui container">
+      <div class="header item">
+        <a href="{{ url_for('creator.home') }}">
+          <img class="ui small image" src="{{ 'image/logo/logo_h.png'|to_cdn }}" alt="">
+        </a>
+      </div>
+      {% for category, message in get_flashed_messages(with_categories=True) %}
+        <div class="ui small {{ category }} compact message">{{ message }}</div>
+      {% endfor %}
+      {% if current_user.is_authenticated %}
+        <div class="right menu">
+          <a href="{{ url_for('front.profile_favorite') }}" class="item dark_gold_button">
+            <i class="ui user icon"></i>マイページ
+          </a>
+        </div>
+      {% else %}
+        <div class="right menu">
+          <a href="{{ url_for('creator.signup') }}" class="item dark_gold_button"><i
+              class="ui signup icon"></i>Signup</a>
+          <a href="{{ url_for('creator.login') }}" class="item dark_gold_button"><i
+              class="ui sign in icon"></i>Login</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+<section>
+  <div id="content" class="ui basic segment">
+    {% block body %}{% endblock %}
+  </div>
+</section>
+
+<footer>
+  <div class="ui inverted vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable inverted divided equal height stackable grid">
+        <div class="four wide column">
+          <h4 class="ui inverted header">About</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item">WIZYとは</a>
+            <a href="#" class="item">プレスリリース</a>
+            <a href="#" class="item">運営会社情報</a>
+            <a href="#" class="item">よくある質問</a>
+            <a href="#" class="item">お問い合わせ</a>
+          </div>
+        </div>
+        <div class="five wide column">
+          <h4 class="ui inverted header">Services</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item">ガイドライン</a>
+            <a href="#" class="item">利用規約</a>
+            <a href="#" class="item">プライバシーポリシー</a>
+            <a href="#" class="item">特商法取引法に基づく表記</a>
+          </div>
+        </div>
+        <div class="six wide column">
+          <h4 class="ui inverted header">Links</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item">公式 Facebook</a>
+            <a href="#" class="item">公式 Twitter</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ 'jquery/2.1.4/jquery.min.js'|to_cdn }}"></script>
+<script src="{{ 'semantic/2.2.2/semantic.min.js'|to_cdn }}"></script>
+{% block script %}{% endblock %}
+{% if google_tag_manager %}
+  {% include 'fragment/google_tag_manager.html' %}
+{% endif %}

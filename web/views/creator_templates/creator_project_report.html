@@ -1,0 +1,150 @@
+{% extends "creator_layout.html" %}
+
+{% block meta %}
+<title>活動報告 - クリエイター</title>
+<meta property="og:title" content="活動報告 - クリエイター">
+{% endblock %}
+
+{% block body %}
+  <div class="ui container">
+    <div class="ui stackable grid">
+      <div class="sixteen wide column">
+        <a href="{{ url_for('creator.project',project_id=project.id) }}"
+           class="ui right floated tiny basic gold button">
+          <i class="icon remove"></i>Cancel
+        </a>
+        <div class="ui huge breadcrumb">
+          <a class="section" href="{{ url_for('creator.home') }}">My Projects</a>
+          <i class="right chevron icon divider"></i>
+          <a class="section" href="{{ url_for('creator.project',project_id=project.id) }}">{{ project.title }}</a>
+          <i class="right chevron icon divider"></i>
+          <div class="active section">Report</div>
+        </div>
+        <div class="ui divider"></div>
+        <form class="ui form" method="post"
+              action="{{ url_for('creator.project_report',project_id=project.id,report_id=report_id) }}">
+          <div class="ui stackable grid">
+            <div class="twelve wide column">
+              {{ form.hidden_tag() }}
+              <div class="ui field">
+                {{ form.title.label }}
+                {{ form.title(maxlength=40) }}
+              </div>
+              <div class="ui field">
+                {{ form.report.label(for="report") }}
+                {{ form.report(rows=10,cols=80) }}
+              </div>
+              <div id="accessible_field" class="ui inline field">
+                {{ form.accessible.label }}
+                {{ form.accessible(class='ui dropdown') }}
+                <div class="ui checkbox">
+                  {{ form.notification.label }}
+                  {{ form.notification }}
+                </div>
+                {{ form.submit(class='ui right floated gold button') }}
+                <a class="ui right floated basic gold button"
+                   href="{{ url_for('creator.project',project_id=project.id) }}">キャンセル</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <form id="image_form">
+    {{ form_image.image(style="display:none", accept='image/*') }}
+    {{ form_image.hidden_tag() }}
+  </form>
+  <form id="media_form">
+    {{ form_media.media(style="display:none", accept='video/*') }}
+    {{ form_media.hidden_tag() }}
+  </form>
+{% endblock %}
+
+{% block script %}
+  <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+  <script>
+    function show_uploading() {
+      $('div.mce-container').hide();
+      var uploading = $('<div>').addClass('ui blurring page dimmer');
+      var content = $('<div>').addClass('content');
+      var text = $('<div>').addClass('ui text loader').text('アップロード中..');
+      $('body').append(uploading.append(content.append(text)));
+      $('div.ui.blurring.page.dimmer').dimmer('show');
+    }
+    function hide_uploading() {
+      $('div.ui.blurring.page.dimmer').remove();
+      $('div.mce-container').show();
+    }
+    function upload_file(blob, callback) {
+      show_uploading();
+      var xhr = new XMLHttpRequest();
+      xhr.withCredentials = false;
+      xhr.open('POST', '{{ url_for('creator.upload_file') }}');
+      xhr.onload = function () {
+        if (xhr.status != 200) {
+          console.error('HTTP Error: ' + xhr.status);
+          return;
+        }
+        callback(JSON.parse(xhr.responseText));
+        hide_uploading();
+      };
+      xhr.setRequestHeader("X-CSRFToken", $('#csrf_token').val());
+      var formData = new FormData();
+      formData.append('file', blob);
+      xhr.send(formData);
+    }
+    $(document).ready(function () {
+      $('.ui.dropdown').dropdown();
+      $('.ui.checkbox').checkbox();
+      $('div.ui.blurring.page.dimmer').dimmer({
+        closable: false
+      }).dimmer('hide');
+      tinymce.init({
+        selector: '#report',
+        language_url: '{{ 'tinymce/ja.js'|to_cdn }}',
+        menubar: false,
+        toolbar: 'undo redo | media link image preview code',
+        plugins: 'link image preview, code textcolor media',
+        image_dimensions: false,
+        media_alt_source: false,
+        media_dimensions: false,
+        media_poster: false,
+        file_browser_callback: function (field_name, url, type) {
+          $('#' + type).click();
+        }
+      });
+      $('#media').change(function () {
+        var file_name = $(this).val().toLowerCase();
+        var field_name_url = $('.mce-textbox').attr('id');
+        var blob = $(this).prop("files")[0];
+        if (!(file_name.endsWith('.mp4') || file_name.endsWith('.ogv') || file_name.endsWith('.webm')
+            || file_name.endsWith('.mov') || file_name.endsWith('.mpg') || file_name.endsWith('.avi')
+            || file_name.endsWith('.wmv') || file_name.endsWith('.flv'))) {
+          alert('動画ファイル以外はアップロードできません');
+          return;
+        }
+        upload_file(blob, function (json) {
+          $('#' + field_name_url).val(json.url);
+        });
+        $(this).val('');
+      });
+      $('#image').change(function () {
+        var file_name = $(this).val().toLowerCase();
+        var field_name_url = $('.mce-textbox').attr('id');
+        var field_name_name = $('.mce-textbox.mce-abs-layout-item.mce-last').attr('id');
+        if (!(file_name.endsWith('.png') || file_name.endsWith('.jpg')
+            || file_name.endsWith('.jpeg') || file_name.endsWith('.gif'))) {
+          alert('画像ファイル以外はアップロードできません');
+          return;
+        }
+        var blob = $(this).prop("files")[0];
+        upload_file(blob, function (json) {
+          $('#' + field_name_url).val(json.url);
+          $('#' + field_name_name).val(json.name);
+        });
+        $(this).val('');
+      });
+    });
+  </script>
+{% endblock %}

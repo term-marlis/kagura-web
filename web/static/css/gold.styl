@@ -1,0 +1,53 @@
+$color-gold = #c5ac69
+$color-dark = #13110a
+$color-gray = #f6f6f6
+
+body
+  background-color: $color-gray
+
+.ui.secondary.menu
+  &.main
+    min-height: 72px
+  a.gold_button, div.gold_button
+    background-color: $color-gold
+    opacity: 0.9
+    &:hover
+      background-color: $color-gold + #111
+  a.dark_gold_button, div.dark_gold_button
+    background-color: $color-dark
+    color: $color-gold
+    opacity: 0.9
+    &:hover
+      background-color: $color-dark * 3
+      color: $color-gold + #333
+
+.ui.footer.segment
+  background-color: #262626
+  color: $color-gray
+  opacity: 0.9
+  padding: 5em 0
+
+.ui.gold
+  a
+    color: $color-gold
+    &:hover
+      color: $color-gold + #111
+  &.button
+    background-color: $color-gold
+    color: $color-gray
+    &:hover
+      background-color: $color-gold + #111
+  &.basic.button
+    box-shadow: 0 0 0 1px $color-gold inset !important;
+    color: $color-gold !important;
+  &.label
+    background-color: $color-gold
+    color: $color-gray
+    &.dark
+      background-color: $color-dark
+      color: $color-gold
+
+.ui.center.aligned.grid
+  min-height: 400px
+  &.login
+    padding-top: 4em

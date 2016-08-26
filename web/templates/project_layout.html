@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta http-equiv="Content-Script-Type" content="text/javascript"/>
+  {% block meta %}{% endblock %}
+  <link rel="stylesheet" href="{{ 'theme/css/reset.css'|to_cdn }}" type="text/css"/>
+  <link rel="stylesheet" href="{{ 'theme/css/common.css'|to_cdn }}" type="text/css"/>
+  <link rel="stylesheet" href="{{ 'theme/css/modal.css'|to_cdn }}" type="text/css"/>
+  <link rel="stylesheet" href="{{ url_for('front.dynamic_css_project', project_id=project.id) }}" type="text/css"/>
+  <link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
+  <style>
+    @media screen and (min-width: 861px) {
+      body {
+        background-image: url("{{ project.image|to_cdn('project') }}");
+        background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        color: #303030;
+      }
+    }
+  </style>
+  {% block style %}{% endblock %}
+</head>
+
+<body>
+
+{# ヘッダ ここから #}
+{% include 'fragment/header.html' %}
+
+<div class="sptop" data-adaptive-background="1">
+  <img src="{{ project.image|to_cdn('project') }}" height="auto" data-adaptive-background="1">
+</div>
+{# ヘッダ ここまで #}
+
+{# PC用右サイドナビ ここから #}
+<div id="shortcut">
+  <ul>
+    <li id="homeicon" class="shortcutbtn homeicon">
+      <a href="#s1">
+        <img src="{{ 'theme/img/project/home.png'|to_cdn }}">
+      </a>
+    </li>
+    <li id="noteicon" class="shortcutbtn noteicon">
+      <a href="#s2">
+        <img src="{{ 'theme/img/project/note.png'|to_cdn }}">
+      </a>
+    </li>
+    <li id="presenticon" class="shortcutbtn presenticon">
+      <a href="#contents">
+        <img src="{{ 'theme/img/project/present.png'|to_cdn }}">
+      </a>
+    </li>
+    <li id="talkicon" class="shortcutbtn talkicon">
+      <a href="#s4">
+        {% if has_new_report %}<span class="newpop">NEW</span>{% endif %}
+        <img src="{{ 'theme/img/project/talk.png'|to_cdn }}">
+      </a>
+    </li>
+    {% if faqs or project.note %}
+      <li id="qaicon" class="shortcutbtn qaicon">
+        <a href="#s5">
+          <img src="{{ 'theme/img/project/qa.png'|to_cdn }}">
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</div>
+{# PC用右サイドナビ ここまで #}
+
+<div class="section1 clearfix" id="s1">
+  <div class="cover">
+    {# プロジェクト名 ここから #}
+    <ul class="pjname">
+      <li class="inner">
+        <h2><span><span class="sp-i">&nbsp;</span>{{ project.title }}</span></h2>
+        <h3><span><span class="sp-i">&nbsp;</span>{{ creator.nickname }}</span></h3>
+        <div class="spwrapper">
+          <div class="pjtextbox">
+            <p class="pjtext">{{ project.summary }}</p>
+          </div>
+        </div>
+        <div id="pcsharearea">
+          <ul id="pcshare">
+            <li>
+              <a href="javascript:void(0)"
+                 onclick="share_project('line','{{ creator.nickname }}', '{{ project.title }}')"
+                 class="linelogo">
+                <img src="{{ 'theme/img/project/line_logo.png'|to_cdn }}" alt="line">
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)"
+                 onclick="share_project('twitter', '{{ creator.nickname }}', '{{ project.title }}')"
+                 class="twitterlogo">
+                <img src="{{ 'theme/img/project/twitter_logo.png'|to_cdn }}" alt="twitter">
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)"
+                 onclick="share_project('facebook', '{{ creator.nickname }}', '{{ project.title }}')"
+                 class="facebooklogo">
+                <img src="{{ 'theme/img/project/facebook_logo.png'|to_cdn }}" alt="facebook">
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    {# プロジェクト名 ここまで #}
+
+    {# SP用 トップボタン群 ここから #}
+    <div id="spsharearea">
+      {% if current_user.is_authenticated %}
+        <a class="likebtn">このクリエイターをお気に入りに登録</a>
+      {% elif session.agree %}
+        <a class="likebtn" href="{{ url_for('front.login') }}">このクリエイターをお気に入りに登録</a>
+      {% else %}
+        <a class="likebtn modal_trigger" data-target="modal-tos">このクリエイターをお気に入りに登録</a>
+      {% endif %}
+      <ul id="spshare">
+        <li>
+          <a href="javascript:void(0)" onclick="share_project('line')" class="linelogo">
+            <img src="{{ 'theme/img/project/line_logo.png'|to_cdn }}" alt="line">
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" onclick="share_project('twitter')" class="twitterlogo">
+            <img src="{{ 'theme/img/project/twitter_logo.png'|to_cdn }}" alt="twitter">
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" onclick="share_project('facebook')" class="facebooklogo">
+            <img src="{{ 'theme/img/project/facebook_logo.png'|to_cdn }}" alt="facebook">
+          </a>
+        </li>
+      </ul>
+    </div>
+    {# SP用 トップボタン群 ここまで #}
+
+    {# TODO PC用 プロジェクトステータス ここから #}
+    {# TODO PC用 プロジェクトステータス ここから #}
+    <div class="inner">
+        {% if project.open_amount %}
+        <div class="pjdays">
+        {% else %}
+        <div class="pjdays no-goal">
+        {% endif %}
+
+        {% if project.type != 3 %}{# プレオーダー型の場合は表示しない #}
+        <div class="gr_top">
+            <span class="tx_limit">残り</span>
+            <span class="tx_gr">
+                
+                  <span id="graph" data-dimension="54"
+                                              data-text="{{ project.end_time|remaining_days }}"
+                                              data-info="null" data-width="4" data-fontsize="20"
+                                              data-percent="{{ project|remaining_days_rate }}"
+                                              data-fgcolor="#978659" data-bgcolor="#000000"
+                                              class="circliful"></span>
+                
+            </span>
+            <span class="tx_day">日</span>
+         </div>
+         {% endif %}{# プレオーダー型の場合は表示しない #}
+         {% if project.type == 3 %}{# プレオーダー型の場合は表示しない #}
+          <div class="gr_top2">　　
+                   <span class="tx_gr">
+                        <span id="graph" data-dimension="160"
+                                                    data-text="{{ project.end_time|remaining_days }}"
+                                                    data-info="null" data-width="6" data-fontsize="20"
+                                                    data-percent="{{ project|remaining_days_rate }}"
+                                                    data-fgcolor="#978659" data-bgcolor="#000000"
+                                                    class="circliful"></span>
+                   </span>
+                  <span class="tx_limit">残り</span>
+                 <span class="tx_day">日</span>
+        </div>
+        {% endif %}{# プレオーダー型の場合は表示しない #}
+        {% if project.type != 3 %}{# プレオーダー型の場合は表示しない #}
+            {% if project.open_amount %}
+            <dl class="now">
+                <dt >現在</dt>
+                <dd>{{ project.current_amount|grouped_number }}<span class="yen">円</span></dd>
+            </dl>
+            <dl class="goal">
+              <dt>目標</dt>
+              <dd>{{ project.target_amount|grouped_number }}<span class="yen">円</span></dd>
+           </dl>
+            {% endif %}
+           <dl class="supporters clearfix">
+               <dt>サポーター</dt>
+               <dd>{{ project.current_supports|grouped_number }}人</dd>
+           </dl>
+
+         <div class="gr_bottom">
+           <span class="tx_comp">達成</span>
+           <span class="tx_gr">
+                 <span id="graph2" data-dimension="54"
+                                       data-text="{{ (project.current_amount*100/project.target_amount)|int }}"
+                                       data-info="null" data-width="4" data-fontsize="20"
+                                       data-percent="{{ (project.current_amount*100/project.target_amount)|int }}"
+                                       data-fgcolor="#000000" data-bgcolor="#978659" class="circliful"></span>
+           </span>
+           <span class="tx_per">%</span>
+        </div>
+        {% endif %}{# プレオーダー型の場合は表示しない #}
+      </div>
+    </div>
+    {# TODO PC用 プロジェクトステータス ここまで #}
+  </div>
+</div>
+
+{% block contents %}{% endblock %}
+
+{% include 'fragment/footer.html' %}
+
+<script src="{{ 'jquery/2.1.4/jquery.min.js'|to_cdn }}"></script>
+<script src="{{ 'theme/js/common.js'|to_cdn }}"></script>
+<script src="{{ 'theme/js/modal.js'|to_cdn }}"></script>
+<script src="{{ url_for('static',filename='js/common/share.min.js') }}"></script>
+<script src="{{ 'theme/js/jquery.circliful.min.js'|to_cdn }}"></script>
+<script src="{{ 'theme/js/readmore.min.js'|to_cdn }}"></script>
+<script src="{{ 'theme/js/adaptive-backgrounds.js'|to_cdn }}"></script>
+<script src="{{ 'theme/js/jquery.inview.min.js'|to_cdn }}"></script>
+<!--<script src="{{ 'theme/js/masonry.pkgd.min.js'|to_cdn }}"></script>-->
+<script src="{{ 'theme/js/salvattore.min.js'|to_cdn }}"></script>
+<script src="{{ 'theme/js/jquery.singlePageNav.js'|to_cdn }}"></script>
+<script>
+  {# TODO 未使用？ #}
+  // $(window).load(function () {
+  //   $('#contents').find('ul').masonry({
+  //     itemSelector: '.plan'
+  //   });
+  // });
+
+  $(document).ready(function () {
+    hsize = $(window).height();
+    $("body").css("height", hsize + "px");
+    $('#graph').circliful();
+    $('#graph2').circliful();
+    $('#graph3').circliful();
+    $('#graph4').circliful();
+    {# TODO 要調査。背景が変わらないので動いてない？ #}
+    // $.adaptiveBackground.run();
+    $('#shortcut').singlePageNav({
+      offset: 175,
+      filter: ':not(.external)',
+      updateHash: true
+    });
+    $('li.sppjtitle').click(function () {
+      var target_url = $(this).attr('data-url');
+      if (target_url) {
+        location.href = target_url;
+      }
+    });
+    $.get('/api/favorite/{{ creator.user_id }}', function (data) {
+      if (data.login && data.favorite) {
+        $('.likebtn').text('このクリエイターのお気に入り解除');
+        $('.likebtn').addClass('liked');
+        $('.likebtn').data('action', 'off');
+      }
+    });
+  });
+
+  $(function () {
+    $('.pcmv').on('inview', function (event, isInView, visiblePartX, visiblePartY) {
+      if (isInView) {
+        $(this).stop().addClass('mv');
+      } else {
+        $(this).stop().removeClass('mv');
+      }
+    });
+    $(".qabox dt").on("click", function () {
+      $(this).next().slideToggle();
+      $(this).toggleClass("active");
+      $(this).toggleClass("bodernone");
+    });
+    $('.pjditail article').readmore({
+      speed: 1000,
+      collapsedHeight: 100,
+      moreLink: '<a href="#" class="readmore open">もっと見る</a>',
+      lessLink: '<a href="#" class="readmore close">閉じる</a>'
+    });
+
+    //for Mobile
+    if (window.matchMedia('(max-width: 641px)').matches) {　//切り替える画面サイズ
+      $('.plan .plantext').readmore({
+        speed: 1000,
+        collapsedHeight: 0,
+        moreLink: '<a href="#" class="readmore open">もっと見る</a>',
+        lessLink: '<a href="#" class="readmore close">閉じる</a>'
+      });
+      //For PC
+    } else {
+      $('.plan .plantext').readmore({
+        speed: 1000,
+        collapsedHeight: 280,
+        moreLink: '<a href="#" class="readmore open">もっと見る</a>',
+        lessLink: '<a href="#" class="readmore close">閉じる</a>'
+      });
+    }
+  });
+
+  $(window).resize(function () {
+    hsize = $(window).height();
+    $("body").css("height", hsize + "px");
+  });
+</script>
+{% if current_user.is_authenticated %}
+  <script>
+    $(function () {
+      $('.likebtn').click(function () {
+        var self = this;
+        $(self).prop("disabled", true);
+        if ($(self).hasClass('liked')) {
+          $.get('/api/favorite/{{ creator.user_id }}?action=off', function () {
+            $(self).removeClass('liked');
+            $(self).text('このクリエイターをお気に入り登録');
+            $(self).prop("disabled", false);
+          });
+        } else {
+          $.get('/api/favorite/{{ creator.user_id }}?action=on', function () {
+            $(self).addClass('liked');
+            $(self).text('このクリエイターのお気に入り解除');
+            $(self).prop("disabled", false);
+          });
+        }
+      });
+    });
+  </script>
+{% endif %}
+{% block script %}{% endblock %}
+{% if google_tag_manager %}
+  {% include 'fragment/google_tag_manager.html' %}
+{% endif %}
+</body>
+</html>

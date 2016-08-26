@@ -1,0 +1,44 @@
+<!doctype html>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+{% block meta %}{% endblock %}
+{% include 'fragment/icon.html' %}
+<link rel=stylesheet type=text/css href="{{ 'semantic/2.2.2/semantic.min.css'|to_cdn }}">
+<link rel="stylesheet" href="{{ 'theme/css/common.css'|to_cdn }}" type="text/css"/>
+<link rel="stylesheet" href="{{ 'theme/css/modal.css'|to_cdn }}" type="text/css"/>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/gold.min.css') }}">
+<link rel="stylesheet" href="{{ 'theme/css/ui_custom.css'|to_cdn }}" type="text/css"/>
+<style>
+  #wrap {
+    width: 100%;
+    position: relative;
+    min-height: 100%;
+  }
+
+  #content {
+    padding-top: 80px;
+  }
+
+</style>
+
+{% block style %}{% endblock %}
+
+<div id="wrap">
+  {% include 'fragment/header.html' %}
+
+  <div id="content" class="ui basic segment">
+    {% block body %}{% endblock %}
+  </div>
+
+  {% include 'fragment/footer.html' %}
+</div>
+
+<script src="{{ 'jquery/2.1.4/jquery.min.js'|to_cdn }}"></script>
+<script src="{{ 'semantic/2.2.2/semantic.min.js'|to_cdn }}"></script>
+<script type="text/javascript" src="{{ 'theme/js/common.js'|to_cdn }}"></script>
+<script type="text/javascript" src="{{ 'theme/js/modal.js'|to_cdn }}"></script>
+{% block script %}{% endblock %}
+{% if google_tag_manager %}
+  {% include 'fragment/google_tag_manager.html' %}
+{% endif %}

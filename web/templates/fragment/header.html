@@ -1,0 +1,90 @@
+<header id="top-head">
+  <div class="inner">
+    <div class="logo">
+      <h1>
+        <a href="{{ url_for('front.home') }}">
+          <img src="{{ 'image/logo/logo_h.png'|to_cdn }}" alt="WIZY">
+        </a>
+      </h1>
+    </div>
+    <nav id="global-nav">
+      <ul>
+        {% if current_user.is_authenticated %}
+          <li><a href="{{ url_for('front.profile_favorite') }}" class="login">マイページ</a></li>
+        {% elif session.agree %}
+          <li><a href="{{ url_for('front.login',signup=True) }}" class="signup">新規登録</a></li>
+          <li><a href="{{ url_for('front.login') }}" class="login">ログイン</a></li>
+        {% else %}
+          <li><a class="signup modal_trigger" data-target="modal-tos">新規登録</a></li>
+          <li><a class="login modal_trigger" data-target="modal-tos">ログイン</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+
+{# アンデリバナー アンデリの通知は3回まで表示する
+  {% if current_user.email_status == 'UNDELIVERY' %}
+    {% if 'notify_count' not in session or ('notify_count' in session and session['notify_count'] < 3) %}
+      <div class="notify">
+        <a href="#">有効なメールアドレスを設定してください。</a>
+        <i id="remove-notify" style="float: right;">x</i>
+      </div>
+    {% endif %}
+  {% endif %}
+#}
+
+  {# メッセージを表示 (category: info=通常メッセージ, error=エラーメッセージ) #}
+  {% for category, message in get_flashed_messages(with_categories=True) %}
+    <div id="info_toparea">
+      <p>{{ message }}</p>
+    </div>
+  {% endfor %}
+</header>
+
+{# ポップアップ：利用規約 #}
+<div id="modal-tos" class="modal_window">
+  <h3>会員登録(無料)/ログイン</h3>
+  <p class="modal_title">
+    <a href="{{ url_for('front.about_page') }}#terms">WIZYサービス利用規約</a>に<br class="sp-i">同意の上お進みください。
+  </p>
+  <a class="modal_button" href="{{ url_for('front.login', signup=True) }}">
+    利用規約に同意して新規登録
+  </a>
+  <a class="modal_button" href="{{ url_for('front.login') }}">
+    利用規約に同意してログイン
+  </a>
+  <p class="modal_message">
+    ※ここから先はクラブレコチョクメンバー登録ページに遷移します。<br/>
+    ※WIZYからサービスやアーティストの新着情報やお知らせをお送りいたします。<br/>
+    お知らせの設定はマイページで変更ができます。<br/>
+    詳しくはこちらをご確認ください。
+  </p>
+  <a id="modal-close" class="closebtn"></a>
+</div>
+
+{# ポップアップ：ニュースレター #}
+<div id="modal-news" class="modal_window">
+  <h3>WIZYニュースレター</h3>
+  <p class="modal_title modal_desc">
+    プロジェクトやアーティストの最新情報を配信しています。<br/>
+    ニュースレターの購読を希望される方は会員登録(無料)をお願いします。
+  </p>
+  <p class="modal_title">
+    <a href="{{ url_for('front.about_page') }}#terms">WIZYサービス利用規約</a>に同意の上お進みください。
+  </p>
+  <a class="modal_button" href="{{ url_for('front.login', signup=True) }}">
+    利用規約に同意して新規登録
+  </a>
+  <a class="modal_button" href="{{ url_for('front.login') }}">
+    利用規約に同意してログイン
+  </a>
+  <p class="modal_message">
+    ※ここから先はクラブレコチョクメンバー登録ページに遷移します。<br/>
+    ※WIZYからサービスやアーティストの新着情報やお知らせをお送りいたします。<br/>
+    お知らせの設定はマイページで変更ができます。<br/>
+    詳しくはこちらをご確認ください。
+  </p>
+  <a id="modal-close" class="closebtn"></a>
+</div>
+
+<div id="top"></div>

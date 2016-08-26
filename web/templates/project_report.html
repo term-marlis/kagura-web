@@ -1,0 +1,213 @@
+{% extends "project_layout.html" %}
+
+{% block meta %}
+<title>レポート - {{ creator.nickname }} - {{ project.title }} | 【WIZY（ウィジー）】アーティストとファンによる共創・体験型の音楽クラウドファンディングプラットフォーム</title>
+<meta name="keywords" content="{{ creator.nickname }},{{ project.title }},クラウドファンディング,音楽,WIZY,ウィジー,共創,クラウドクリエイティング,レコチョク">
+<meta name="description" content="クリエイター:{{ creator.nickname }}の「{{ project.title }}」プロジェクトです。レコチョクが運営する共創型クラウドクリエイティング音楽プラットフォーム【WIZY(ウィジー)】を使って{{ creator.nickname }}をサポートしよう！">
+<meta property="og:title" content="レポート - {{ creator.nickname }} - {{ project.title }} | 共創型クラウドクリエイティング WIZY（ウィジー）">
+<meta property="og:description" content="クリエイター:{{ creator.nickname }}の「{{ project.title }}」プロジェクトです。レコチョクが運営する共創型クラウドクリエイティング音楽プラットフォーム【WIZY(ウィジー)】を使って{{ creator.nickname }}をサポートしよう！">
+<meta property="og:image" content="{{ project.image|to_cdn('project') }}">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:site_name" content="WIZY（ウィジー）">
+<meta property="og:type" content="article">
+<meta name="twitter:image:src" content="{{ project.image|to_cdn('project') }}">
+{% endblock %}
+
+{% block style %}
+  <style>
+    #shortcut {
+      display: none;
+    }
+  </style>
+{% endblock %}
+
+
+{% block contents %}
+
+<div id="report_link">　</div>
+
+{# TODO SP用 タブ切り替え(プロジェクト&レポート) ここから #}
+
+<div id="pjtab">
+  <div class="tab_area clearfix">
+    <ul>
+      <li class="tab1 sppjtitle" data-url="{{ url_for('front.project',project_id=project.id) }}">プロジェクト</li>
+      <li class="tab2 sppjtitle select"><img src="{{ 'theme/img/project/talk.png'|to_cdn }}">レポート
+        {% if has_new_report %}<span class="spnewpop">NEW</span>{% endif %}
+      </li>
+    </ul>
+  </div>
+  <div class="spwrapper">
+    <div class="content_area">
+      <div class="content_area_inner clearfix">
+        <div id="contents1" class="content_block hide">
+        </div>
+        <div id="contents2" class="content_block" style="display:block">
+          <article class="boxlarge_detail box1">
+            <ul>
+              <li class="pagelink">
+                {% if next_report %}
+                  <a href="{{ url_for('front.project_report', project_id=project.id,report_id=next_report.id) }}#report_link">
+                    <p><img src="{{ 'theme/img/project/pagelink_back.png'|to_cdn }}">新しい記事</p>
+                  </a>
+                {% endif %}
+              </li>
+              <li class="pagelink">
+                <a href="{{ url_for('front.project_reports', project_id=project.id) }}"><p>一覧に戻る</p></a>
+              </li>
+              <li class="pagelink">
+                {% if previous_report %}
+                  <a href="{{ url_for('front.project_report', project_id=project.id,report_id=previous_report.id) }}#report_link">
+                    <p>過去の記事<img src="{{ 'theme/img/project/pagelink_next.png'|to_cdn }}"></p>
+                  </a>
+                {% endif %}
+              </li>
+            </ul>
+          </article>
+          <div class="boxlarge box2">
+            <ul>
+              <li class="date">
+                <h3>
+                  {{ report.update_date|format_date }}
+                  {% if report.is_new %}<span class="new">NEW</span>{% endif %}
+                  {% if report.accessible == 'supporter' %}<span class="olsa"><img src="{{ 'theme/img/project/icon_supporter_sp.png'|to_cdn }}" alt="サポーター限定 "></span>{% endif %}
+                </h3>
+              </li>
+              <li class="repotext_detail">
+                <h3>{{ report.title }}</h3>
+                <p>
+                  {% if report.accessible == 'all' %}
+                    {# 全体に公開 #}{{ report.detail|safe }}
+                  {% elif report.accessible == 'supporter' and is_supporter %}
+                    {# サポーターに限定公開 #}{{ report.detail|safe }}
+                  {% elif current_user.is_creator %}
+                    {# 非公開/クリエイター #}{{ report.detail|safe }}
+                  {% else %}
+                    {# 非公開/ユーザー #}
+                    このレポートはサポーター限定公開です
+                  {% endif %}
+                </p>
+              </li>
+            </ul>
+            <ul class="reposns">
+              <li>
+                <a href="javascript:void(0)" onclick="share_report('line')" class="linelogo">
+                  <img src="{{ 'theme/img/project/reposns_line@2x.png'|to_cdn }}" alt="line">
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" onclick="share_report('twitter')" class="twitterlogo">
+                  <img src="{{ 'theme/img/project/reposns_twitter@2x.png'|to_cdn }}" alt="twitter">
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" onclick="share_report('facebook')" class="facebooklogo">
+                  <img src="{{ 'theme/img/project/reposns_facebook@2x.png'|to_cdn }}" alt="facebook">
+                </a>
+              </li>
+            </ul>
+          </div>
+          <article class="boxlarge_detail box3">
+            <ul>
+              <li class="pagelink">
+                {% if next_report %}
+                  <a href="{{ url_for('front.project_report', project_id=project.id,report_id=next_report.id) }}#report_link">
+                    <p><img src="{{ 'theme/img/project/pagelink_back.png'|to_cdn }}">新しい記事</p></a>
+                {% endif %}
+              </li>
+              <li class="pagelink">
+                <a href="{{ url_for('front.project_reports', project_id=project.id) }}"><p>一覧に戻る</p></a>
+              </li>
+              <li class="pagelink">
+                {% if previous_report %}
+                  <a href="{{ url_for('front.project_report', project_id=project.id,report_id=previous_report.id) }}#report_link">
+                    <p>過去の記事<img src="{{ 'theme/img/project/pagelink_next.png'|to_cdn }}"></p></a>
+                {% endif %}
+              </li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{# TODO SP用 タブ切り替え(プロジェクト&レポート) ここまで #}
+
+
+
+
+
+<div class="parea_wrap">
+  <div class="section4 report_detail pcmv inner" id="s4">
+    <div class="left_title pc" style="margin-top: 0px;">
+      <h2><img src="{{ 'theme/img/project/h2_report.png'|to_cdn }}" alt="活動報告"></h2>
+    </div>
+    <div class="boxlarge repobox pc">
+      <ul class="clearfix">
+        <li class="left_area">
+          <dl class="date">
+            {% if report.is_new %}<p>NEW</p>{% endif %}
+            <h3>{{ report.update_date|format_date }}</h3>
+          </dl>
+          <dl class="pagelink">
+            {% if next_report %}
+              <a href="{{ url_for('front.project_report', project_id=project.id,report_id=next_report.id) }}#report_link">
+                <p>新しい記事</p>
+              </a>
+            {% endif %}
+            <a href="{{ url_for('front.project_reports', project_id=project.id) }}"><p>一覧に戻る</p></a>
+            {% if previous_report %}
+              <a href="{{ url_for('front.project_report', project_id=project.id,report_id=previous_report.id) }}#report_link">
+                <p>過去の記事</p>
+              </a>
+            {% endif %}
+          </dl>
+          <dl class="reposns">
+            <a href="javascript:void(0)" onclick="share_report('line')" class="linelogo">
+              <img src="{{ 'theme/img/project/reposns_line.png'|to_cdn }}" alt="line">
+            </a>
+            <a href="javascript:void(0)" onclick="share_report('twitter')" class="twitterlogo">
+              <img src="{{ 'theme/img/project/reposns_twitter.png'|to_cdn }}" alt="twitter">
+            </a>
+            <a href="javascript:void(0)" onclick="share_report('facebook')" class="facebooklogo">
+              <img src="{{ 'theme/img/project/reposns_facebook.png'|to_cdn }}" alt="facebook">
+            </a>
+          </dl>
+        </li>
+        <li class="repotext">
+          <h3> {% if report.accessible == 'supporter' %}<span class="ic_gentei"><img src="{{ 'theme/img/project/icon_supporter_pc.png'|to_cdn }}" alt="限定公開"></span>{% endif %}{{ report.title }}</h3>
+          {% if report.accessible == 'all' %}
+            {# 全体に公開 #}{{ report.detail|safe }}
+          {% elif report.accessible == 'supporter' and is_supporter %}
+            {# サポーターに限定公開 #}{{ report.detail|safe }}
+          {% elif current_user.is_creator %}
+            {# 非公開/クリエイター #}{{ report.detail|safe }}
+          {% else %}
+            {# 非公開/ユーザー #}
+            このレポートはサポーター限定公開です
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  (function () {
+    share_report = function (mode) {
+      var text = '{{ report.title }} - {{ project.title }} | WIZY(ウィジー)';
+      if (mode == 'line') {
+        share_line(text)
+      }
+      if (mode == 'facebook') {
+        share_facebook();
+      }
+      if (mode == 'twitter') {
+        share_twitter(text, '{{ creator.nickname }} #WIZY');
+      }
+    }
+  }());
+</script>
+{% endblock %}

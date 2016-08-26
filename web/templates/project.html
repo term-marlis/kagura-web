@@ -1,0 +1,328 @@
+{% extends "project_layout.html" %}
+
+{% block meta %}
+<title>{{ creator.nickname }} - {{ project.title }} |【WIZY（ウィジー）】アーティストとファンによる共創・体験型の音楽クラウドファンディングプラットフォーム</title>
+<meta name="keywords" content="{{ creator.nickname }},{{ project.title }},クラウドファンディング,音楽,WIZY,ウィジー,共創,クラウドクリエイティング,レコチョク">
+<meta name="description" content="クリエイター:{{ creator.nickname }}の「{{ project.title }}」プロジェクトです。レコチョクが運営する共創型クラウドクリエイティング音楽プラットフォーム【WIZY(ウィジー)】を使って{{ creator.nickname }}をサポートしよう！">
+<meta property="og:title" content="{{ creator.nickname }} - {{ project.title }} |【WIZY（ウィジー）】共創型クラウドクリエイティング WIZY（ウィジー）">
+<meta property="og:description" content="クリエイター:{{ creator.nickname }}の「{{ project.title }}」プロジェクトです。レコチョクが運営する共創型クラウドクリエイティング音楽プラットフォーム【WIZY(ウィジー)】を使って{{ creator.nickname }}をサポートしよう！">
+<meta property="og:image" content="{{ project.image|to_cdn('project') }}">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:site_name" content="WIZY（ウィジー）">
+<meta property="og:type" content="article">
+<meta name="twitter:image:src" content="{{ project.image|to_cdn('project') }}">
+{% endblock %}
+
+{% block contents %}
+{# TODO SP用 タブ切り替え(プロジェクト&レポート) ここから #}
+<div id="pjtab" class="pcmv">
+  <div class="tab_area clearfix">
+    <ul>
+      <li class="tab1 sppjtitle select">
+        <img src="{{ 'theme/img/project/home.png'|to_cdn }}">プロジェクト
+      </li>
+      <li class="tab2 sppjtitle" data-url="{{ url_for('front.project_reports',project_id=project.id) }}">
+        <img src="{{ 'theme/img/project/talk.png'|to_cdn }}">レポート
+        {% if has_new_report %}<span class="spnewpop">NEW</span>{% endif %}
+      </li>
+    </ul>
+  </div>
+  <div class="spwrapper">
+    <div class="content_area">
+      <div class="content_area_inner clearfix">
+        <div id="contents1" class="content_block" style="display:block">
+          <ul>
+            <li class="remainingdays">残り<span id="graph3" data-dimension="54"
+                                              data-text="{{ project.end_time|remaining_days }}"
+                                              data-info="null" data-width="4" data-fontsize="24"
+                                              data-percent="{{ project|remaining_days_rate }}"
+                                              data-fgcolor="#ECECEC" data-bgcolor="#c5ac69" class="circliful"> </span>日
+            </li>
+            {% if project.type != 3 %}{# プレオーダー型の場合は表示しない #}
+              <li class="pcarea">達成<span id="graph4" data-dimension="54"
+                                         data-text="{{ (project.current_amount*100/project.target_amount)|int }}"
+                                         data-info="null" data-width="4" data-fontsize="24"
+                                         data-percent="{{ (project.current_amount*100/project.target_amount)|int }}"
+                                         data-fgcolor="#c5ac69"
+                                         data-bgcolor="#ECECEC" class="circliful"></span>%
+              </li>
+
+              </ul>
+              <ul>
+                {% if project.open_amount %}
+                  <li class="now">現在の金額</li>
+                  <li class="nowmoney">{{ project.current_amount|grouped_number }}円 <br>
+                    <span class="goal">目標{{ project.target_amount|grouped_number }}円</span>
+                  </li>
+                  </ul>
+                  <ul>
+                {% endif %}
+              <li class="saponame">サポーター</li>
+              <li class="supporters clearfix">{{ project.current_supports|grouped_number }}人</li>
+            {% endif %}{# プレオーダー型の場合は表示しない #}
+          </ul>
+          <div class="suportbtnarea">
+            {% if items|length > 0 %}
+              <a class="signupfor" href="{{ url_for('front.checkout', project=project.id,item=items[0].id) }}">
+                {% if project.type == 3 %}予約購入する{% else %}サポートする{% endif %}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{# TODO SP用 タブ切り替え(プロジェクト&レポート) ここまで #}
+
+<div class="parea_wrap">
+  <div class="section2 pcmv">
+    <div class="sptittle">
+      <h2 class="title1"><span>プロジェクト概要</span></h2>
+    </div>
+    <div class="spwrapper">
+      <div class="pjditail inner clearfix" id="s2">
+        <div class="left_title pc">
+          <h2>
+            <img src="{{ 'theme/img/project/h2_gaiyou.png'|to_cdn }}"
+                 alt="プロジェクト概要">
+          </h2>
+        </div>
+        {% if project.detail %}
+          <article class="ditailarea">{{ project.detail|safe }}<div class="grc">&nbsp;</div></article>
+        {% endif %}
+        <div class="borderline"></div>
+        <ul class="likearea clearfix">
+          <li class="icon">
+            {% if creator.image %}
+              <img src="{{ creator.image|to_cdn('profile') }}">
+            {% else %}
+              <img src="{{ 'image/noimage/profile.png'|to_cdn }}">
+            {% endif %}
+          </li>
+          <li class="right">
+            <h4>{{ creator.nickname }}</h4>
+            {% if current_user.is_authenticated %}
+              <a class="likebtn">このクリエイターをお気に入りに登録</a>
+            {% elif session.agree %}
+              <a class="likebtn" href="{{ url_for('front.login') }}">このクリエイターをお気に入りに登録</a>
+            {% else %}
+              <a class="likebtn modal_trigger" data-target="modal-tos">このクリエイターをお気に入りに登録</a>
+            {% endif %}
+            <ul class="sns">
+            {% if creator.twitter %}
+              <li><a class="twbtn" href="https://twitter.com/{{ creator.twitter }}"
+                 target="_blank">@{{ creator.twitter }}</a></li>
+            {% endif %}
+            {% if creator.facebook %}
+              <li><a class="fbbtn" href="https://www.facebook.com/{{ creator.facebook }}"
+                 target="_blank">facebook.com/{{ creator.facebook }}</a></li>
+            {% endif %}
+            {% if creator.link %}
+              <li><a class="linkbtn" href="{{ creator.link }}"
+                 target="_blank">{{ creator.link }}</a></li>
+            {% endif %}
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section3 pcmv">
+    <div class="inner clearfix">
+      <div class="sptittle">
+        <h2 class="title2"><span>アイテムを選ぶ</span></h2>
+      </div>
+      <div class="spwrapper clearfix">
+        <div id="contents">
+          <div class="left_title pc">
+            <h2>
+              <img src="{{ 'theme/img/project/h2_selectitem.png'|to_cdn }}" alt="アイテムを選ぶ">
+            </h2>
+          </div>
+          {% if items %}
+            <ul id="grid" data-columns>
+              {% for item in items %}
+                <li class="plan box1">
+                  <div>
+                    {% if item.limit > -1 %}
+                      <div class="remaining">
+                        <p>残り<br>{{ (item.limit - item.expected_supports, 0)|sort(reverse=True)|first }}個</p>
+                      </div>
+                    {% endif %}
+                    <h3>{{ item.name }}<br>
+                      <span class="fontsize">{{ item.price|grouped_number }}円</span>
+                    </h3>
+                    {% if item.image %}
+                      <img src="{{ item.image|to_cdn('item') }}">
+                    {% endif %}
+                    <p class="plantext">
+                      {% for line in item.description.splitlines() %}
+                        {{ line }}<br/>
+                      {% endfor %}
+                    </p>
+                    <p class="sapo">
+                      サポーター：{% if project.type == 2 %}{{ item.expected_supports }}{% else %}{{ item.fixed_supports }}{% endif %}人 <br>
+                      お届け予定日：{{ item.deliver_date|format_datemonth }}頃
+                      {% if item.limit_user > -1 %}<br>お一人様 {{ item.limit_user }}個まで{% endif %}
+                    </p>
+                    {% if not item.error_message %}
+                      {% if current_user.is_authenticated %}
+                        <a class="signupfor" href="{{ url_for('front.checkout', project=project.id,item=item.id) }}">
+                          {% if project.type == 3 %}予約購入する{% else %}サポートする{% endif %}
+                        </a>
+                      {% elif session.agree %}
+                        <a class="signupfor" href="{{ url_for('front.login') }}">
+                          {% if project.type == 3 %}予約購入する{% else %}サポートする{% endif %}
+                        </a>
+                      {% else %}
+                        <a class="signupfor modal_trigger" data-target="modal-tos">
+                          {% if project.type == 3 %}予約購入する{% else %}サポートする{% endif %}
+                        </a>
+                      {% endif %}
+                    {% else %}
+                      <div class="signupfor disabled">{{ item.error_message }}</div>
+                    {% endif %}
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <div class="readmorebtn">
+              <a class="report_btn report_btn-1 report_btn-1a">まだアイテムがありません</a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section4 report pcmv inner" id="s4">
+    <div class="left_title pc" style="margin-top: 0;">
+      <h2><img src="{{ 'theme/img/project/h2_report.png'|to_cdn }}" alt="活動報告"></h2>
+    </div>
+    {% if reports %}
+      {% for report in reports[:5] if report.accessible != 'private' %}
+
+        <article class="boxlarge repobox1">
+          <a href="{{ url_for('front.project_report', project_id=project.id, report_id=report.id) }}#report_link">
+          <ul class="clearfix">
+            <li class="date">
+              {% if report.is_new %}<p>NEW</p>{% endif %}
+              <h3>{{ report.update_date|format_date }}</h3>
+              {% if report.accessible == 'supporter' %}<p>サポーター限定公開</p>{% endif %}
+            </li>
+            <li class="repotext">
+              <h3>{{ report.title }}</h3>
+            </li>
+          </ul>
+          </a>
+        </article>
+
+      {% endfor %}
+      {% if (reports|length) > 5 %}
+        <div class="readmorebtn">
+          <a href="{{ url_for('front.project_reports',project_id=project.id) }}"
+             class="report_btn report_btn-1 report_btn-1a icon-arrow-right">もっと見る</a>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="readmorebtn">
+        <a class="report_btn report_btn-1 report_btn-1a">まだ活動報告がありません</a>
+      </div>
+    {% endif %}
+  </div>
+
+   {% if faqs %}
+  <div class="section5 pcmv" id="s5">
+     <div class="sptittle">
+        <h2 class="title3">Q&amp;A</h2>
+      </div>
+
+    <div class="qa inner clearfix">
+      {% if faqs %}
+
+      {% endif %}
+
+      {% if faqs %}
+      <div class="spwrapper">
+        <div class="boxlarge">
+          <section class="tittle">
+            <h3>Q&amp;A</h3>
+          </section>
+          <section class="qaarea">
+            <dl class="qabox">
+              {% for faq in faqs %}
+                <dt class="question">
+                <p><span class="color">Q：</span>{{ faq.question }}</p>
+                </dt>
+                <dd class="answer">
+                  <p><span class="color">A：</span>
+                    {% for line in faq.answer.splitlines() %}
+                      {{ line }}<br/>
+                    {% endfor %}
+                  </p>
+                </dd>
+              {% endfor %}
+            </dl>
+          </section>
+        </div>
+      </div>
+       {% endif %}
+    </div>
+  </div>
+   {% endif %}
+
+
+  {% if project.note %}
+  <div class="section5_2 pcmv">
+      <div class="notes inner clearfix">
+        <div class="sptittle">
+          <h2 class="title3">注意事項</h2>
+        </div>
+
+          <div class="spwrapper">
+          <div class="boxlarge">
+            <section class="tittle">
+              <h3>注意事項</h3>
+            </section>
+            <section class="textarea">
+              <p>
+                {% for line in project.note.splitlines() %}
+                  {{ line }}<br/>
+                {% endfor %}
+              </p>
+            </section>
+          </div>
+        </div>
+
+      </div>
+  </div>
+   {% endif %}
+
+  <div class="section6 inner pcmv">
+     <div class="sptittle">
+        <h2 class="title3">このプロジェクトをシェアしよう</h2>
+      </div>
+    <div class="spwrapper">
+       <div class="btm_sns boxlarge">
+          <section class="title">
+             このプロジェクトをシェアしよう
+          </section>
+         <section class="btn_area">
+              <ul class="clearfix pc">
+                  <li class="fb"><a href="javascript:void(0)" onclick="share_project('facebook')"><img src="{{ 'theme/img/project/share_fb_pc.png'|to_cdn }}" /></a></li>
+                  <li class="tw"><a href="javascript:void(0)" onclick="share_project('twitter')"><img src="{{ 'theme/img/project/share_tw_pc.png'|to_cdn }}" /></a></li>
+              </ul>
+             <ul class="clearfix sp">
+                  <li class="fb"><a href="javascript:void(0)" onclick="share_project('facebook')"><img src="{{ 'theme/img/project/share_fb_sp.png'|to_cdn }}" /></a></li>
+                  <li class="tw"><a href="javascript:void(0)" onclick="share_project('twitter')"><img src="{{ 'theme/img/project/share_tw_sp.png'|to_cdn }}" /></a></li>
+              </ul>
+         </section>
+       </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

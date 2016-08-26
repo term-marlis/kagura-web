@@ -1,0 +1,126 @@
+{% extends "creator_project_edit_layout.html" %}
+
+{% block meta %}
+<title>プロジェクト編集(基本情報)  - クリエイター</title>
+<meta property="og:title" content="プロジェクト編集(基本情報)  - クリエイター">
+{% endblock %}
+
+{% block container %}
+  <div class="sixteen wide column">
+    <div class="ui pointing secondary menu">
+      <a class="item active" href="{{ url_for('creator.project_edit_basic',project_id=project.id) }}"><i
+          class="ui camera retro icon"></i>基本情報</a>
+      <a class="item disabled" href="{{ url_for('creator.project_edit_item',project_id=project.id) }}"><i
+          class="ui gift icon"></i>アイテム</a>
+      <a class="item disabled" href="{{ url_for('creator.project_edit_detail',project_id=project.id) }}"><i
+          class="ui setting icon"></i>詳細情報</a>
+      <a class="item disabled" href="{{ url_for('creator.project_edit_faq',project_id=project.id) }}"><i
+          class="ui help circle icon"></i>FAQ</a>
+    </div>
+    <form id="basic_form" class="ui form" method="post"
+          action="{{ url_for('creator.project_edit_basic',project_id=project.id) }}"
+          enctype="multipart/form-data">
+      {{ basic_form.hidden_tag() }}
+      <div class="ui stackable grid">
+        <div class="ui eight wide column">
+          <div class="ui field">
+            <h4 class="ui dividing header">Main Image</h4>
+            <div class="ui field" style="background-color: {{ project.main_color }}">
+              <img class="ui centered small image" src="{{ project.image|to_cdn('project') }}">
+              {{ basic_form.image(style="display:none", accept='image/*') }}
+            </div>
+            <label for="image" class="ui icon gold button"><i class="upload icon"></i>Upload Image</label>
+          </div>
+        </div>
+        <div class="ui eight wide column">
+          <div class="ui field">
+            {{ basic_form.title.label }}
+            {{ basic_form.title(placeholder='Title', maxlength=40) }}
+          </div>
+          <div class="ui field">
+            {{ basic_form.summary.label }}
+            {{ basic_form.summary(rows=3,  placeholder='Summary', maxlength=60) }}
+          </div>
+        </div>
+        <div class="ui eight wide column">
+          <div class="ui two fields">
+            <div class="ui field">
+              {{ basic_form.start_date.label }}
+              <div class="ui input">
+                {{ basic_form.start_date }}
+              </div>
+            </div>
+            <div class="ui field">
+              {{ basic_form.start_time.label }}
+              <div class="ui input">
+                {{ basic_form.start_time }}
+              </div>
+            </div>
+          </div>
+          <div class="ui two fields">
+            <div class="ui field">
+              {{ basic_form.end_date.label }}
+              <div class="ui input">
+                {{ basic_form.end_date }}
+              </div>
+            </div>
+            <div class="ui field">
+              {{ basic_form.end_time.label }}
+              <div class="ui input">
+                {{ basic_form.end_time }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ui eight wide column">
+          <div class="ui two fields">
+            <div id="type_field" class="ui field">
+              {{ basic_form.type.label }}
+              {{ basic_form.type(class='ui dropdown') }}
+            </div>
+          </div>
+          <div class="ui two fields">
+            <div class="ui field">
+              {{ basic_form.target_amount.label }}
+              {{ basic_form.target_amount(type='number', min=1, max=999999999) }}
+            </div>
+            <div class="ui field">
+              {{ basic_form.target_amount.label }}
+              <div class="ui checkbox">
+                {{ basic_form.open_amount }}
+                {{ basic_form.open_amount.label }}
+              </div>
+            </div>
+          </div>
+          <div class="ui two fields">
+            <div id="color_field" class="ui field">
+              {{ basic_form.main_color.label }}
+              {{ basic_form.main_color(class='ui dropdown') }}
+            </div>
+            <div class="ui field">
+              {{ basic_form.accent_color.label }}
+              {{ basic_form.accent_color }}
+            </div>
+          </div>
+          {{ basic_form.submit(class='ui right floated gold button') }}
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $(document).ready(function () {
+      $('.ui.dropdown').dropdown();
+      $('#image').change(function () {
+        var file_name = $(this).val().toLowerCase();
+        if (file_name.endsWith('.png') || file_name.endsWith('.jpg')
+            || file_name.endsWith('.jpeg') || file_name.endsWith('.gif')) {
+          $('#submit').click();
+        }
+        $(this).val('');
+      });
+    });
+  </script>
+{% endblock %}

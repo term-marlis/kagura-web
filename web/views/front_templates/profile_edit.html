@@ -1,0 +1,248 @@
+{% extends "profile_layout.html" %}
+
+{% block meta %}
+<title>プロフィール編集 - マイページ</title>
+<meta name="keywords" content="クラウドファンディング,音楽,WIZY,ウィジー,共創,クラウドクリエイティング,レコチョク">
+<meta name="description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:title" content="プロフィール編集 - マイページ">
+<meta property="og:description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:image" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:site_name" content="WIZY（ウィジー）">
+<meta property="og:type" content="article">
+<meta name="twitter:image:src" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+{% endblock %}
+
+{% block style %}
+  <link rel=stylesheet type=text/css href="{{ 'cropper/2.3.2/cropper.min.css'|to_cdn }}">
+  <style>
+    .ui.toggle.checkbox input:focus:checked ~ label:before {
+      background-color: #c5ac69 !important;
+    }
+
+    .ui.toggle.checkbox input:checked ~ label:before {
+      background-color: #c5ac69 !important;
+    }
+  </style>
+{% endblock %}
+
+{% block container %}
+  <div class="ui top attached tabular menu">
+    <a class="item" href="{{ url_for('front.profile_favorite') }}">お気に入り</a>
+    <a class="item" href="{{ url_for('front.profile_support') }}">サポート履歴</a>
+    <div class="right menu">
+      <a class="active item">設定</a>
+    </div>
+  </div>
+  <div class="ui tab bottom attached active segment">
+    <div class="ui stackable grid">
+      <div class="four wide column">
+        <div class="ui vertical pointing menu ct_menu">
+          <a class="active item" data-tab="profile">プロフィール編集</a>
+          {% if current_user.is_user %}
+            <a class="item" data-tab="mail">メール通知設定</a>
+            <a class="item" data-tab="member">会員情報変更</a>
+          {% else %}
+            <a class="item" data-tab="creator">クリエイター情報変更</a>
+            <a class="item" data-tab="password">パスワード変更</a>
+          {% endif %}
+          <a class="item" href="{{ url_for('front.logout') }}">ログアウト</a>
+        </div>
+      </div>
+      <div class="twelve wide stretched column">
+        <div class="ui active basic tab segment" data-tab="profile">
+          <div class="center aligned column">
+            <form id="image_form" method="post" action="{{ url_for('front.profile_image') }}"
+                  enctype="multipart/form-data">
+              <label for="image" class="ui icon right floated gold button">
+                <i class="upload icon"></i>画像を変更
+              </label>
+              <img class="ui centered bordered circular small image" src="{{ profile.image|to_cdn('profile') }}">
+              {{ image_form.image(style="display:none", accept='image/*') }}
+              {{ image_form.hidden_tag() }}
+            </form>
+          </div>
+          <form class="ui form" method="post" action="{{ url_for('front.profile_edit') }}">
+            <div class="field">
+              {{ basic_form.nickname.label }}
+              {{ basic_form.nickname(maxlength=16) }}
+            </div>
+            <div class="field">
+              {{ basic_form.profile.label }}
+              {{ basic_form.profile(maxlength=6000, rows='5') }}
+            </div>
+            {{ basic_form.hidden_tag() }}
+            {{ basic_form.basic_submit(class='ui right floated gold button') }}
+          </form>
+          {% if basic_form.profile.errors %}
+            <div class="ui error message">
+              {% for error in basic_form.profile.errors %}
+                {{ error }}
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <div class="ui basic tab segment" data-tab="mail">
+          <form class="ui form" method="post" action="{{ url_for('front.profile_edit',view='mail') }}">
+            {{ mail_form.hidden_tag() }}
+            <div class="ui segment">
+              <div class="field">
+                <div class="ui toggle checkbox">
+
+                  <label for="news">
+                    <b>ニュースレター</b><br/>
+                    最新のプロジェクトやお得なキャンペーン情報などを受け取ることができます。
+                  </label>
+                  {{ mail_form.news(class='hidden') }}
+                </div>
+              </div>
+            </div>
+            <div class="ui segment">
+              <div class="field">
+                <div class="ui toggle checkbox">
+                  {{ mail_form.favorite(class='hidden') }}
+                  <label for="favorite">
+                    <b>クリエイターお知らせ</b><br/>
+                    お気に入りのクリエイターの最新情報や活動報告を受け取ることができます。
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="ui segment">
+              <div class="field">
+                <div class="ui toggle checkbox">
+                  {{ mail_form.project(class='hidden') }}
+                  <label for="project">
+                    <b>サポーターお知らせ</b><br/>
+                    サポートしたプロジェクトの活動報告を受け取ることができます。WIZYでしか手に入らない情報が届くかも!?
+                  </label>
+                </div>
+              </div>
+            </div>
+            {{ mail_form.mail_submit(class='ui right floated gold button') }}
+          </form>
+        </div>
+        <div class="ui basic tab segment" data-tab="member">
+          <table class="ui table">
+            <tbody>
+            <tr>
+              <td>メールアドレス</td>
+              <td>{{ profile.email }}</td>
+              <td class="right aligned">
+                <a class="ui gray button" href="{{ url_for('front.member_edit', edit_type='mail') }}">
+                  <i class="external icon"></i>変更</a>
+              </td>
+            </tr>
+            <tr>
+              <td>パスワード</td>
+              <td>******************</td>
+              <td class="right aligned">
+                <a class="ui gray button" href="{{ url_for('front.member_edit', edit_type='password') }}">
+                  <i class="external icon"></i>変更</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ui basic tab segment" data-tab="creator">
+          <form class="ui form" method="post" action="{{ url_for('front.profile_edit') }}">
+            <div class="field">
+              {{ creator_form.email.label }}
+              {{ creator_form.email(maxlength=200) }}
+            </div>
+            <div class="field">
+              {{ creator_form.link.label }}
+              {{ creator_form.link(placeholder='web site', maxlength=500) }}
+            </div>
+            <div class="middle wide field">
+              <div class="ui labeled input">
+                <div class="ui label fb"><span class="pc">https://www.facebook.com/</span ><span class="sp">facebook</span></div>
+                {{ creator_form.facebook(placeholder='facebook name', maxlength=50) }}
+              </div>
+            </div>
+            <div class="middle wide field">
+              <div class="ui labeled input tw">
+                <div class="ui blue label"><span class="pc">https://twitter.com/</span><span class="sp">twitter</span></div>
+                {{ creator_form.twitter(placeholder='twitter name', maxlength=15) }}
+              </div>
+            </div>
+            {{ creator_form.hidden_tag() }}
+            {{ creator_form.creator_submit(class='ui right floated gold button') }}
+          </form>
+        </div>
+        <div class="ui basic tab segment" data-tab="password">
+          <form class="ui form" method="post" action="{{ url_for('front.profile_edit') }}">
+            <div class="field">
+              {{ password_form.password.label }}
+              {{ password_form.password }}
+            </div>
+            <div class="field">
+              {{ password_form.password_confirm.label }}
+              {{ password_form.password_confirm }}
+            </div>
+            {{ password_form.hidden_tag() }}
+            {{ password_form.password_submit(class='ui right floated gold button') }}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if 'profile_image' in session %}
+    <div class="ui basic modal">
+      <div class="ui header">プロフィールに表示する範囲を選択してください。</div>
+      <div class="content">
+        <img id="profile-image" class="ui image"
+             src="{{ url_for('static', filename='img/tmp/' + session.profile_image) }}">
+      </div>
+      <div class="actions">
+        <div class="ui cancel basic basic inverted button">キャンセル</div>
+        <div class="ui approve blue basic inverted button">保存</div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block script %}
+  <script type="text/javascript" src="{{ 'cropper/2.3.2/cropper.min.js'|to_cdn }}"></script>
+  <script>
+    $(document).ready(function () {
+      $('.menu .item').tab();
+      $('.ui.checkbox').checkbox();
+      $('#image').change(function () {
+        var file_name = $(this).val().toLowerCase();
+        if (file_name.endsWith('.png') || file_name.endsWith('.jpg')
+            || file_name.endsWith('.jpeg') || file_name.endsWith('.gif')) {
+          $('#image_form').submit();
+        }
+        $(this).val('');
+      });
+      {% if 'profile_image' in session %}
+        $('.ui.modal').modal({
+          closable: false,
+          blurring: true,
+          onVisible: function () {
+            $('#profile-image').cropper({
+              aspectRatio: 1
+            });
+          },
+          onDeny: function () {
+            $.post('{{ url_for('front.profile_image') }}', {
+              csrf_token: $('#csrf_token').val()
+            });
+          },
+          onApprove: function () {
+            var data = $('#profile-image').cropper('getData');
+            $.post('{{ url_for('front.profile_image') }}', {
+              x: Math.round(data.x),
+              y: Math.round(data.y),
+              width: Math.round(data.width),
+              height: Math.round(data.height),
+              csrf_token: $('#csrf_token').val()
+            });
+          }
+        }).modal('show');
+      {% endif %}
+    });
+  </script>
+{% endblock %}

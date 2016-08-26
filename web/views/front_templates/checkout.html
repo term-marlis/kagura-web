@@ -1,0 +1,901 @@
+{% extends "layout.html" %}
+
+{% block meta %}
+<title>アイテム選択 - 購入</title>
+<meta name="keywords" content="クラウドファンディング,音楽,WIZY,ウィジー,共創,クラウドクリエイティング,レコチョク">
+<meta name="description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:title" content="アイテム購入- {{ creator.nickname }} - {{ project.title }} | 共創型クラウドクリエイティング WIZY(ウィジー)">
+<meta property="og:description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:image" content="{{ project.image|to_cdn('project') }}">
+<meta property="og:url" content="{{ url_for('front.project', project_id=project.id) }}">
+<meta property="og:site_name" content="WIZY（ウィジー）">
+<meta property="og:type" content="article">
+<meta name="twitter:image:src" content="{{ project.image|to_cdn('project') }}">
+{% endblock %}
+
+{% block style %}
+  <style xmlns="http://www.w3.org/1999/html">
+    .ui.steps .step.active .title,
+    .ui.steps .step.active .icon {
+      color: #c5ac69;
+    }
+
+    img.payment.image {
+      width: auto;
+      max-height: 24px;
+    }
+
+    table.ui.basic.table td,
+    div.ui.segment p {
+      word-break: break-all;
+    }
+
+    input[type="text"] {
+      ime-mode: active;
+    }
+
+    div#checkout {
+      min-height: 500px;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+  <div class="ui container">
+    <div class="ui stackable grid">
+      <div class="sixteen wide column computer only">
+        <div class="ui four top attached steps">
+          <div class="select active step">
+            <i class="gift icon"></i>
+            <div class="content">
+              <div class="title">アイテム選択</div>
+            </div>
+          </div>
+          {% if item.shipping %}
+            <div class="shipping disabled step">
+              <i class="truck icon"></i>
+              <div class="content">
+                <div class="title">お届け先</div>
+              </div>
+            </div>
+          {% endif %}
+          <div class="payment disabled step">
+            <i class="payment icon"></i>
+            <div class="content">
+              <div class="title">支払方法</div>
+            </div>
+          </div>
+          <div class="confirm disabled step">
+            <i class="info icon"></i>
+            <div class="content">
+              <div class="title">内容確認</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sixteen wide column mobile tablet only">
+        <div class="ui horizontal divider step_name select">アイテム選択</div>
+        <div class="ui horizontal divider step_name shipping" style="display:none">お届け先</div>
+        <div class="ui horizontal divider step_name payment" style="display:none">支払方法</div>
+        <div class="ui horizontal divider step_name confirm" style="display:none">内容確認</div>
+        <div class="ui horizontal divider step_name complete" style="display:none">完了</div>
+      </div>
+      <div class="sixteen wide column">
+        <input id="member_id" type="hidden" value="{{ current_user.member_id }}">
+        <input id="gmo_shop_id" type="hidden" value="{{ gmo_shop_id }}">
+        <input id="project_id" type="hidden" value="{{ project.id }}">
+        <input id="project_title" type="hidden" value="{{ project.title }}">
+        <input id="item_id" type="hidden" value="{{ item.id }}">
+        <input id="item_price" type="hidden" value="{{ item.price }}">
+        <input id="item_name" type="hidden" value="{{ item.name }}">
+        <input id="shipping" type="hidden" value="{{ item.shipping }}">
+        {{ form.hidden_tag() }}
+        <div id="checkout"></div>
+      </div>
+    </div>
+  </div>
+  <div id="adebis"></div>
+  <div class="ui page inverted dimmer">
+    <div class="ui text loader">処理中です...</div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ gmo_script_url }}"></script>
+  <script src="{{ 'underscore/1.8.3/underscore-min.js'|to_cdn('common') }}"></script>
+  <script src="{{ 'backbone/1.3.2/backbone-min.js'|to_cdn('common') }}"></script>
+  <script type="text/template" id="select-template">
+    <h2 class="ui header">{{ project.title }}</h2>
+    <div class="ui styled fluid accordion">
+      {% for it in items %}
+        {% if it.id == item.id %}
+          <div class="title active">
+            <a class="ui gold ribbon label">選択中</a>
+            <label class="ui basic label">¥{{ item.price|grouped_number }}</label>
+            {{ item.name }}
+            {% if it.limit_user > -1 %}
+              (お一人様{{ item.limit_user }}点まで)
+            {% endif %}
+          </div>
+          <div class="content active">
+            <div class="ui items">
+              <div class="item">
+                <div class="image">
+                  {% if item.image %}
+                    <img src="{{ item.image|to_cdn('item') }}">
+                  {% else %}
+                    <img src="{{ 'image/noimage/item.png'|to_cdn }}">
+                  {% endif %}
+                </div>
+                <div class="content">
+                  <div class="description">
+                    {% for line in (item.description).splitlines() %}
+                      {{ line }}<br/>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% else %}
+          <div class="title">
+            <i class="dropdown icon"></i>
+            <label class="ui basic label">¥{{ it.price|grouped_number }}</label>
+            {{ it.name }}
+            {% if it.limit_user > -1 %}
+              (お一人様{{ it.limit_user }}点まで)
+            {% endif %}
+          </div>
+          <div class="content">
+            <div class="ui items">
+              <div class="item">
+                <div class="image">
+                  {% if it.image %}
+                    <img src="{{ it.image|to_cdn('item') }}">
+                  {% else %}
+                    <img src="{{ 'image/noimage/item.png'|to_cdn }}">
+                  {% endif %}
+                </div>
+                <div class="content">
+                  <div class="description">
+                    {% for line in it.description.splitlines() %}
+                      {{ line }}<br/>
+                    {% endfor %}
+                  </div>
+                  <div class="ui meta">
+                    <div class="ui grid">
+                      <div class="computer tablet only sixteen wide column">
+                        {% if it.error_message %}
+                          <a class="ui disabled large button">{{ it.error_message }}</a>
+                        {% else %}
+                          <a class="ui gold large button"
+                             href="{{ url_for('front.checkout',project=project.id, item=it.id) }}">選択する</a>
+                        {% endif %}
+                      </div>
+                      <div class="mobile only sixteen wide column">
+                        {% if it.error_message %}
+                          <a class="ui disabled fluid large button">{{ it.error_message }}</a>
+                        {% else %}
+                          <a class="ui gold fluid large button"
+                             href="{{ url_for('front.checkout',project=project.id, item=it.id) }}">選択する</a>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="ui segment">
+      <form class="ui select form">
+        {% for question in questions %}
+          <div class="ui field">
+            <label>
+              {{ question.description }}
+              {% if question.is_required %}<i class="red asterisk icon"></i>{% endif %}
+            </label>
+            {% if question.type =='number' %}
+              <input type="number" name="answer_{{ question.id }}" placeholder="0"/>
+            {% elif question.type =='text' %}
+              <input type="text" name="answer_{{ question.id }}" placeholder="ご回答ください" maxlength="1000"/>
+            {% else %}
+              {% set values = question.format.split(',') %}
+              <select name="answer_{{ question.id }}" class="ui fluid dropdown">
+                <option value="">選択してください</option>
+                {% for value in values %}
+                  <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+              </select>
+            {% endif %}
+          </div>
+        {% endfor %}
+        <button type="button" class="ui cancel small button">キャンセル</button>
+        {% if item.error_message %}
+          <button type="button" class="ui small disabled button">{{ item.error_message }}</button>
+        {% else %}
+          <button type="button" class="ui next small gold button">次へ</button>
+        {% endif %}
+        <div class="ui select error message"></div>
+      </form>
+    </div>
+  </script>
+  <script type="text/template" id="shipping-template">
+    <h2 class="ui header">{{ project.title }}</h2>
+    <div class="ui segment">
+      <form class="ui shipping form">
+        <div class="ui two fields">
+          <div class="field">
+            <label>郵便番号<i class="red asterisk icon"></i></label>
+            <input id="zipcode" name="shipping_zipcode" type="number" placeholder="例）1500002" tabindex="1"
+                   maxlength="8">
+          </div>
+          <div class="field">
+            <label>都道府県<i class="red asterisk icon"></i></label>
+            {{ form.shipping_state(class='ui fluid dropdown') }}
+          </div>
+          <div class="field">
+            <label>市区町村<i class="red asterisk icon"></i></label>
+            <input name="shipping_town" type="text" placeholder="" maxlength="100">
+          </div>
+        </div>
+        <div class="ui two fields">
+          <div class="field">
+            <label>番地<i class="red asterisk icon"></i></label>
+            <input name="shipping_address" type="text" placeholder="" tabindex="2" maxlength="100">
+          </div>
+          <div class="field">
+            <label>建物名・部屋番号等</label>
+            <input name="shipping_building" type="text" placeholder="" tabindex="3" maxlength="100">
+          </div>
+        </div>
+        <div class="ui two fields">
+          <div class="field">
+            <label>お名前(姓)<i class="red asterisk icon"></i></label>
+            <input name="shipping_last_name" type="text" placeholder="" tabindex="4" maxlength="50">
+          </div>
+          <div class="field">
+            <label>お名前(名)<i class="red asterisk icon"></i></label>
+            <input name="shipping_first_name" type="text" placeholder="" tabindex="5" maxlength="50">
+          </div>
+          <div class="field">
+            <label>電話番号<i class="red asterisk icon"></i></label>
+            <input name="shipping_phone" type="number" placeholder="例）09012345678" tabindex="6" maxlength="13">
+          </div>
+        </div>
+        <button type="button" class="ui back small gold button">戻る</button>
+        <button type="button" class="ui next small gold button" tabindex="7">次へ</button>
+        <div class="ui shipping error message"></div>
+      </form>
+    </div>
+  </script>
+  <script type="text/template" id="payment-template">
+    <div class="ui segment">
+      <form class="ui payment form">
+        {% if project.type != 2 and ((item.price + item.fee_payeasy) < 1000000) and (project.end_time|payment_term) %}
+          <h3 class="ui header">お支払い方法を選択してください</h3>
+        {% endif %}
+        <div class="field">
+          {% if project.type != 2 %}{# チャレンジ型以外は決済手段を選択可能 #}
+            {% if (item.price + item.fee_cvs) < 300000 and (project.end_time|payment_term) %}
+              <div class="ui stackable three item menu">
+                <a class="item active" id="credit" data-tab="credit">クレジットカード</a>
+                <a class="item" id="cvs" data-tab="cvs">コンビニ支払い</a>
+                <a class="item" id="payeasy" data-tab="payeasy">銀行支払い(Pay-easy)</a>
+              </div>
+            {% elif (item.price + item.fee_payeasy) < 1000000 and (project.end_time|payment_term) %}
+              <div class="ui stackable two item menu">
+                <a class="item active" id="credit" data-tab="credit">クレジットカード</a>
+                <a class="item" id="payeasy" data-tab="payeasy">銀行支払い(Pay-easy)</a>
+              </div>
+            {% else %}
+              <div class="ui stackable item menu">
+                <a class="item active" id="credit" data-tab="credit">クレジットカード</a>
+              </div>
+            {% endif %}
+          {% endif %}
+          <div class="ui tab basic segment active" data-tab="credit">
+            <div class="ui yellow message">
+              <div class="header">クレジットカード払いについて</div>
+              <div class="ui center aligned segment">
+                <div class="ui images">
+                  <img class="ui payment image"
+                       src="{{ 'image/payment/card/visa.gif'|to_cdn }}">
+                  <img class="ui payment image"
+                       src="{{ 'image/payment/card/mastercard.gif'|to_cdn }}">
+                </div>
+              </div>
+              <ul class="list">
+                <li>ご利用可能なクレジットカードブランドは、VISA/Masterカードになります</li>
+                <li>クレジットカードの決済日は、チャレンジ型のプロジェクトの場合はプロジェクトが終了した日、それ以外の場合はサポートした直後になります</li>
+              </ul>
+            </div>
+            <% if (payment_credit_saved_number) { %>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input class="saved_card" type="radio" name="payment_credit_mode" value="old" checked="checked">
+                <label>前回使用したクレジットカードを使用する</label>
+              </div>
+            </div>
+            <div class="field">
+              <p>クレジットカード番号：<%- payment_credit_saved_number %></p>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input class="saved_card" type="radio" name="payment_credit_mode" value="new">
+                <label>新規クレジットカードを使用する</label>
+              </div>
+            </div>
+            <% } %>
+            <div class="ui two card_input fields">
+              <div class="four wide field">
+                <label>カード番号<i class="red asterisk icon"></i></label>
+                <input name="payment_credit_number" type="number" maxlength="16">
+              </div>
+              <div class="four wide field">
+                <label>セキュリティコード<i class="red asterisk icon"></i></label>
+                <input name="payment_credit_cvc" type="number" maxlength="4">
+              </div>
+            </div>
+            <div class="card_input field">
+              <label>有効期限<i class="red asterisk icon"></i></label>
+              <div class="two fields">
+                <div id="payment_credit_exp_month_field" class="four wide field">
+                  {{ form.payment_credit_exp_month(class='ui dropdown') }}
+                </div>
+                <div id="payment_credit_exp_year_field" class="four wide field">
+                  {{ form.payment_credit_exp_year(class='ui dropdown') }}
+                </div>
+              </div>
+            </div>
+            <div class="ui clearing card_input segment">
+              <img class="ui medium left floated image" src="{{ 'image/payment/card/security.jpg'|to_cdn }}">
+              <p>セキュリティコードとは？<br/>
+                セキュリティコードはカード裏面または表面に記載された3～4桁の番号です(暗証番号ではありません)。<br/>
+                セキュリティコードの記載がないクレジットカードはご利用いただけません。<br/></p>
+            </div>
+            <div class="ui yellow message">
+              <div class="header">お支払い額</div>
+              <table class="ui collapsing table">
+                <tbody>
+                <tr>
+                  <td class="six wide">商品の小計</td>
+                  <td class="ten wide right aligned">{{ item.price|grouped_number }}円</td>
+                </tr>
+                <tr>
+                  <td>決済手数料</td>
+                  <td class="right aligned">0円</td>
+                </tr>
+                <tr>
+                  <td>合計</td>
+                  <td class="right aligned">{{ item.price|grouped_number }}円</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          {% if project.type != 2 %}{# チャレンジ型以外は利用可能 #}
+            {% if (item.price + item.fee_cvs) < 300000 and (project.end_time|payment_term) %}
+              <div class="ui tab basic segment" data-tab="cvs">
+                <div class="ui yellow message">
+                  <div class="header">コンビニ払いについて</div>
+                  <div class="ui center aligned segment">
+                    <div class="ui images">
+                      <img class="ui payment image" src="{{ 'image/payment/cvs/lawson.gif'|to_cdn }}">
+                      <img class="ui payment image" src="{{ 'image/payment/cvs/famima.gif'|to_cdn }}">
+                      <img class="ui payment image" src="{{ 'image/payment/cvs/circlek.gif'|to_cdn }}">
+                      <img class="ui payment image" src="{{ 'image/payment/cvs/sunkus.gif'|to_cdn }}">
+                      <img class="ui payment image" src="{{ 'image/payment/cvs/ministop.gif'|to_cdn }}">
+                      <img class="ui payment image" src="{{ 'image/payment/cvs/dailystore.gif'|to_cdn }}">
+                      <img class="ui payment image" src="{{ 'image/payment/cvs/dailyyamazaki.gif'|to_cdn }}">
+                      <img class="ui payment image" src="{{ 'image/payment/cvs/seicomart.gif'|to_cdn }}">
+                      <img class="ui payment image" src="{{ 'image/payment/cvs/three-f.gif'|to_cdn }}">
+                    </div>
+                  </div>
+                  <ul class="list">
+                    <li>コンビニ払いの取扱店舗は、ローソン/ファミリーマート/サークルK/サンクス/セイコーマート/ミニストップ/デイリーヤマザキ/スリーエフになります</li>
+                    <li>コンビニ払いは、30万円を超える場合は決済できません</li>
+                    <li>コンビニ払いは、支払い時に別途手数料が掛かります</li>
+                    <li>
+                      コンビニ払いのご利用方法は、<a href="//www.gmo-pg.com/service/convenience_store/various_user/" target="_blank">こちら</a>からご確認ください
+                    </li>
+                  </ul>
+                </div>
+                <div id="payment_cvs_code_field" class="eight wide field">
+                  <label>コンビニ名<i class="red asterisk icon"></i></label>
+                  {{ form.payment_cvs_code(class='ui dropdown') }}
+                </div>
+                <div class="two fields">
+                  <div class="four wide field">
+                    <label>お名前(姓)<i class="red asterisk icon"></i></label>
+                    <input name="payment_cvs_last_name" type="text" maxlength="19"/>
+                  </div>
+                  <div class="four wide field">
+                    <label>お名前(名)<i class="red asterisk icon"></i></label>
+                    <input name="payment_cvs_first_name" type="text" maxlength="19"/>
+                  </div>
+                </div>
+                <div class="two fields">
+                  <div class="four wide field">
+                    <label>フリガナ(セイ)<i class="red asterisk icon"></i></label>
+                    <input name="payment_cvs_last_name_kana" type="text" maxlength="19">
+                  </div>
+                  <div class="four wide field">
+                    <label>フリガナ(メイ)<i class="red asterisk icon"></i></label>
+                    <input name="payment_cvs_first_name_kana" type="text" maxlength="19"/>
+                  </div>
+                </div>
+                <div class="eight wide field">
+                  <label>電話番号<i class="red asterisk icon"></i></label>
+                  <input name="payment_cvs_tel_no" type="number" placeholder="例）09012345678" maxlength="13"/>
+                </div>
+                <div class="ui yellow message">
+                  <div class="header">お支払い期日： {{ project.end_time|payment_term }} 23時59分59秒まで</div>
+                  <p>＊お支払い期日を過ぎてしまいますと自動的にキャンセルとなっていまいます。
+                    くれぐれもお支払い期日内にご入金いただけますようよろしくお願い致します。</p>
+                  <div class="header">お支払い額</div>
+                  <table class="ui collapsing table">
+                    <tbody>
+                    <tr>
+                      <td class="six wide">商品の小計</td>
+                      <td class="ten wide right aligned">{{ item.price|grouped_number }}円</td>
+                    </tr>
+                    <tr>
+                      <td>決済手数料</td>
+                      <td class="right aligned">{{ item.fee_cvs }}円</td>
+                    </tr>
+                    <tr>
+                      <td>合計</td>
+                      <td class="right aligned">{{ (item.price + item.fee_cvs)|grouped_number }}円</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            {% endif %}
+            {% if (item.price + item.fee_payeasy) < 1000000 and (project.end_time|payment_term) %}
+              <div class="ui tab basic segment" data-tab="payeasy">
+                <div class="ui yellow message">
+                  <div class="header">銀行払い(Pay-easy)について</div>
+                  <div class="ui center aligned segment">
+                    <div class="ui images">
+                      <img class="ui payment image"
+                           src="{{ 'image/payment/payeasy/pay-easy.jpg'|to_cdn }}">
+                    </div>
+                  </div>
+                  <ul class="list">
+                    <li>銀行振込(Pay-easy)は、金融機関のATMをご利用ください。コンビニ設置のATMからはご利用いただけません</li>
+                    <li>銀行振込(Pay-easy)は、100万円を超える場合は決済できません</li>
+                    <li>銀行振込(Pay-easy)は、支払い時に別途手数料が掛かります</li>
+                    <li>
+                      銀行払い(Pay-easy)でのお支払い方法は<a href="//www.pay-easy.jp/howto/index.html" target="_blank">こちら</a>をご確認ください
+                    </li>
+                    <li>
+                      銀行振込(Pay-easy)の取扱金融機関は<a href="//www.pay-easy.jp/where/list_atm.php" target="_blank">こちら</a>をご確認ください
+                    </li>
+                  </ul>
+                </div>
+                <div class="two fields">
+                  <div class="four wide field">
+                    <label>お名前(姓)<i class="red asterisk icon"></i></label>
+                    <input name="payment_payeasy_last_name" type="text" maxlength="19"/>
+                  </div>
+                  <div class="four wide field">
+                    <label>お名前(名)<i class="red asterisk icon"></i></label>
+                    <input name="payment_payeasy_first_name" type="text" maxlength="19"/>
+                  </div>
+                </div>
+                <div class="two fields">
+                  <div class="four wide field">
+                    <label>フリガナ(セイ)<i class="red asterisk icon"></i></label>
+                    <input name="payment_payeasy_last_name_kana" type="text" maxlength="19"/>
+                  </div>
+                  <div class="four wide field">
+                    <label>フリガナ(メイ)<i class="red asterisk icon"></i></label>
+                    <input name="payment_payeasy_first_name_kana" type="text" maxlength="19"/>
+                  </div>
+                </div>
+                <div class="eight wide field">
+                  <label>電話番号<i class="red asterisk icon"></i></label>
+                  <input name="payment_payeasy_tel_no" type="number" placeholder="例）09012345678" maxlength="13"/>
+                </div>
+                <div class="ui yellow message">
+                  <div class="header">お支払い期日： {{ project.end_time|payment_term }} 23時59分59秒まで</div>
+                  <p>＊お支払い期日を過ぎてしまいますと自動的にキャンセルとなっていまいます。
+                    くれぐれもお支払い期日内にご入金いただけますようよろしくお願い致します。</p>
+                  <div class="header">お支払い額</div>
+                  <table class="ui collapsing table">
+                    <tbody>
+                    <tr>
+                      <td class="six wide">商品の小計</td>
+                      <td class="ten wide right aligned">{{ item.price|grouped_number }}円</td>
+                    </tr>
+                    <tr>
+                      <td>決済手数料</td>
+                      <td class="right aligned">{{ item.fee_payeasy }}円</td>
+                    </tr>
+                    <tr>
+                      <td>合計</td>
+                      <td class="right aligned">{{ (item.price + item.fee_payeasy)|grouped_number }}円</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            {% endif %}
+          {% endif %}
+          <button type="button" class="ui back small gold button">戻る</button>
+          <button type="button" class="ui next small gold button">次へ</button>
+          <div class="ui payment error message"></div>
+        </div>
+      </form>
+    </div>
+  </script>
+  <script type="text/template" id="confirm-template">
+    <div class="ui segment">
+      <div id="confirm-message" class="ui error message" style="display: none;"></div>
+      <table class="ui basic table">
+        <tbody>
+        <tr>
+          <td class="collapsing">プロジェクト</td>
+          <td colspan="2">{{ project.title }}</td>
+        </tr>
+        <tr>
+          <td rowspan="3" class="collapsing">アイテム</td>
+          <td colspan="2">{{ item.name }}</td>
+        </tr>
+        <tr>
+          <td>価格</td>
+          <td>{{ item.price|grouped_number }} 円</td>
+        </tr>
+        <tr>
+          <td>内容</td>
+          <td>
+            {% for line in item.description.splitlines() %}
+              {{ line }}<br/>
+            {% endfor %}
+          </td>
+        </tr>
+        {% for question in questions %}
+          <tr>
+            {% if loop.first %}
+              <td class="collapsing" rowspan="{{ questions|length }}">質問</td>
+            {% endif %}
+            <td>{{ question.description }}</td>
+            <td><% if (answer_{{ question.id }}) { %>
+              <%- answer_{{ question.id }} %><% } else { %>※ 回答なし ※<% } %>
+            </td>
+          </tr>
+        {% endfor %}
+        {% if item.shipping %}
+          <tr>
+            <td class="collapsing" rowspan="4">お届け先</td>
+            <td>郵便番号</td>
+            <td><%- shipping_zipcode %></td>
+          </tr>
+          <tr>
+            <td>都道府県</td>
+            <td><%- shipping_state_text %></td>
+          </tr>
+          <tr>
+            <td>住所</td>
+            <td><%- shipping_town %> <%- shipping_address %> <%- shipping_building %></td>
+          </tr>
+          <tr>
+            <td>お名前 / 電話番号</td>
+            <td><%- shipping_last_name %> <%- shipping_first_name %> / <%- shipping_phone %></td>
+          </tr>
+        {% endif %}
+        <% if (payment_type == 'credit') { %>
+        <tr>
+          <td class="collapsing" rowspan="3">支払方法</td>
+          <td colspan="2">クレジットカード支払い</td>
+        </tr>
+        <tr>
+          <td>カード番号</td>
+          <% if (payment_credit_mode == 'new') { %>
+          <td><%- '************' + payment_credit_number.substr(12) %></td>
+          <% } else { %>
+          <td><%- payment_credit_saved_number %></td>
+          <% } %>
+        </tr>
+        <% if (payment_credit_mode == 'new') { %>
+        <tr>
+          <td>有効期限</td>
+          <td><%- payment_credit_exp_year %>年 <%- payment_credit_exp_month %>月</td>
+        </tr>
+        <% } %>
+        <% } else if (payment_type == 'cvs') { %>
+        <tr>
+          <td class="collapsing" rowspan="5">支払方法</td>
+          <td colspan="2">コンビニ支払い</td>
+        </tr>
+        <tr>
+          <td>支払先</td>
+          <td><%- payment_cvs_text %></td>
+        </tr>
+        <tr>
+          <td>お名前</td>
+          <td><%- payment_cvs_last_name %> <%- payment_cvs_first_name %></td>
+        </tr>
+        <tr>
+          <td>フリガナ</td>
+          <td><%- payment_cvs_last_name_kana %> <%- payment_cvs_first_name_kana %></td>
+        </tr>
+        <tr>
+          <td>電話番号</td>
+          <td><%- payment_cvs_tel_no %></td>
+        </tr>
+        <tr>
+          <td>お支払い期日</td>
+          <td colspan="2">{{ project.end_time|payment_term }} 23時59分59秒まで</td>
+        </tr>
+        <% } else if (payment_type == 'payeasy') { %>
+        <tr>
+          <td class="collapsing" rowspan="4">支払方法</td>
+          <td colspan="2">銀行支払い</td>
+        </tr>
+        <tr>
+          <td>お名前</td>
+          <td><%- payment_payeasy_last_name %> <%- payment_payeasy_first_name %></td>
+        </tr>
+        <tr>
+          <td>フリガナ</td>
+          <td><%- payment_payeasy_last_name_kana %> <%- payment_payeasy_first_name_kana %></td>
+        </tr>
+        <tr>
+          <td>電話番号</td>
+          <td><%- payment_payeasy_tel_no %></td>
+        </tr>
+        <tr>
+          <td>お支払い期日</td>
+          <td colspan="2">{{ project.end_time|payment_term }} 23時59分59秒まで</td>
+        </tr>
+        <% } %>
+        </tbody>
+      </table>
+      <table class="ui collapsing table">
+        <tbody>
+        <tr>
+          <td class="six wide">商品の小計</td>
+          <td class="ten wide right aligned">{{ item.price|grouped_number }}円</td>
+        </tr>
+        <tr>
+          <td>決済手数料</td>
+          <td class="right aligned">
+            <% if (payment_type == 'credit') { %>0円
+            <% } else if (payment_type == 'cvs') { %>{{ item.fee_cvs }}円
+            <% } else if (payment_type == 'payeasy') { %>{{ item.fee_payeasy }}円
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td>合計</td>
+          <td class="right aligned">
+            <% if (payment_type == 'credit') { %>{{ item.price|grouped_number }}円
+            <% } else if (payment_type == 'cvs') { %>
+            {% if (item.price + item.fee_cvs) < 300000 %}
+              {{ (item.price + item.fee_cvs)|grouped_number }}円
+            {% endif %}
+            <% } else if (payment_type == 'payeasy') { %>
+            {% if (item.price + item.fee_payeasy) < 1000000 %}
+              {{ (item.price + item.fee_payeasy)|grouped_number }}円
+            {% endif %}
+            <% } %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="ui privacy checkbox">
+        <input type="checkbox">
+        <label>&nbsp;個人情報の取り扱い/プライバシーポリシーに同意します</label>
+      </div>
+    </div>
+    <button type="button" class="ui back small gold button">戻る</button>
+    <button id="submit-button" type="button" class="ui submit small disabled gold button" disabled>申し込みを確定する</button>
+  </script>
+  <script type="text/template" id="complete-template">
+    <div class="ui one column centered grid">
+      <div class="center aligned column">
+
+        <% if (payment_type != 'credit') { %>
+        <div class="ui info message">
+          <h4 class="unpaid"><i class="warning sign icon"></i>まだ決済は完了していません</h4>
+          <% if (payment_type == 'cvs') { %>
+          <div class="header unpaid">
+            期限内に指定のコンビニでお支払いをしてください<br>
+            <a href="https://www.gmo-pg.com/service/convenience_store/various_user/" target="_blank"><i
+                class="external icon"></i>コンビニでのお支払い方法はこちら</a>
+          </div>
+          <%} else if (payment_type == 'payeasy') { %>
+          <div class="header unpaid">
+            期限内に指定の金融機関でお支払いをしてください<br>
+            <a href="http://www.pay-easy.jp/where/list_atm.php#list" target="_blank"><i class="external icon"></i>取引金融機関はこちら</a>
+          </div>
+          <% } %>
+        </div>
+        <% } %>
+
+        <div class="ui basic segment">
+          <h3 class="header">お申込み完了</h3>
+          <div class="checkout-square"></div>
+          <h4 id="complete-message" class="ui header">サポートありがとうございました</h4>
+          <br/>
+          <h4 class="ui header">プロジェクト情報をシェアしよう！</h4>
+          <div class="ui horizontal list">
+            <div class="item">
+              <a href="javascript:void(0)"
+                 onclick="share_checkout('twitter', '{{ project.user_name }}', '{{ project.title }}')">
+                <img class="ui avatar image" src="{{ 'theme/img/common/twitter.png'|to_cdn }}">
+              </a>
+            </div>
+            <div class="item">
+              <a href="javascript:void(0)"
+                 onclick="share_checkout('facebook', '{{ project.user_name }}', '{{ project.title }}')">
+                <img class="ui avatar image" src="{{ 'theme/img/common/facebook.png'|to_cdn }}">
+              </a>
+            </div>
+            <div class="item">
+              <a href="javascript:void(0)"
+                 onclick="share_checkout('line', '{{ project.user_name }}', '{{ project.title }}')">
+                <img class="ui avatar image" src="{{ 'theme/img/common/line.png'|to_cdn }}">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="center aligned column">
+        <div class="ui compact segments">
+          <div class="ui segment">
+            <h4 class="header">【 決済番号：<%- order_id %> 】</h4>
+          </div>
+          <div class="ui left aligned segment">
+            <p>お申込み確認メールを「{{ current_user.email }}」宛に送信しております。</p>
+            <p>決済番号はメモを取るなどして商品お届けまで保管いただきますようお願いいたします。</p>
+            <p>サポート状況はマイページのサポート履歴からご確認いただけます。</p>
+            <p>引き続き、WIZYをお楽しみください。</p>
+          </div>
+          <div class="ui left aligned segment">
+            <% if (payment_type != 'credit') { %>
+            <h6 class="header">お支払い期日： {{ project.end_time|payment_term }} 23時59分59秒まで</h6>
+            <p>＊お支払い期日を過ぎてしまいますと自動的にキャンセルとなってしまいます。</p>
+            <p>くれぐれもお支払い期日内にご入金いただけますようよろしくお願い致します。</p>
+            <div class="ui divider"></div>
+            <% } %>
+
+            <h6 class="header">プロジェクト</h6>
+            <p>{{ project.title }}</p>
+            <h6 class="header">アイテム</h6>
+            <p>{{ item.name }}</p>
+            <div class="ui divider"></div>
+
+            {% if item.shipping %}
+              <h6 class="header">お届け先</h6>
+              <p>〒<%- shipping_zipcode %></p>
+              <p>
+                <%- shipping_state_text %><%- shipping_town %>
+                <%- shipping_address %>
+                <%- shipping_building %>
+              </p>
+              <div class="ui divider"></div>
+            {% endif %}
+
+            <h6 class="header">お支払い方法</h6>
+            <table class="ui very basic collapsing compact table">
+              <tbody>
+              <% if (payment_type == 'credit') { %>
+              <tr>
+                <td class="nine wide">決済手段</td>
+                <td>クレジットカード支払い</td>
+              </tr>
+              <% } else if (payment_type == 'cvs') { %>
+              <tr>
+                <td class="nine wide">決済手段</td>
+                <td>コンビニ支払い</td>
+              </tr>
+              <tr>
+                <td>お支払いコンビニ</td>
+                <td><%- payment_cvs_text %></td>
+              </tr>
+              <% if (['00001','00002','00003','00004','00005'].indexOf(payment_cvs_code) > -1) { %>
+              <tr>
+                <td>お客様番号</td>
+                <td><%- order_receipt_no %></td>
+              </tr>
+              <tr>
+                <td>確認番号</td>
+                <td><%- order_conf_no %></td>
+              </tr>
+              <% } else { %>
+              <tr>
+                <td>オンライン決済番号</td>
+                <td><%- order_receipt_no.substr(0,4) %>-<%- order_receipt_no.substr(4,11) %></td>
+              </tr>
+              <% } %>
+              <% } else if (payment_type == 'payeasy') { %>
+              <tr>
+                <td class="nine wide">決済手段</td>
+                <td>Pay-easy</td>
+              </tr>
+              <tr>
+                <td>収納機関番号</td>
+                <td><%- order_bk_code %></td>
+              </tr>
+              <tr>
+                <td>お客様番号</td>
+                <td><%- order_cust_id %></td>
+              </tr>
+              <tr>
+                <td>確認番号</td>
+                <td><%- order_conf_no %></td>
+              </tr>
+              <% } %>
+              </tbody>
+            </table>
+            <div class="ui divider"></div>
+
+            <h6 class="left aligned header">お支払い額</h6>
+            <table class="ui collapsing table">
+              <tbody>
+              <tr>
+                <td class="six wide">商品の小計</td>
+                <td class="ten wide right aligned">{{ item.price|grouped_number }}円</td>
+              </tr>
+              <tr>
+                <td>決済手数料</td>
+                <td class="right aligned">
+                  <% if (payment_type == 'credit') { %>0円
+                  <% } else if (payment_type == 'cvs') { %>{{ item.fee_cvs }}円
+                  <% } else if (payment_type == 'payeasy') { %>{{ item.fee_payeasy }}円
+                  <% } %>
+                </td>
+              </tr>
+              <tr>
+                <td>合計</td>
+                <td class="right aligned">
+                  <% if (payment_type == 'credit') { %>{{ item.price|grouped_number }}円
+                  <% } else if (payment_type == 'cvs') { %>
+                  {% if (item.price + item.fee_cvs) < 300000 %}{{ (item.price + item.fee_cvs)|grouped_number }}
+                    円{% endif %}
+                  <% } else if (payment_type == 'payeasy') { %>
+                  {% if (item.price + item.fee_payeasy) < 1000000 %}{{ (item.price + item.fee_payeasy)|grouped_number }}
+                    円{% endif %}
+                  <% } %>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="right aligned column">
+        <a class="ui gold button" href="{{ url_for('front.project',project_id=project.id) }}">プロジェクトへ戻る</a>
+      </div>
+    </div>
+  </script>
+  <script type="text/template" id="error-template">
+    <div class="ui one column centered grid">
+      <div class="center aligned column">
+        <div class="ui basic segment">
+          <h3 class="header">エラー</h3>
+          <h4 id="error-message" class="ui header">エラーが発生しました。しばらくしてからやり直してください。</h4>
+        </div>
+      </div>
+      <div class="right aligned column">
+        <a class="ui gold button" href="{{ url_for('front.project',project_id=project.id) }}">プロジェクトへ戻る</a>
+      </div>
+    </div>
+  </script>
+  <script src="{{ url_for('static',filename='js/checkout/validator.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/checkout/view.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/checkout/app.js') }}"></script>
+  {% if google_analytics %}
+    {% include 'fragment/google_analytics.html' %}
+  {% endif %}
+  <script src="{{ url_for('static',filename='js/checkout/tracking.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/checkout/adebis.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='js/common/share.min.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,277 @@
+{% extends 'top_layout.html' %}
+
+{% block meta %}
+<title>サービス紹介 | 【WIZY（ウィジー）】アーティストとファンによる共創・体験型の音楽クラウドファンディングプラットフォーム</title>
+<meta name="keywords" content="クラウドファンディング,音楽,WIZY,ウィジー,共創,クラウドクリエイティング,レコチョク">
+<meta name="description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:title" content="サービス紹介 | 【WIZY（ウィジー）】アーティストとファンによる共創・体験型の音楽クラウドファンディングプラットフォーム">
+<meta property="og:description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:image" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:site_name" content="WIZY（ウィジー）">
+<meta property="og:type" content="article">
+<meta name="twitter:image:src" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+{% endblock %}
+
+{% block style %}
+  <link rel="stylesheet" href="{{ 'theme/css/service.css'|to_cdn }}" type="text/css"/>
+  <link rel="stylesheet" href="{{ 'theme/css/fllslideshow.css'|to_cdn }}" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+  <div class="fullSlideShow">
+    <ul class="slide">
+      <li><img class="sp-img" src="{{ 'theme/img/service/top-pc01.jpg'|to_cdn }}"></li>
+      <li><img class="sp-img" src="{{ 'theme/img/service/top-pc02.jpg'|to_cdn }}"></li>
+      <li><img class="sp-img" src="{{ 'theme/img/service/top-pc03.jpg'|to_cdn }}"></li>
+      <li><img class="sp-img" src="{{ 'theme/img/service/top-pc04.jpg'|to_cdn }}"></li>
+    </ul>
+    <div id="masuk"></div>
+  </div>
+  <!-- /.fullSlideShow -->
+
+  <div id="main" class="box">
+    <h2>みんなの夢をかたちにしよう。</h2>
+    <h1 class="box"><img src="{{ 'theme/img/service/lp_logo.png'|to_cdn }}" alt="WIZY"></h1>
+    <p>
+      アーティストがつくりたいもの、
+      <br class="br-sp">ファンがアーティストとしたいこと
+      <br class="br-sp"> みんなの夢が、ひとつでも多く実現できますように。
+    </p>
+  </div>
+
+  <div id="wrapper">
+
+    <!--   start about   -->
+    <section class="about">
+      <div class="inner">
+        <h2>共創型クラウドクリエイティング <br class="br-sp">WIZY(ウィジー)</h2>
+        <p>音楽は、ただ”聴くこと”から”体験”として多様化し、
+          <br class="br-sp">そのサイクルをアーティストとファンが”共に創る”時代に。
+          <br class="br-sp"> WIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、
+          <br class="br-sp">その実現をサポートするプラットフォームです。
+        </p>
+      </div>
+      <img class="about_img" src="{{ 'theme/img/service/about_wizy.png'|to_cdn }}">
+      <img class="sp_about_img" src="{{ 'theme/img/service/sp_about_wizy.png'|to_cdn }}">
+      <img class="arrow_bottom sp-img" src="{{ 'theme/img/service/arrow_bottom-pc.png'|to_cdn }}">
+
+      <h3>WIZYがご提供する特別な体験</h3>
+
+      <div class="list">
+        <img class="creation" src="{{ 'theme/img/service/creation.png'|to_cdn }}"
+             alt="共創/co-creaiton まだアイディア段階であるプロジェクトに参加することで、目標に達成するか見守ったり、実際にプロジェクトに携わったり、応援したり。アーティストと一緒にアイディア（夢）をカタチにする一体感を味わえます。">
+        <img class="process" src="{{ 'theme/img/service/process.png'|to_cdn }}"
+             alt="プロセス/Process  例えばサポートしたアルバムのレコーディング風景やライブのリハーサル状況などプロジェクト達成に至るまでの過程を「活動報告」として受け取ることで、達成するまでのプロセスをアーティストと一緒に楽しむことができます。">
+        <img class="item" src="{{ 'theme/img/service/item.png'|to_cdn }}"
+             alt="アイテム/Item  プロジェクト成立のお礼としてアーティストから届くアイテムは、あなたの協力のもとにつくられた何物にも代えがたい特別なモノとなるでしょう。">
+      </div>
+      <div class="sp_list">
+        <div class="sp-creation"><img src="{{ 'theme/img/service/sp_creation.png'|to_cdn }}" alt="共創/co-creaiton">
+          <p>まだアイディア段階であるプロジェクトに参加することで、目標に達成するか見守ったり、実際にプロジェクトに携わったり、応援したり。アーティストと一緒にアイディア（夢）をカタチにする一体感を味わえます。</p>
+        </div>
+        <div class="sp-process"><img src="{{ 'theme/img/service/sp_process.png'|to_cdn }}" alt="プロセス/Process ">
+          <p>
+            例えばサポートしたアルバムのレコーディング風景やライブのリハーサル状況などプロジェクト達成に至るまでの過程を「活動報告」として受け取ることで、達成するまでのプロセスをアーティストと一緒に楽しむことができます。</p>
+        </div>
+        <div class="sp-item"><img src="{{ 'theme/img/service/sp_item.png'|to_cdn }}" alt="アイテム/Item">
+          <p>プロジェクト成立のお礼としてアーティストから届くアイテムは、あなたの協力のもとにつくられた何物にも代えがたい特別なモノとなるでしょう。</p></div>
+      </div>
+    </section>
+    <!--   end about   -->
+
+    <!--   start  entry   -->
+    <section class="entry">
+      <h2>参加方法</h2>
+      <div class="square"></div>
+
+      <ul class="inner">
+        <li>
+          <img class="entry_i" src="{{ 'theme/img/service/serch_i.png'|to_cdn }}">
+          <div class="sp_right">
+            <h4>プロジェクトを探す</h4>
+            <P>好きなアーティストや興味がある企画から、サポートしたいプロジェクトを探そう
+            </P>
+          </div>
+        </li>
+        <img class="arrow_right sp-img" src="{{ 'theme/img/service/arrow_right-pc.png'|to_cdn }}">
+
+        <li>
+          <img class="entry_i" src="{{ 'theme/img/service/select_i.png'|to_cdn }}">
+          <div class="sp_right">
+            <h4>アイテムを選ぶ</h4>
+            <P>参加したいプロジェクトの中から、サポートするアイテムを選ぼう
+            </P>
+          </div>
+        </li>
+        <img class="arrow_right sp-img" src="{{ 'theme/img/service/arrow_right-pc.png'|to_cdn }}">
+        <li>
+          <img class="entry_i" src="{{ 'theme/img/service/success_i.png'|to_cdn }}">
+          <div class="sp_right">
+            <h4>プロジェクト成功</h4>
+            <P>サポートしたプロジェクトが成立し、アイテムが実行されるのを楽しみに待とう
+            </P>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <!--   end  entry   -->
+
+    <!--   start  type   -->
+    <section class="type">
+      <h2>プロジェクトの種類</h2>
+      <div class="square"></div>
+      <ul class="inner">
+        <li>
+          <h3>All or Nothing</h3>
+          <div class="line"></div>
+          <h4 class="titlebg">チャレンジ型</h4>
+          <p>
+            目標金額を達成した時点でプロジェクト成立となり、同時に売買契約が成立します。<br>
+            プロジェクト成立後にアイテムの申し込みがある場合は、その時点で売買契約の成立となります。 <br>
+            達成できなかった場合は、プロジェクト不成立となり、購入代金は返金され、アイテムを受け取ることはできません。
+          </p>
+        </li>
+
+        <li>
+          <h3>ALL in</h3>
+          <div class="line"></div>
+          <h4 class="titlebg">実施確約型</h4>
+          <p>目標金額の達成有無にかかわらず、サポーターがアイテムを申し込んだ時点で売買契約の成立となります。<br>
+            プロジェクトが目標に達成しなかった場合でも返金はされず、アイテムを受け取ることができます。
+          </p>
+        </li>
+
+        <li>
+          <h3>Pre Order</h3>
+          <div class="line"></div>
+          <h4 class="titlebg">プレオーダー型</h4>
+          <p>目標金額を設けず、アイテムを予約購入をした時点で売買契約の成立となります。
+            <br class="pc-br">
+            <br>ここでしか選べない魅力的なアイテムを事前に予約購入することができます。
+          </p>
+        </li>
+      </ul>
+    </section>
+    <!--   end type   -->
+
+
+    <!--   start  pay   -->
+    <section class="pay">
+      <h2>決済方法</h2>
+      <div class="square"></div>
+
+      <ul class="inner">
+        <li>
+          <h4>クレジットカード </h4>
+          <div class="line"></div>
+          <div class="pay_i">
+            <img class="visa" src="{{ 'theme/img/service/visa.jpg'|to_cdn }}" alt="VISA">
+            <img class="master" src="{{ 'theme/img/service/master.jpg'|to_cdn }}" alt="Master">
+          </div>
+        </li>
+      </ul>
+      <ul class="inner">
+        <li>
+          <h4>コンビニ払い</h4>
+          <div class="line"></div>
+          <div class="pay_i">
+            <img class="lawson" src="{{ 'theme/img/service/lawson.jpg'|to_cdn }}" alt="Lawson">
+            <img class="fm" src="{{ 'theme/img/service/familymart.jpg'|to_cdn }}" alt="Familymart">
+            <img class="k" src="{{ 'theme/img/service/k.jpg'|to_cdn }}" alt="サークルK">
+            <img class="sunkus" src="{{ 'theme/img/service/sunkus.jpg'|to_cdn }}" alt="サンクス">
+            <img class="dy1" src="{{ 'theme/img/service/dy1.jpg'|to_cdn }}" alt="ヤマザキデイリーストア">
+            <img class="dy2" src="{{ 'theme/img/service/dy2.jpg'|to_cdn }}" alt="Daily Yamazaki">
+            <img class="ministop" src="{{ 'theme/img/service/ministop.jpg'|to_cdn }}" alt="MINI STOP">
+            <img class="seicomart" src="{{ 'theme/img/service/seicomart.jpg'|to_cdn }}" alt="Seicomart">
+            <img class="tf" src="{{ 'theme/img/service/threef.jpg'|to_cdn }}" alt="スリーエフ">
+          </div>
+        </li>
+      </ul>
+      <ul class="inner">
+        <li>
+          <h4>銀行振り込み</h4>
+          <div class="line"></div>
+          <div class="pay_i">
+            <img class="payeasy" src="{{ 'theme/img/service/pay-easy.jpg'|to_cdn }}" alt="Pay-easy">
+            <p class="pay_text">取引金融機関は<a href="http://www.pay-easy.jp/where/list_atm.php#list" target="_blank">こちら</a>
+            </p>
+          </div>
+        </li>
+        <p class="text_bold">注意事項</p>
+        <p class="caution_text">
+          <br>※ご利用可能なクレジットカードブランドは、VISA/Masterカードになります
+          <br> ※クレジットカードの決済日は、チャレンジ型のプロジェクトの場合はプロジェクトが終了した日、それ以外の場合はサポートした直後になります
+          <br> ※コンビニ払いの取扱店舗は、ローソン/ファミリーマート/サークルK/サンクス/セイコーマート/ミニストップ/デイリーヤマザキ/スリーエフになります
+          <br> ※コンビニ払いは、30万円を超える場合は決済できません
+          <br> ※コンビニ払いは、支払い時に別途手数料が掛かります
+          <br> ※コンビニ払いのご利用方法は、<a href="https://www.gmo-pg.com/service/convenience_store/various_user/" target="_blank">こちら</a>からご確認ください
+          <br> ※銀行振込(Pay-easy)は、金融機関のATMをご利用ください。コンビニ設置のATMからはご利用いただけません
+          <br> ※銀行振込(Pay-easy)は、100万円を超える場合は決済できません
+          <br> ※銀行振込(Pay-easy)は、支払い時に別途手数料が掛かります
+          <br> ※銀行振込(Pay-easy)の取扱金融機関、ご利用方法は、<a href="http://www.pay-easy.jp/faq/index.html" target="_blank">こちら</a>からご確認ください
+          <br> ※コンビニ払い、銀行振込(Pay-easy)は、チャレンジ型のプロジェクトの場合はご利用いただけません
+          <br>
+        </p>
+      </ul>
+    </section>
+
+    <section class="btn_area">
+      <ul class="inner">
+        <li class="left">
+          <p>プロジェクトを探しましょう</p>
+          <a class="btn_1 search" href="{{ url_for('front.home') }}">プロジェクトを探す</a>
+        </li>
+        <div class="border"><img src="{{ 'theme/img/service/line_b.png'|to_cdn }}"></div>
+
+        <li class="right">
+          <p>新しいプロジェクトが開始したらお知らせします</p>
+          {% if current_user.is_authenticated %}
+            <a class="btn_1 news regist newsletter">ニュースレターを登録</a>
+          {% elif session.agree %}
+            <a class="btn_1 news" href="{{ url_for('front.login') }}">ニュースレターを登録</a>
+          {% else %}
+            <a class="btn_1 news modal_trigger" data-target="modal-news">ニュースレターを登録</a>
+          {% endif %}
+
+        </li>
+      </ul>
+    </section>
+
+    <section class="wizy">
+      <div class="inner">
+        <img class="logo" src="{{ 'image/logo/logo_h.png'|to_cdn }}" alt="">
+        <p>「WIZY」とは、“アーティストとファンが一緒に”という
+          <br class="br-sp">意味の「<span class="font_color">with</span>」と
+          <br class="pc-br"> “あなた＝ファン”を指す「<span class="font_color">you</span>」の
+          <br class="br-sp">「<span class="font_color">with you</span>」からうまれた造語で、
+          <br class="pc-br"> 「<span class="font_color">みんなの夢をかた <br class="br-sp">ちにしよう</span>」というコンセプトが込められています。
+        </p>
+      </div>
+    </section>
+  </div>
+  <!--   end wrapper   -->
+{% endblock %}
+
+{% block script %}
+  <script type="text/javascript" src="{{ 'theme/js/breakpoints.js'|to_cdn }}"></script>
+  <script type="text/javascript" src="{{ 'theme/js/fullSlideShow.js'|to_cdn }}"></script>
+  <script type="text/javascript">
+    $(function () {
+      $(window).setBreakpoints({
+        distinct: true,
+        breakpoints: [1, 640]
+      });
+      $(window).bind('enterBreakpoint640', function () {
+        $('.sp-img').each(function () {
+          $(this).attr('src', $(this).attr('src').replace('-sp', '-pc'));
+        });
+      });
+      $(window).bind('enterBreakpoint1', function () {
+        $('.sp-img').each(function () {
+          $(this).attr('src', $(this).attr('src').replace('-pc', '-sp'));
+        });
+      });
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "creator_layout.html" %}
+
+{% block meta %}
+<title>クリエイタートップ</title>
+<meta property="og:title" content="クリエイタートップ">
+{% endblock %}
+
+{% block body %}
+  <div class="ui container">
+    <div class="ui stackable grid">
+      <div class="sixteen wide column">
+        <a href="{{ url_for('creator.project_new') }}" class="ui right floated tiny basic gold button">
+          <i class="icon plus"></i>
+          New Project
+        </a>
+        <div class="ui huge breadcrumb">
+          <div class="active section">My Projects</div>
+        </div>
+        <div class="ui divider"></div>
+      </div>
+    </div>
+    <div class="sixteen wide column">
+      <table class="ui gold table">
+        <thead>
+        <tr>
+          <th>ステータス</th>
+          <th>タイプ</th>
+          <th>タイトル</th>
+          <th>進捗</th>
+          <th colspan="2">終了日時</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if projects %}
+          {% for project in projects %}
+            <tr>
+              <td>
+                <div class="ui gold label">{{ project.is_approval|codec('is_approval') }}</div>
+                <div class="ui gold label">{{ project.public_status|codec('public_status') }}</div>
+              </td>
+              <td>
+                {{ project.type|codec('type') }}
+              </td>
+              <td>
+                <a href="{{ url_for('front.project',project_id=project.id) }}">{{ project.title }}</a>
+              </td>
+              <td>
+                <div class="ui dark gold label">{{ (project.current_amount*100/project.target_amount)|int }}%</div>
+              </td>
+              <td>
+                {{ project.end_time|format_datetime }}
+              </td>
+              <td class="right aligned">
+                <a class="ui tiny basic button" href="{{ url_for('creator.project',project_id=project.id) }}">
+                  詳細<i class="icon chevron right"></i>
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="4">
+              No Projects
+            </td>
+          </tr>
+        {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

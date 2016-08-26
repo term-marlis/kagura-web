@@ -1,0 +1,71 @@
+{% extends "profile_layout.html" %}
+
+{% block meta %}
+<title>お気に入り - マイページ</title>
+<meta name="keywords" content="クラウドファンディング,音楽,WIZY,ウィジー,共創,クラウドクリエイティング,レコチョク">
+<meta name="description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:title" content="お気に入り - マイページ">
+<meta property="og:description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:image" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:site_name" content="WIZY（ウィジー）">
+<meta property="og:type" content="article">
+<meta name="twitter:image:src" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+{% endblock %}
+
+{% block container %}
+  <div class="ui top attached tabular menu">
+    <a class="active item">お気に入り</a>
+    <a class="item" href="{{ url_for('front.profile_support') }}">サポート履歴</a>
+    <div class="right menu">
+      <a class="item" href="{{ url_for('front.profile_edit') }}">設定</a>
+    </div>
+  </div>
+  <div class="ui tab bottom attached active segment">
+
+    <div class="ui link cards">
+      {% if favorites %}
+        {% for favorite in favorites if favorite.project_id %}
+          <div class="card creator{{ favorite.creator_id }}">
+            <a class="image" href="{{ url_for('front.project',project_id=favorite.project_id) }}">
+              <img src="{{ favorite.project_image|to_cdn('project') }}">
+            </a>
+            <div class="content">
+              <div class="header">{{ favorite.creator_name }}</div>
+              <div class="meta">
+                <a href="{{ url_for('front.project',project_id=favorite.project_id) }}">{{ favorite.project_title }}</a>
+              </div>
+              <div class="description">
+                {{ favorite.project_summary }}
+              </div>
+            </div>
+            <div class="ui bottom attached off button" data-cid="{{ favorite.creator_id }}">
+              <i class="delete icon"></i>
+              お気に入り解除
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>まだお気に入りしたクリエイターがいません</p>
+      {% endif %}
+    </div>
+
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $(document).ready(function () {
+      $('div.off.button').click(function () {
+        var creator_id = this.dataset.cid;
+        if (creator_id) {
+          $.get('/api/favorite/' + creator_id + '?action=off', function () {
+            $('.card.creator' + creator_id).fadeOut('fast').queue(function () {
+              this.remove();
+            });
+          });
+        }
+      });
+    });
+  </script>
+{% endblock %}

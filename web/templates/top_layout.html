@@ -1,0 +1,25 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript"/>
+{% block meta %}{% endblock %}
+{% include 'fragment/icon.html' %}
+<link rel="stylesheet" href="{{ 'theme/css/reset.css'|to_cdn }}" type="text/css"/>
+<link rel="stylesheet" href="{{ 'theme/css/common.css'|to_cdn }}" type="text/css"/>
+<link rel="stylesheet" href="{{ 'theme/css/modal.css'|to_cdn }}" type="text/css"/>
+<link href='//fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
+{% block style %}{% endblock %}
+
+{% include 'fragment/header.html' %}
+
+{% block content %}{% endblock %}
+
+{% include 'fragment/footer.html' %}
+
+<script src="{{ 'jquery/2.1.4/jquery.min.js'|to_cdn }}"></script>
+<script type="text/javascript" src="{{ 'theme/js/common.js'|to_cdn }}"></script>
+<script type="text/javascript" src="{{ 'theme/js/modal.js'|to_cdn }}"></script>
+{% block script %}{% endblock %}
+{% if google_tag_manager %}
+  {% include 'fragment/google_tag_manager.html' %}
+{% endif %}

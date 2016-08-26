@@ -1,0 +1,220 @@
+.about_us {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.about_hd_title {
+    float: left;
+    /*font-family: 'Playfair Display', serif;*/
+    letter-spacing: 5px;
+    position: relative;
+    left: 42%;
+    font-size: 30px;
+}
+
+.btn_back a {
+    float: right;
+    color: #c5ac69;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 24px;
+    padding-left: 30px;
+    background: url("../img/info/arrow.png") left center no-repeat;
+    cursor: pointer;
+    background-size: 24px auto;
+}
+
+.wrapper {
+    background-color: #f6f6f6;
+    margin-top: 50px;
+    padding-bottom: 50px;
+}
+
+.aboutbtn_area {
+    margin-top: 30px;
+}
+
+.aboutbtn_area a {
+    color: #c5ac69;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
+    text-decoration: none;
+}
+
+.aboutbtn_area a:hover {
+    text-decoration: underline;
+}
+
+.aboutbtn_area li {
+    float: left;
+    left: 20%;
+    position: relative;
+}
+
+.aboutbtn_area a:before {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    width: 0;
+    height: 0;
+    margin-top: -5px;
+    border: 5px solid transparent;
+    border-left: 5px solid #c5ac69;
+}
+
+.aboutbtn_area .terms {
+    display: inline-block;
+    width: 400px;
+}
+
+.aboutbtn_area .law {
+    width: 400px;
+}
+
+.aboutbtn_area .policy {
+    width: 400px;
+}
+
+.aboutbtn_area .aboutrmation {
+    width: 400px;
+}
+
+.about_wrap {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.about_col {
+    margin-top: 20px;
+    padding: 25px 30px;
+    border: 2px solid #c5ac69;
+    background-color: #fff;
+}
+
+.about_meta.wrap {
+    border-left: 4px solid #c5ac69;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    line-height: 130%;
+    margin-bottom: 10px;
+}
+
+.about_meta.title {
+    color: #c5ac69;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.about_body a {
+    color: #303030;
+}
+
+
+/*    responsive CSS     */
+
+@media screen and (min-width: 768px) and (max-device-width: 980px) {
+    .about_list {
+        padding-top: 20px;
+        width: 100%;
+        padding-bottom: 0;
+        text-align: center;
+    }
+    .about_hd_title {
+        padding-top: 20px;
+        float: none;
+        /*font-family: 'Playfair Display', serif;*/
+        letter-spacing: 5px;
+        position: static;
+    }
+    .btn_back a {
+        float: none;
+        color: #c5ac69;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        padding-left: 30px;
+        background: url('../img/info/arrow.png') left center no-repeat;
+        cursor: pointer;
+        background-size: 24px auto;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .about_list {
+        padding: 20px 10px 0 10px;
+    }
+    .about_hd_title {
+        float: none;
+        font-size: 1.5rem;
+        /* font-family: 'Playfair Display', serif; */
+        letter-spacing: 5px;
+        position: static;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    .btn_back {
+        text-align: center;
+    }
+    .btn_back a {
+        float: none;
+        font-size: 1.0rem;
+        display: inline-block;
+        padding-left: 20px;
+        background-size: 16px auto;
+        line-height: 20px;
+    }
+    .about_wrap {
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    .aboutbtn_area {
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 10px;
+    }
+    .aboutbtn_area li {
+        float: none;
+        position: static;
+        margin-top: 5px
+    }
+    .aboutbtn_area a {
+        font-size: 1.4rem;
+        padding-left: 40px;
+        background: #fff;
+        border: 2px solid #c5ac69;
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        line-height: 36px;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+    }
+    .aboutbtn_area a:before {
+        display: block;
+        content: "";
+        position: relative;
+        top: 22px;
+        left: -20px;
+        width: 0;
+        height: 0;
+        border: 5px solid transparent;
+        border-left: 5px solid #c5ac69;
+    }
+    .aboutbtn_area .terms {
+        width: 100%;
+    }
+    .aboutbtn_area .law {
+        width: 100%;
+    }
+    .aboutbtn_area .policy {
+        width: 100%;
+    }
+    .aboutbtn_area .aboutrmation {
+        width: 100%;
+    }
+}

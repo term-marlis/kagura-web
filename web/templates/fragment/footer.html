@@ -1,0 +1,58 @@
+<footer id="footer">
+  <div class="inner  clearfix">
+    <section class="logo">
+      <h1><a href="{{ url_for('front.home') }}">
+        <img src="{{ 'image/logo/footer_logo_sp.png'|to_cdn }}" alt="WIZY">
+      </a></h1>
+    </section>
+    <section class="followus">
+      <h4 class="fs">FOLLOW US</h4>
+      <ul class="socialicons">
+        <li class="twitter">
+          <a href="https://twitter.com/wizy_official" target="_blank">
+            <img src="{{ 'theme/img/common/twitter.png'|to_cdn }}">
+          </a>
+        </li>
+        <li class="facebook">
+          <a href="https://www.facebook.com/WIZY.jp/" target="_blank">
+            <img src="{{ 'theme/img/common/facebook.png'|to_cdn }}">
+          </a>
+        </li>
+        <li class="instagram">
+          <a href="https://www.instagram.com/wizy_official" target="_blank">
+            <img src="{{ 'theme/img/common/instagram.png'|to_cdn }}">
+          </a>
+        </li>
+      </ul>
+      {% if current_user.is_authenticated %}
+        <a class="regist newsletter">ニュースレターを登録</a>
+      {% elif session.agree %}
+        <a class="newsletter" href="{{ url_for('front.login') }}">ニュースレターを登録</a>
+      {% else %}
+        <a class="newsletter modal_trigger" data-target="modal-news">ニュースレターを登録</a>
+      {% endif %}
+    </section>
+
+    <section class="aboutus">
+      <h4>ABOUT US</h4>
+      <ul class="aboutmenu">
+        <li><a href="{{ url_for('front.about_page', path='service') }}" title="WIZYとは">WIZYとは</a></li>
+        <li><a href="{{ url_for('front.about_page') }}#terms" title="利用規約">利用規約</a></li>
+        <li><a id="faq-button" href="#" title="よくある質問/お問い合わせ">よくある質問/お問い合わせ</a></li>
+        <li><a href="{{ url_for('front.about_page') }}#privacy01" title="">プライバシーポリシー</a></li>
+        <li><a href="{{ url_for('front.about_page') }}#specifiedCommercialTransactions"
+               title="特定商取引法に基づく表">特定商取引法に基づく表記</a></li>
+        <li><a href="{{ url_for('front.about_page') }}#privacy02" title="個人情報の取り扱いについて">個人情報の取り扱いについて</a></li>
+      </ul>
+    </section>
+    <adress class="copyright">© RecoChoku Co.,Ltd.</adress>
+  </div>
+
+
+  <div id="page-top">
+    <a href="#top"><img src="{{ 'image/icon/icon_pagetop.png'|to_cdn }}"/></a>
+  </div>
+</footer>
+<form id="faq-form" action="{{ faq_site_url }}" method="post" target="_blank">
+  <input type="hidden" name="p1" value="{{ current_user.member_id }}"/>
+</form>

@@ -1,0 +1,104 @@
+@charset "utf-8";
+
+/* fullSlideShow
+--------------------------- */
+
+.fullSlideShow {
+    width: 100%;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.fullSlideShow ul {
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    position: fixed;
+    /* absolute or fixed */
+    overflow: hidden;
+}
+
+.fullSlideShow ul li {
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: none;
+    position: absolute;
+}
+
+.fullSlideShow ul.slide li img {
+    width: 100%;
+}
+
+
+/* PagiNation
+--------------------------- */
+
+.pagiNation {
+    bottom: 30px;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    text-align: center;
+    position: fixed;
+    z-index: 90;
+    visibility: hidden;
+}
+
+.pagiNation a {
+    margin: 0 5px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    overflow: hidden;
+    background: #000;
+}
+
+.pagiNation a.pnActive {
+    filter: alpha(opacity=100)!important;
+    -moz-opacity: 1!important;
+    opacity: 1!important;
+}
+
+
+/* =======================================
+	ClearFixElements
+======================================= */
+
+.fullSlideShow ul:after {
+    content: ".";
+    height: 0;
+    clear: both;
+    display: block;
+    visibility: hidden;
+}
+
+.fullSlideShow ul {
+    display: inline-block;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 640px) {
+    /* fullSlideShow
+--------------------------- */
+    .fullSlideShow ul {
+        top: 50%;
+        left: 100%;
+        width: 100%;
+        position: fixed;
+        /* absolute or fixed */
+        overflow: hidden;
+    }
+    .fullSlideShow ul li {
+        top: -33%;
+        left: 0;
+        width: 100%;
+        display: none;
+        position: absolute;
+    }
+    .fullSlideShow ul.slide li img {
+        width: 50%;
+    }
+}

@@ -1,0 +1,41 @@
+{% extends "creator_layout.html" %}
+
+{% block body %}
+  <div class="ui container">
+    <div class="ui stackable grid">
+      <div class="sixteen wide column">
+        <a href="{{ url_for('creator.project',project_id=project.id) }}"
+           class="ui right floated tiny basic gold button">
+          <i class="icon remove"></i>キャンセル
+        </a>
+        {% if project.is_approval != 1 %}
+        <a href="{{ url_for('creator.project_review',project_id=project.id) }}"
+           class="ui right floated tiny gold button">
+          <i class="icon send"></i>審査を依頼
+        </a>
+        {% endif %}
+        <a href="{{ url_for('front.project',project_id=project.id) }}"
+           class="ui right floated tiny gold button" target="_blank">
+          <i class="icon unhide"></i>プレビュー
+        </a>
+        <div class="ui huge breadcrumb">
+          <a class="section" href="{{ url_for('creator.home') }}">My Projects</a>
+          <i class="right chevron icon divider"></i>
+          <a class="section" href="{{ url_for('creator.project',project_id=project.id) }}">{{ project.title }}</a>
+          <i class="right chevron icon divider"></i>
+          <div class="active section">編集</div>
+        </div>
+        <div class="ui divider"></div>
+      </div>
+    </div>
+    {% block container %}{% endblock %}
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $(document).ready(function () {
+      $('.ui.dropdown').dropdown();
+    });
+  </script>
+{% endblock %}

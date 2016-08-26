@@ -1,0 +1,109 @@
+{% extends "creator_project_edit_layout.html" %}
+
+{% block meta %}
+<title>プロジェクト編集(FAQ) - クリエイター</title>
+<meta property="og:title" content="プロジェクト編集(FAQ) - クリエイター">
+{% endblock %}
+
+{% block container %}
+  <div class="sixteen wide column">
+    <div class="ui pointing secondary menu">
+      <a class="item disabled" href="{{ url_for('creator.project_edit_basic',project_id=project.id) }}"><i
+          class="ui camera retro icon"></i>基本情報</a>
+      <a class="item disabled" href="{{ url_for('creator.project_edit_item',project_id=project.id) }}"><i
+          class="ui gift icon"></i>アイテム</a>
+      <a class="item disabled" href="{{ url_for('creator.project_edit_detail',project_id=project.id) }}"><i
+          class="ui setting icon"></i>詳細情報</a>
+      <a class="item active" href="{{ url_for('creator.project_edit_faq',project_id=project.id) }}"><i
+          class="ui help circle icon"></i>FAQ</a>
+    </div>
+    <div class="ui stackable grid">
+      <div class="ui twelve wide column">
+        {% for faq in project_faqs %}
+          {% if faq.id == faq_id %}
+            <form class="ui form" method="post"
+                  action="{{ url_for('creator.project_edit_faq',project_id=project.id, faq_id=faq.id) }}">
+              <div class="ui clearing segment">
+                {{ faq_form.hidden_tag() }}
+                <div class="ui field">
+                  {{ faq_form.question.label }}
+                  {{ faq_form.question(placeholder='質問項目', maxlength=200) }}
+                </div>
+                <div class="ui field">
+                  {{ faq_form.answer.label }}
+                  {{ faq_form.answer(rows=2, placeholder='回答内容', maxlength=400) }}
+                </div>
+                {{ faq_form.submit(class='ui right floated small gold button') }}
+              </div>
+            </form>
+          {% else %}
+            <div class="ui clearing segment">
+              <h5>Q{{ loop.index }}: {{ faq.question }}</h5>
+              <div class="ui red right floated small basic delete button" data-fid="{{ faq.id }}">
+                <i class="delete icon"></i>削除
+              </div>
+              <a class="ui right floated small basic button"
+                 href="{{ url_for('creator.project_edit_faq',project_id=project.id, faq_id=faq.id) }}">
+                <i class="edit icon"></i>編集</a>
+            </div>
+          {% endif %}
+        {% endfor %}
+        {% if not faq_id %}
+          <form class="ui form" method="post" action="{{ url_for('creator.project_edit_faq',project_id=project.id) }}">
+            <div class="ui clearing segment">
+              {{ faq_form.hidden_tag() }}
+              <div class="ui field">
+                {{ faq_form.question.label }}
+                {{ faq_form.question(placeholder='質問項目') }}
+              </div>
+              <div class="ui field">
+                {{ faq_form.answer.label }}
+                {{ faq_form.answer(rows=2, placeholder='回答内容') }}
+              </div>
+              {{ faq_form.submit(class='ui right floated small gold button') }}
+            </div>
+          </form>
+        {% else %}
+          <a class="ui right floated small gold button"
+             href="{{ url_for('creator.project_edit_faq',project_id=project.id) }}">
+            <i class="add icon"></i>追加</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="ui small modal">
+    <div class="header">確認</div>
+    <div class="content">本当に削除してもよろしいですか？</div>
+    <div class="actions">
+      <div class="ui approve gold button">OK</div>
+      <div class="ui cancel basic button">Cancel</div>
+    </div>
+    {{ form.hidden_tag() }}
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $(document).ready(function () {
+      $('.delete.button').click(function () {
+        var faq_id = this.dataset.fid;
+        $('.ui.modal').modal({
+          onApprove: function () {
+            $.ajax({
+              type: 'POST',
+              url: '/api/delete',
+              data: {id:{{ project.id }}, faq_id: faq_id},
+              headers: {
+                'X-CSRFToken': $('#csrf_token').val()
+              }
+            }).done(function (msg) {
+              console.log(msg);
+              location.reload();
+            });
+            return false;
+          }
+        }).modal('show');
+      });
+    });
+  </script>
+{% endblock %}

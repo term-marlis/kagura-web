@@ -1,0 +1,115 @@
+{% extends "project_layout.html" %}
+
+{% block meta %}
+<title>レポート一覧 - {{ creator.nickname }} - {{ project.title }} | 【WIZY（ウィジー）】アーティストとファンによる共創・体験型の音楽クラウドファンディングプラットフォーム</title>
+<meta name="keywords" content="{{ creator.nickname }},{{ project.title }},クラウドファンディング,音楽,WIZY,ウィジー,共創,クラウドクリエイティング,レコチョク">
+<meta name="description" content="クリエイター:{{ creator.nickname }}の「{{ project.title }}」プロジェクトです。レコチョクが運営する共創型クラウドクリエイティング音楽プラットフォーム【WIZY(ウィジー)】を使って{{ creator.nickname }}をサポートしよう！">
+<meta property="og:title" content="レポート一覧 - {{ creator.nickname }} - {{ project.title }} | 共創型クラウドクリエイティング WIZY（ウィジー）">
+<meta property="og:description" content="クリエイター:{{ creator.nickname }}の「{{ project.title }}」プロジェクトです。レコチョクが運営する共創型クラウドクリエイティング音楽プラットフォーム【WIZY(ウィジー)】を使って{{ creator.nickname }}をサポートしよう！">
+<meta property="og:image" content="{{ project.image|to_cdn('project') }}">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:site_name" content="WIZY（ウィジー）">
+<meta property="og:type" content="article">
+<meta name="twitter:image:src" content="{{ project.image|to_cdn('project') }}">
+{% endblock %}
+
+{% block style %}
+  <style>
+    #shortcut {
+      display: none;
+    }
+  </style>
+{% endblock %}
+
+{% block contents %}
+{# TODO SP用 タブ切り替え(プロジェクト&レポート) ここから #}
+<div id="pjtab">
+  <div class="tab_area clearfix">
+    <ul>
+      <li class="tab1 sppjtitle" data-url="{{ url_for('front.project',project_id=project.id) }}">
+        <img src="{{ 'theme/img/project/home.png'|to_cdn }}">プロジェクト
+      </li>
+      <li class="tab2 sppjtitle select">
+        <img src="{{ 'theme/img/project/talk.png'|to_cdn }}">レポート
+        {% if has_new_report %}<span class="spnewpop">NEW</span>{% endif %}
+      </li>
+    </ul>
+  </div>
+  <div class="spwrapper">
+    <div class="content_area">
+      <div class="content_area_inner clearfix">
+        <div id="contents1" class="content_block hide">
+        </div>
+      </div>
+      <div id="contents2" class="content_block" style="display:block">
+        {% if reports %}
+          {% for report in reports %}
+            <article class="boxlarge box1">
+              <a href="{{ url_for('front.project_report', project_id=project.id, report_id=report.id) }}">
+              <ul>
+                <li class="date">
+                  <h3>
+                    {{ report.update_date|format_date }}
+                    {% if report.accessible == 'supporter' %}<span class="pc">サポーター限定公開</span><span class="olsali sp"><img src="{{ 'theme/img/project/icon_supporter_sp.png'|to_cdn }}" alt="サポーター限定 "></span>{% endif %}
+                    {% if report.is_new %}<span class="new">NEW</span>{% endif %}
+                  </h3>
+                </li>
+                <li class="repotext">
+                  <h3>
+                      {{ report.title }}
+                  </h3>
+                </li>
+              </ul>
+               </a>
+            </article>
+          {% endfor %}
+        {% else %}
+          <div class="readmorebtn">
+            <a class="report_btn report_btn-1 report_btn-1a">まだ活動報告がありません</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{# TODO SP用 タブ切り替え(プロジェクト&レポート) ここまで #}
+
+<div class="parea_wrap">
+
+  <div class="section4 report pcmv inner" id="s4">
+    <div class="left_title pc" style="margin-top: 0;">
+      <h2><img src="{{ 'theme/img/project/h2_report.png'|to_cdn }}" alt="活動報告"></h2>
+    </div>
+    {% if reports %}
+      {% for report in reports %}
+        <article class="boxlarge repobox1">
+          <a href="{{ url_for('front.project_report', project_id=project.id, report_id=report.id) }}">
+          <ul>
+            <li class="date">
+              {% if report.is_new %}<p>NEW</p>{% endif %}
+              <h3>{{ report.update_date|format_date }}</h3>
+              {% if report.accessible == 'supporter' %}<p>サポーター限定公開</p>{% endif %}
+            </li>
+            <li class="repotext">
+              <h3>
+                  {{ report.title }}
+              </h3>
+            </li>
+          </ul>
+         </a>
+        </article>
+      {% endfor %}
+    {% else %}
+      <div class="readmorebtn">
+        <a class="report_btn report_btn-1 report_btn-1a">まだ活動報告がありません</a>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="section5 pcmv" id="s5">
+    <div class="qa inner clearfix">
+    </div>
+  </div>
+
+</div>
+{% endblock %}

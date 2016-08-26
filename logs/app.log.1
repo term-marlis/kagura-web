@@ -1,0 +1,1524 @@
+2016-08-17 17:17:15,794	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Date': 'Wed, 17 Aug 2016 08:17:15 GMT', 'Content-Type': 'text/html', 'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Length': '339'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-17 17:17:50,729	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Date': 'Wed, 17 Aug 2016 08:17:50 GMT', 'Content-Type': 'text/html', 'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Length': '339'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-17 17:18:16,735	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Date': 'Wed, 17 Aug 2016 08:18:16 GMT', 'Content-Type': 'text/html', 'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Length': '339'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-17 17:18:37,681	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Date': 'Wed, 17 Aug 2016 08:18:37 GMT', 'Content-Type': 'text/html', 'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Length': '339'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-17 17:19:32,560	[INFO]	success login!
+2016-08-18 17:47:36,858	[WARNING]	creator login: (500)
+Reason: INTERNAL SERVER ERROR
+HTTP response headers: HTTPHeaderDict({'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Date': 'Thu, 18 Aug 2016 08:47:36 GMT', 'X-XSS-Protection': '0', 'Connection': 'close', 'Content-Type': 'text/html; charset=utf-8'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>sqlalchemy.exc.OperationalError: (_mysql_exceptions.OperationalError) (1045, &quot;Access denied for user 'root'@'localhost' (using password: YES)&quot;) // Werkzeug Debugger</title>
+    <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css"
+        type="text/css">
+    <!-- We need to make sure this has a favicon so that the debugger does
+         not by accident trigger a request to /favicon.ico which might
+         change the application state. -->
+    <link rel="shortcut icon"
+        href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=jquery.js"></script>
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
+    <script type="text/javascript">
+      var TRACEBACK = 4403208264,
+          CONSOLE_MODE = false,
+          EVALEX = true,
+          EVALEX_TRUSTED = false,
+          SECRET = "csSGQMBEVbtvlbIDEspg";
+    </script>
+  </head>
+  <body>
+    <div class="debugger">
+<h1>sqlalchemy.exc.OperationalError</h1>
+<div class="detail">
+  <p class="errormsg">sqlalchemy.exc.OperationalError: (_mysql_exceptions.OperationalError) (1045, &quot;Access denied for user 'root'@'localhost' (using password: YES)&quot;)</p>
+</div>
+<h2 class="traceback">Traceback <em>(most recent call last)</em></h2>
+<div class="traceback">
+  
+  <ul><li><div class="frame" id="frame-4403211064">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py"</cite>,
+      line <em class="line">2000</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">                </span>error = None</pre>
+<pre class="line before"><span class="ws">            </span>ctx.auto_pop(error)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def __call__(self, environ, start_response):</pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;Shortcut for :attr:`wsgi_app`.&quot;&quot;&quot;</pre>
+<pre class="line current"><span class="ws">        </span>return self.wsgi_app(environ, start_response)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def __repr__(self):</pre>
+<pre class="line after"><span class="ws">        </span>return '&lt;%s %r&gt;' % (</pre>
+<pre class="line after"><span class="ws">            </span>self.__class__.__name__,</pre>
+<pre class="line after"><span class="ws">            </span>self.name,</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403315936">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py"</cite>,
+      line <em class="line">1991</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line before"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line before"><span class="ws">                </span>error = e</pre>
+<pre class="line current"><span class="ws">                </span>response = self.make_response(self.handle_exception(e))</pre>
+<pre class="line after"><span class="ws">            </span>return response(environ, start_response)</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre>
+<pre class="line after"><span class="ws">            </span>if self.should_ignore_error(error):</pre>
+<pre class="line after"><span class="ws">                </span>error = None</pre>
+<pre class="line after"><span class="ws">            </span>ctx.auto_pop(error)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403315992">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py"</cite>,
+      line <em class="line">1567</em>,
+      in <code class="function">handle_exception</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">            </span># if we want to repropagate the exception, we can attempt to</pre>
+<pre class="line before"><span class="ws">            </span># raise it with the whole traceback in case we can do that</pre>
+<pre class="line before"><span class="ws">            </span># (the function was actually called from the except part)</pre>
+<pre class="line before"><span class="ws">            </span># otherwise, we just raise the error again</pre>
+<pre class="line before"><span class="ws">            </span>if exc_value is e:</pre>
+<pre class="line current"><span class="ws">                </span>reraise(exc_type, exc_value, tb)</pre>
+<pre class="line after"><span class="ws">            </span>else:</pre>
+<pre class="line after"><span class="ws">                </span>raise e</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>self.log_exception((exc_type, exc_value, tb))</pre>
+<pre class="line after"><span class="ws">        </span>if handler is None:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316048">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/flask/_compat.py"</cite>,
+      line <em class="line">33</em>,
+      in <code class="function">reraise</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">    </span>from io import StringIO</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def reraise(tp, value, tb=None):</pre>
+<pre class="line before"><span class="ws">        </span>if value.__traceback__ is not tb:</pre>
+<pre class="line before"><span class="ws">            </span>raise value.with_traceback(tb)</pre>
+<pre class="line current"><span class="ws">        </span>raise value</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>implements_to_string = _identity</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span>else:</pre>
+<pre class="line after"><span class="ws">    </span>text_type = unicode</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403315208">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py"</cite>,
+      line <em class="line">1988</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>ctx = self.request_context(environ)</pre>
+<pre class="line before"><span class="ws">        </span>ctx.push()</pre>
+<pre class="line before"><span class="ws">        </span>error = None</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line current"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line after"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">                </span>error = e</pre>
+<pre class="line after"><span class="ws">                </span>response = self.make_response(self.handle_exception(e))</pre>
+<pre class="line after"><span class="ws">            </span>return response(environ, start_response)</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316160">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py"</cite>,
+      line <em class="line">1641</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">            </span>request_started.send(self)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line before"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line before"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line current"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line after"><span class="ws">        </span>response = self.make_response(rv)</pre>
+<pre class="line after"><span class="ws">        </span>response = self.process_response(response)</pre>
+<pre class="line after"><span class="ws">        </span>request_finished.send(self, response=response)</pre>
+<pre class="line after"><span class="ws">        </span>return response</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316216">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py"</cite>,
+      line <em class="line">1544</em>,
+      in <code class="function">handle_user_exception</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">            </span>return self.handle_http_exception(e)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>handler = self._find_error_handler(e)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>if handler is None:</pre>
+<pre class="line current"><span class="ws">            </span>reraise(exc_type, exc_value, tb)</pre>
+<pre class="line after"><span class="ws">        </span>return handler(e)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def handle_exception(self, e):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Default exception handling that kicks in when an exception</pre>
+<pre class="line after"><span class="ws">        </span>occurs that is not caught.  In debug mode the exception will</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316272">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/flask/_compat.py"</cite>,
+      line <em class="line">33</em>,
+      in <code class="function">reraise</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">    </span>from io import StringIO</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def reraise(tp, value, tb=None):</pre>
+<pre class="line before"><span class="ws">        </span>if value.__traceback__ is not tb:</pre>
+<pre class="line before"><span class="ws">            </span>raise value.with_traceback(tb)</pre>
+<pre class="line current"><span class="ws">        </span>raise value</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>implements_to_string = _identity</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span>else:</pre>
+<pre class="line after"><span class="ws">    </span>text_type = unicode</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403315488">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py"</cite>,
+      line <em class="line">1639</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>self.try_trigger_before_first_request_functions()</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>request_started.send(self)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line current"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line after"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line after"><span class="ws">        </span>response = self.make_response(rv)</pre>
+<pre class="line after"><span class="ws">        </span>response = self.process_response(response)</pre>
+<pre class="line after"><span class="ws">        </span>request_finished.send(self, response=response)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316384">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py"</cite>,
+      line <em class="line">1625</em>,
+      in <code class="function">dispatch_request</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span># request came with the OPTIONS method, reply automatically</pre>
+<pre class="line before"><span class="ws">        </span>if getattr(rule, 'provide_automatic_options', False) \</pre>
+<pre class="line before"><span class="ws">           </span>and req.method == 'OPTIONS':</pre>
+<pre class="line before"><span class="ws">            </span>return self.make_default_options_response()</pre>
+<pre class="line before"><span class="ws">        </span># otherwise dispatch to the handler for that endpoint</pre>
+<pre class="line current"><span class="ws">        </span>return self.view_functions[rule.endpoint](**req.view_args)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def full_dispatch_request(self):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Dispatches the request and on top of that performs request</pre>
+<pre class="line after"><span class="ws">        </span>pre and postprocessing as well as HTTP exception catching and</pre>
+<pre class="line after"><span class="ws">        </span>error handling.</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316440">
+  <h4>File <cite class="filename">"/Users/recochoku/peach-demo/docker/repos/peach-api/api/endpoints/auth.py"</cite>,
+      line <em class="line">112</em>,
+      in <code class="function">authenticate</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">                </span>current_app.logger.error('user login error: %s', ex)</pre>
+<pre class="line before"><span class="ws">            </span>finally:</pre>
+<pre class="line before"><span class="ws">                </span>db.session.close()</pre>
+<pre class="line before"><span class="ws">        </span># クリエイター</pre>
+<pre class="line before"><span class="ws">        </span>current_app.logger.info('[ creator ] %s', auth.key)</pre>
+<pre class="line current"><span class="ws">        </span>user = User.query.filter_by(mail=auth.key, is_delete=0, is_retire=0).scalar()</pre>
+<pre class="line after"><span class="ws">        </span>if user and user.password == sha512(auth.secret.encode('utf-8')).hexdigest():</pre>
+<pre class="line after"><span class="ws">            </span>return generate_token(user=user, type_='creator', device=auth.device)</pre>
+<pre class="line after"><span class="ws">        </span># 認証NG</pre>
+<pre class="line after"><span class="ws">        </span>abort(401)</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316496">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py"</cite>,
+      line <em class="line">2749</em>,
+      in <code class="function">scalar</code></h4>
+  <div class="source"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>This results in an execution of the underlying query.</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line current"><span class="ws">            </span>ret = self.one()</pre>
+<pre class="line after"><span class="ws">            </span>if not isinstance(ret, tuple):</pre>
+<pre class="line after"><span class="ws">                </span>return ret</pre>
+<pre class="line after"><span class="ws">            </span>return ret[0]</pre>
+<pre class="line after"><span class="ws">        </span>except orm_exc.NoResultFound:</pre>
+<pre class="line after"><span class="ws">            </span>return None</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403315712">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py"</cite>,
+      line <em class="line">2718</em>,
+      in <code class="function">one</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">            </span>:meth:`.Query.first`</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">            </span>:meth:`.Query.one_or_none`</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
+<pre class="line current"><span class="ws">        </span>ret = list(self)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>l = len(ret)</pre>
+<pre class="line after"><span class="ws">        </span>if l == 1:</pre>
+<pre class="line after"><span class="ws">            </span>return ret[0]</pre>
+<pre class="line after"><span class="ws">        </span>elif l == 0:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316104">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py"</cite>,
+      line <em class="line">2761</em>,
+      in <code class="function">__iter__</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">    </span>def __iter__(self):</pre>
+<pre class="line before"><span class="ws">        </span>context = self._compile_context()</pre>
+<pre class="line before"><span class="ws">        </span>context.statement.use_labels = True</pre>
+<pre class="line before"><span class="ws">        </span>if self._autoflush and not self._populate_existing:</pre>
+<pre class="line before"><span class="ws">            </span>self.session._autoflush()</pre>
+<pre class="line current"><span class="ws">        </span>return self._execute_and_instances(context)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def _connection_from_session(self, **kw):</pre>
+<pre class="line after"><span class="ws">        </span>conn = self.session.connection(</pre>
+<pre class="line after"><span class="ws">            </span>**kw)</pre>
+<pre class="line after"><span class="ws">        </span>if self._execution_options:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316328">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py"</cite>,
+      line <em class="line">2774</em>,
+      in <code class="function">_execute_and_instances</code></h4>
+  <div class="source"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def _execute_and_instances(self, querycontext):</pre>
+<pre class="line before"><span class="ws">        </span>conn = self._connection_from_session(</pre>
+<pre class="line before"><span class="ws">            </span>mapper=self._bind_mapper(),</pre>
+<pre class="line before"><span class="ws">            </span>clause=querycontext.statement,</pre>
+<pre class="line current"><span class="ws">            </span>close_with_result=True)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>result = conn.execute(querycontext.statement, self._params)</pre>
+<pre class="line after"><span class="ws">        </span>return loading.instances(querycontext.query, result, querycontext)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>@property</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316552">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py"</cite>,
+      line <em class="line">2765</em>,
+      in <code class="function">_connection_from_session</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">            </span>self.session._autoflush()</pre>
+<pre class="line before"><span class="ws">        </span>return self._execute_and_instances(context)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def _connection_from_session(self, **kw):</pre>
+<pre class="line before"><span class="ws">        </span>conn = self.session.connection(</pre>
+<pre class="line current"><span class="ws">            </span>**kw)</pre>
+<pre class="line after"><span class="ws">        </span>if self._execution_options:</pre>
+<pre class="line after"><span class="ws">            </span>conn = conn.execution_options(**self._execution_options)</pre>
+<pre class="line after"><span class="ws">        </span>return conn</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def _execute_and_instances(self, querycontext):</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316608">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/session.py"</cite>,
+      line <em class="line">893</em>,
+      in <code class="function">connection</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>if bind is None:</pre>
+<pre class="line before"><span class="ws">            </span>bind = self.get_bind(mapper, clause=clause, **kw)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>return self._connection_for_bind(bind,</pre>
+<pre class="line before"><span class="ws">                                         </span>close_with_result=close_with_result,</pre>
+<pre class="line current"><span class="ws">                                         </span>execution_options=execution_options)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def _connection_for_bind(self, engine, execution_options=None, **kw):</pre>
+<pre class="line after"><span class="ws">        </span>if self.transaction is not None:</pre>
+<pre class="line after"><span class="ws">            </span>return self.transaction._connection_for_bind(</pre>
+<pre class="line after"><span class="ws">                </span>engine, execution_options)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316664">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/session.py"</cite>,
+      line <em class="line">898</em>,
+      in <code class="function">_connection_for_bind</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">                                         </span>execution_options=execution_options)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def _connection_for_bind(self, engine, execution_options=None, **kw):</pre>
+<pre class="line before"><span class="ws">        </span>if self.transaction is not None:</pre>
+<pre class="line before"><span class="ws">            </span>return self.transaction._connection_for_bind(</pre>
+<pre class="line current"><span class="ws">                </span>engine, execution_options)</pre>
+<pre class="line after"><span class="ws">        </span>else:</pre>
+<pre class="line after"><span class="ws">            </span>conn = engine.contextual_connect(**kw)</pre>
+<pre class="line after"><span class="ws">            </span>if execution_options:</pre>
+<pre class="line after"><span class="ws">                </span>conn = conn.execution_options(**execution_options)</pre>
+<pre class="line after"><span class="ws">            </span>return conn</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316720">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/session.py"</cite>,
+      line <em class="line">334</em>,
+      in <code class="function">_connection_for_bind</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">                </span>if conn.engine in self._connections:</pre>
+<pre class="line before"><span class="ws">                    </span>raise sa_exc.InvalidRequestError(</pre>
+<pre class="line before"><span class="ws">                        </span>&quot;Session already has a Connection associated for the &quot;</pre>
+<pre class="line before"><span class="ws">                        </span>&quot;given Connection's Engine&quot;)</pre>
+<pre class="line before"><span class="ws">            </span>else:</pre>
+<pre class="line current"><span class="ws">                </span>conn = bind.contextual_connect()</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>if execution_options:</pre>
+<pre class="line after"><span class="ws">            </span>conn = conn.execution_options(**execution_options)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>if self.session.twophase and self._parent is None:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316776">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/base.py"</cite>,
+      line <em class="line">2039</em>,
+      in <code class="function">contextual_connect</code></h4>
+  <div class="source"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>return self._connection_cls(</pre>
+<pre class="line before"><span class="ws">            </span>self,</pre>
+<pre class="line current"><span class="ws">            </span>self._wrap_pool_connect(self.pool.connect, None),</pre>
+<pre class="line after"><span class="ws">            </span>close_with_result=close_with_result,</pre>
+<pre class="line after"><span class="ws">            </span>**kwargs)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def table_names(self, schema=None, connection=None):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Return a list of all table names available in the database.</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317000">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/base.py"</cite>,
+      line <em class="line">2078</em>,
+      in <code class="function">_wrap_pool_connect</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>return fn()</pre>
+<pre class="line before"><span class="ws">        </span>except dialect.dbapi.Error as e:</pre>
+<pre class="line before"><span class="ws">            </span>if connection is None:</pre>
+<pre class="line before"><span class="ws">                </span>Connection._handle_dbapi_exception_noconnection(</pre>
+<pre class="line current"><span class="ws">                    </span>e, dialect, self)</pre>
+<pre class="line after"><span class="ws">            </span>else:</pre>
+<pre class="line after"><span class="ws">                </span>util.reraise(*sys.exc_info())</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def raw_connection(self, _connection=None):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Return a &quot;raw&quot; DBAPI connection from the connection pool.</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317056">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/base.py"</cite>,
+      line <em class="line">1405</em>,
+      in <code class="function">_handle_dbapi_exception_noconnection</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>if newraise:</pre>
+<pre class="line before"><span class="ws">            </span>util.raise_from_cause(newraise, exc_info)</pre>
+<pre class="line before"><span class="ws">        </span>elif should_wrap:</pre>
+<pre class="line before"><span class="ws">            </span>util.raise_from_cause(</pre>
+<pre class="line before"><span class="ws">                </span>sqlalchemy_exception,</pre>
+<pre class="line current"><span class="ws">                </span>exc_info</pre>
+<pre class="line after"><span class="ws">            </span>)</pre>
+<pre class="line after"><span class="ws">        </span>else:</pre>
+<pre class="line after"><span class="ws">            </span>util.reraise(*exc_info)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def default_schema_name(self):</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317112">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/util/compat.py"</cite>,
+      line <em class="line">202</em>,
+      in <code class="function">raise_from_cause</code></h4>
+  <div class="source"><pre class="line before"><span class="ws"></span>def raise_from_cause(exception, exc_info=None):</pre>
+<pre class="line before"><span class="ws">    </span>if exc_info is None:</pre>
+<pre class="line before"><span class="ws">        </span>exc_info = sys.exc_info()</pre>
+<pre class="line before"><span class="ws">    </span>exc_type, exc_value, exc_tb = exc_info</pre>
+<pre class="line before"><span class="ws">    </span>cause = exc_value if exc_value is not exception else None</pre>
+<pre class="line current"><span class="ws">    </span>reraise(type(exception), exception, tb=exc_tb, cause=cause)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span>if py3k:</pre>
+<pre class="line after"><span class="ws">    </span>exec_ = getattr(builtins, 'exec')</pre>
+<pre class="line after"><span class="ws"></span>else:</pre>
+<pre class="line after"><span class="ws">    </span>def exec_(func_text, globals_, lcl=None):</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316832">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/util/compat.py"</cite>,
+      line <em class="line">185</em>,
+      in <code class="function">reraise</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">    </span>def reraise(tp, value, tb=None, cause=None):</pre>
+<pre class="line before"><span class="ws">        </span>if cause is not None:</pre>
+<pre class="line before"><span class="ws">            </span>assert cause is not value, &quot;Same cause emitted&quot;</pre>
+<pre class="line before"><span class="ws">            </span>value.__cause__ = cause</pre>
+<pre class="line before"><span class="ws">        </span>if value.__traceback__ is not tb:</pre>
+<pre class="line current"><span class="ws">            </span>raise value.with_traceback(tb)</pre>
+<pre class="line after"><span class="ws">        </span>raise value</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span>else:</pre>
+<pre class="line after"><span class="ws">    </span># not as nice as that of Py3K, but at least preserves</pre>
+<pre class="line after"><span class="ws">    </span># the code line where the issue occurred</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403316888">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/base.py"</cite>,
+      line <em class="line">2074</em>,
+      in <code class="function">_wrap_pool_connect</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>return self.run_callable(self.dialect.has_table, table_name, schema)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def _wrap_pool_connect(self, fn, connection):</pre>
+<pre class="line before"><span class="ws">        </span>dialect = self.dialect</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line current"><span class="ws">            </span>return fn()</pre>
+<pre class="line after"><span class="ws">        </span>except dialect.dbapi.Error as e:</pre>
+<pre class="line after"><span class="ws">            </span>if connection is None:</pre>
+<pre class="line after"><span class="ws">                </span>Connection._handle_dbapi_exception_noconnection(</pre>
+<pre class="line after"><span class="ws">                    </span>e, dialect, self)</pre>
+<pre class="line after"><span class="ws">            </span>else:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317280">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py"</cite>,
+      line <em class="line">376</em>,
+      in <code class="function">connect</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>``close()`` method is called, the connection will be returned to</pre>
+<pre class="line before"><span class="ws">        </span>the pool.</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws">        </span>if not self._use_threadlocal:</pre>
+<pre class="line current"><span class="ws">            </span>return _ConnectionFairy._checkout(self)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>try:</pre>
+<pre class="line after"><span class="ws">            </span>rec = self._threadconns.current()</pre>
+<pre class="line after"><span class="ws">        </span>except AttributeError:</pre>
+<pre class="line after"><span class="ws">            </span>pass</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317224">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py"</cite>,
+      line <em class="line">713</em>,
+      in <code class="function">_checkout</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">    </span>&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>@classmethod</pre>
+<pre class="line before"><span class="ws">    </span>def _checkout(cls, pool, threadconns=None, fairy=None):</pre>
+<pre class="line before"><span class="ws">        </span>if not fairy:</pre>
+<pre class="line current"><span class="ws">            </span>fairy = _ConnectionRecord.checkout(pool)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">            </span>fairy._pool = pool</pre>
+<pre class="line after"><span class="ws">            </span>fairy._counter = 0</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">            </span>if threadconns is not None:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317336">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py"</cite>,
+      line <em class="line">480</em>,
+      in <code class="function">checkout</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws">        </span>return {}</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>@classmethod</pre>
+<pre class="line before"><span class="ws">    </span>def checkout(cls, pool):</pre>
+<pre class="line current"><span class="ws">        </span>rec = pool._do_get()</pre>
+<pre class="line after"><span class="ws">        </span>try:</pre>
+<pre class="line after"><span class="ws">            </span>dbapi_connection = rec.get_connection()</pre>
+<pre class="line after"><span class="ws">        </span>except:</pre>
+<pre class="line after"><span class="ws">            </span>with util.safe_reraise():</pre>
+<pre class="line after"><span class="ws">                </span>rec.checkin()</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317392">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py"</cite>,
+      line <em class="line">1060</em>,
+      in <code class="function">_do_get</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">            </span>if self._inc_overflow():</pre>
+<pre class="line before"><span class="ws">                </span>try:</pre>
+<pre class="line before"><span class="ws">                    </span>return self._create_connection()</pre>
+<pre class="line before"><span class="ws">                </span>except:</pre>
+<pre class="line before"><span class="ws">                    </span>with util.safe_reraise():</pre>
+<pre class="line current"><span class="ws">                        </span>self._dec_overflow()</pre>
+<pre class="line after"><span class="ws">            </span>else:</pre>
+<pre class="line after"><span class="ws">                </span>return self._do_get()</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def _inc_overflow(self):</pre>
+<pre class="line after"><span class="ws">        </span>if self._max_overflow == -1:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317448">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/util/langhelpers.py"</cite>,
+      line <em class="line">60</em>,
+      in <code class="function">__exit__</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">    </span>def __exit__(self, type_, value, traceback):</pre>
+<pre class="line before"><span class="ws">        </span># see #2703 for notes</pre>
+<pre class="line before"><span class="ws">        </span>if type_ is None:</pre>
+<pre class="line before"><span class="ws">            </span>exc_type, exc_value, exc_tb = self._exc_info</pre>
+<pre class="line before"><span class="ws">            </span>self._exc_info = None   # remove potential circular references</pre>
+<pre class="line current"><span class="ws">            </span>compat.reraise(exc_type, exc_value, exc_tb)</pre>
+<pre class="line after"><span class="ws">        </span>else:</pre>
+<pre class="line after"><span class="ws">            </span>if not compat.py3k and self._exc_info and self._exc_info[1]:</pre>
+<pre class="line after"><span class="ws">                </span># emulate Py3K's behavior of telling us when an exception</pre>
+<pre class="line after"><span class="ws">                </span># occurs in an exception handler.</pre>
+<pre class="line after"><span class="ws">                </span>warn(</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317168">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/util/compat.py"</cite>,
+      line <em class="line">186</em>,
+      in <code class="function">reraise</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>if cause is not None:</pre>
+<pre class="line before"><span class="ws">            </span>assert cause is not value, &quot;Same cause emitted&quot;</pre>
+<pre class="line before"><span class="ws">            </span>value.__cause__ = cause</pre>
+<pre class="line before"><span class="ws">        </span>if value.__traceback__ is not tb:</pre>
+<pre class="line before"><span class="ws">            </span>raise value.with_traceback(tb)</pre>
+<pre class="line current"><span class="ws">        </span>raise value</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span>else:</pre>
+<pre class="line after"><span class="ws">    </span># not as nice as that of Py3K, but at least preserves</pre>
+<pre class="line after"><span class="ws">    </span># the code line where the issue occurred</pre>
+<pre class="line after"><span class="ws">    </span>exec(&quot;def reraise(tp, value, tb=None, cause=None):\n&quot;</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403315376">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py"</cite>,
+      line <em class="line">1057</em>,
+      in <code class="function">_do_get</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">                        </span>&quot;connection timed out, timeout %d&quot; %</pre>
+<pre class="line before"><span class="ws">                        </span>(self.size(), self.overflow(), self._timeout))</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">            </span>if self._inc_overflow():</pre>
+<pre class="line before"><span class="ws">                </span>try:</pre>
+<pre class="line current"><span class="ws">                    </span>return self._create_connection()</pre>
+<pre class="line after"><span class="ws">                </span>except:</pre>
+<pre class="line after"><span class="ws">                    </span>with util.safe_reraise():</pre>
+<pre class="line after"><span class="ws">                        </span>self._dec_overflow()</pre>
+<pre class="line after"><span class="ws">            </span>else:</pre>
+<pre class="line after"><span class="ws">                </span>return self._do_get()</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317616">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py"</cite>,
+      line <em class="line">323</em>,
+      in <code class="function">_create_connection</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>return _ConnectionFairy._checkout(self)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def _create_connection(self):</pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;Called by subclasses to create a new ConnectionRecord.&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">        </span>return _ConnectionRecord(self)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def _invalidate(self, connection, exception=None):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Mark all connections established within the generation</pre>
+<pre class="line after"><span class="ws">        </span>of the given connection as invalidated.</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317672">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py"</cite>,
+      line <em class="line">449</em>,
+      in <code class="function">__init__</code></h4>
+  <div class="source"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def __init__(self, pool):</pre>
+<pre class="line before"><span class="ws">        </span>self.__pool = pool</pre>
+<pre class="line current"><span class="ws">        </span>self.connection = self.__connect()</pre>
+<pre class="line after"><span class="ws">        </span>self.finalize_callback = deque()</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>pool.dispatch.first_connect.\</pre>
+<pre class="line after"><span class="ws">            </span>for_modify(pool.dispatch).\</pre>
+<pre class="line after"><span class="ws">            </span>exec_once(self.connection, self)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317728">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py"</cite>,
+      line <em class="line">607</em>,
+      in <code class="function">__connect</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>self.__pool._close_connection(self.connection)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def __connect(self):</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>self.starttime = time.time()</pre>
+<pre class="line current"><span class="ws">            </span>connection = self.__pool._invoke_creator(self)</pre>
+<pre class="line after"><span class="ws">            </span>self.__pool.logger.debug(&quot;Created new connection %r&quot;, connection)</pre>
+<pre class="line after"><span class="ws">            </span>return connection</pre>
+<pre class="line after"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">            </span>self.__pool.logger.debug(&quot;Error on connect(): %s&quot;, e)</pre>
+<pre class="line after"><span class="ws">            </span>raise</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317784">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/strategies.py"</cite>,
+      line <em class="line">97</em>,
+      in <code class="function">connect</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">                    </span>for fn in dialect.dispatch.do_connect:</pre>
+<pre class="line before"><span class="ws">                        </span>connection = fn(</pre>
+<pre class="line before"><span class="ws">                            </span>dialect, connection_record, cargs, cparams)</pre>
+<pre class="line before"><span class="ws">                        </span>if connection is not None:</pre>
+<pre class="line before"><span class="ws">                            </span>return connection</pre>
+<pre class="line current"><span class="ws">                </span>return dialect.connect(*cargs, **cparams)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">            </span>creator = pop_kwarg('creator', connect)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">            </span>poolclass = pop_kwarg('poolclass', None)</pre>
+<pre class="line after"><span class="ws">            </span>if poolclass is None:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317504">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/default.py"</cite>,
+      line <em class="line">385</em>,
+      in <code class="function">connect</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">                </span>&quot;Identifier '%s' exceeds maximum length of %d characters&quot; %</pre>
+<pre class="line before"><span class="ws">                </span>(ident, self.max_identifier_length)</pre>
+<pre class="line before"><span class="ws">            </span>)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def connect(self, *cargs, **cparams):</pre>
+<pre class="line current"><span class="ws">        </span>return self.dbapi.connect(*cargs, **cparams)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def create_connect_args(self, url):</pre>
+<pre class="line after"><span class="ws">        </span>opts = url.translate_connect_args()</pre>
+<pre class="line after"><span class="ws">        </span>opts.update(url.query)</pre>
+<pre class="line after"><span class="ws">        </span>return [[], opts]</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317560">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/MySQLdb/__init__.py"</cite>,
+      line <em class="line">81</em>,
+      in <code class="function">Connect</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">    </span>return bytes(x)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws"></span>def Connect(*args, **kwargs):</pre>
+<pre class="line before"><span class="ws">    </span>&quot;&quot;&quot;Factory function for connections.Connection.&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws">    </span>from MySQLdb.connections import Connection</pre>
+<pre class="line current"><span class="ws">    </span>return Connection(*args, **kwargs)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span>connect = Connection = Connect</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span>__all__ = [ 'BINARY', 'Binary', 'Connect', 'Connection', 'DATE',</pre>
+<pre class="line after"><span class="ws">    </span>'Date', 'Time', 'Timestamp', 'DateFromTicks', 'TimeFromTicks',</pre></div>
+</div>
+
+<li><div class="frame" id="frame-4403317840">
+  <h4>File <cite class="filename">"/Users/recochoku/venv/lib/python3.5/site-packages/MySQLdb/connections.py"</cite>,
+      line <em class="line">204</em>,
+      in <code class="function">__init__</code></h4>
+  <div class="source"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span># PEP-249 requires autocommit to be initially off</pre>
+<pre class="line before"><span class="ws">        </span>autocommit = kwargs2.pop('autocommit', False)</pre>
+<pre class="line before"><span class="ws">        </span>self.waiter = kwargs2.pop('waiter', None)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">        </span>super(Connection, self).__init__(*args, **kwargs2)</pre>
+<pre class="line after"><span class="ws">        </span>self.cursorclass = cursorclass</pre>
+<pre class="line after"><span class="ws">        </span>self.encoders = dict([ (k, v) for k, v in conv.items()</pre>
+<pre class="line after"><span class="ws">                               </span>if type(k) is not int ])</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>self._server_version = tuple([ numeric_part(n) for n in self.get_server_info().split('.')[:2] ])</pre></div>
+</div>
+</ul>
+  <blockquote>sqlalchemy.exc.OperationalError: (_mysql_exceptions.OperationalError) (1045, &quot;Access denied for user 'root'@'localhost' (using password: YES)&quot;)</blockquote>
+</div>
+
+<div class="plain">
+  <form action="/?__debugger__=yes&amp;cmd=paste" method="post">
+    <p>
+      <input type="hidden" name="language" value="pytb">
+      This is the Copy/Paste friendly version of the traceback.  <span
+      class="pastemessage">You can also paste this traceback into
+      a <a href="https://gist.github.com/">gist</a>:
+      <input type="submit" value="create paste"></span>
+    </p>
+    <textarea cols="50" rows="10" name="code" readonly>Traceback (most recent call last):
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 2000, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1991, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1567, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1988, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1641, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1544, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1639, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1625, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/recochoku/peach-demo/docker/repos/peach-api/api/endpoints/auth.py", line 112, in authenticate
+    user = User.query.filter_by(mail=auth.key, is_delete=0, is_retire=0).scalar()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2749, in scalar
+    ret = self.one()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2718, in one
+    ret = list(self)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2761, in __iter__
+    return self._execute_and_instances(context)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2774, in _execute_and_instances
+    close_with_result=True)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2765, in _connection_from_session
+    **kw)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/session.py", line 893, in connection
+    execution_options=execution_options)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/session.py", line 898, in _connection_for_bind
+    engine, execution_options)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/session.py", line 334, in _connection_for_bind
+    conn = bind.contextual_connect()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 2039, in contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 2078, in _wrap_pool_connect
+    e, dialect, self)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 1405, in _handle_dbapi_exception_noconnection
+    exc_info
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/util/compat.py", line 202, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/util/compat.py", line 185, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 2074, in _wrap_pool_connect
+    return fn()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 376, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 713, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 480, in checkout
+    rec = pool._do_get()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 1060, in _do_get
+    self._dec_overflow()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/util/langhelpers.py", line 60, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/util/compat.py", line 186, in reraise
+    raise value
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 1057, in _do_get
+    return self._create_connection()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 323, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 449, in __init__
+    self.connection = self.__connect()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 607, in __connect
+    connection = self.__pool._invoke_creator(self)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/strategies.py", line 97, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/default.py", line 385, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/MySQLdb/__init__.py", line 81, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/MySQLdb/connections.py", line 204, in __init__
+    super(Connection, self).__init__(*args, **kwargs2)
+sqlalchemy.exc.OperationalError: (_mysql_exceptions.OperationalError) (1045, "Access denied for user 'root'@'localhost' (using password: YES)")</textarea>
+  </form>
+</div>
+<div class="explanation">
+  The debugger caught an exception in your WSGI application.  You can now
+  look at the traceback which led to the error.  <span class="nojavascript">
+  If you enable JavaScript you can also use additional features such as code
+  execution (if the evalex feature is enabled), automatic pasting of the
+  exceptions and much more.</span>
+</div>
+      <div class="footer">
+        Brought to you by <strong class="arthur">DON'T PANIC</strong>, your
+        friendly Werkzeug powered traceback interpreter.
+      </div>
+    </div>
+
+    <div class="pin-prompt">
+      <div class="inner">
+        <h3>Console Locked</h3>
+        <p>
+          The console is locked and needs to be unlocked by entering the PIN.
+          You can find the PIN printed out on the standard output of your
+          shell that runs the server.
+        <form>
+          <p>PIN:
+            <input type=text name=pin size=14>
+            <input type=submit name=btn value="Confirm Pin">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!--
+
+Traceback (most recent call last):
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 2000, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1991, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1567, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1988, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1641, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1544, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1639, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/flask/app.py", line 1625, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/recochoku/peach-demo/docker/repos/peach-api/api/endpoints/auth.py", line 112, in authenticate
+    user = User.query.filter_by(mail=auth.key, is_delete=0, is_retire=0).scalar()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2749, in scalar
+    ret = self.one()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2718, in one
+    ret = list(self)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2761, in __iter__
+    return self._execute_and_instances(context)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2774, in _execute_and_instances
+    close_with_result=True)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/query.py", line 2765, in _connection_from_session
+    **kw)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/session.py", line 893, in connection
+    execution_options=execution_options)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/session.py", line 898, in _connection_for_bind
+    engine, execution_options)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/orm/session.py", line 334, in _connection_for_bind
+    conn = bind.contextual_connect()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 2039, in contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 2078, in _wrap_pool_connect
+    e, dialect, self)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 1405, in _handle_dbapi_exception_noconnection
+    exc_info
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/util/compat.py", line 202, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/util/compat.py", line 185, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/base.py", line 2074, in _wrap_pool_connect
+    return fn()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 376, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 713, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 480, in checkout
+    rec = pool._do_get()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 1060, in _do_get
+    self._dec_overflow()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/util/langhelpers.py", line 60, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/util/compat.py", line 186, in reraise
+    raise value
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 1057, in _do_get
+    return self._create_connection()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 323, in _create_connection
+    return _ConnectionRecord(self)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 449, in __init__
+    self.connection = self.__connect()
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/pool.py", line 607, in __connect
+    connection = self.__pool._invoke_creator(self)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/strategies.py", line 97, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/sqlalchemy/engine/default.py", line 385, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/MySQLdb/__init__.py", line 81, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/recochoku/venv/lib/python3.5/site-packages/MySQLdb/connections.py", line 204, in __init__
+    super(Connection, self).__init__(*args, **kwargs2)
+sqlalchemy.exc.OperationalError: (_mysql_exceptions.OperationalError) (1045, "Access denied for user 'root'@'localhost' (using password: YES)")
+
+-->
+
+
+2016-08-18 17:57:22,122	[INFO]	success login!
+2016-08-19 10:27:22,768	[INFO]	success login!
+2016-08-19 10:59:08,987	[INFO]	success login!
+2016-08-19 12:00:13,042	[INFO]	success login!
+2016-08-19 12:00:13,816	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Length': '339', 'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Type': 'text/html', 'Date': 'Fri, 19 Aug 2016 03:00:13 GMT'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 12:00:14,130	[INFO]	success login!
+2016-08-19 12:00:16,277	[INFO]	success login!
+2016-08-19 12:00:18,077	[INFO]	success login!
+2016-08-19 12:00:20,035	[INFO]	success login!
+2016-08-19 12:00:21,572	[INFO]	success login!
+2016-08-19 12:00:22,998	[INFO]	success login!
+2016-08-19 12:00:24,349	[INFO]	success login!
+2016-08-19 12:00:25,822	[INFO]	success login!
+2016-08-19 12:00:27,276	[INFO]	success login!
+2016-08-19 12:00:32,296	[INFO]	success login!
+2016-08-19 12:00:36,370	[INFO]	success login!
+2016-08-19 12:00:48,083	[INFO]	success login!
+2016-08-19 12:00:50,506	[INFO]	success login!
+2016-08-19 12:00:54,019	[INFO]	success login!
+2016-08-19 12:00:57,337	[INFO]	success login!
+2016-08-19 12:00:58,883	[INFO]	success login!
+2016-08-19 12:01:00,280	[INFO]	success login!
+2016-08-19 12:01:01,961	[INFO]	success login!
+2016-08-19 12:01:03,530	[INFO]	success login!
+2016-08-19 12:01:04,921	[INFO]	success login!
+2016-08-19 12:01:07,229	[INFO]	success login!
+2016-08-19 12:01:09,414	[INFO]	success login!
+2016-08-19 12:01:11,298	[INFO]	success login!
+2016-08-19 12:01:13,143	[INFO]	success login!
+2016-08-19 12:01:16,683	[INFO]	success login!
+2016-08-19 12:01:18,327	[INFO]	success login!
+2016-08-19 12:01:21,455	[INFO]	success login!
+2016-08-19 12:01:24,315	[INFO]	success login!
+2016-08-19 12:01:29,421	[INFO]	success login!
+2016-08-19 12:01:30,307	[INFO]	success login!
+2016-08-19 12:01:34,642	[INFO]	success login!
+2016-08-19 12:01:41,327	[INFO]	success login!
+2016-08-19 12:01:42,736	[INFO]	success login!
+2016-08-19 12:01:53,862	[INFO]	success login!
+2016-08-19 12:02:15,912	[INFO]	success login!
+2016-08-19 12:02:30,200	[INFO]	success login!
+2016-08-19 12:02:45,979	[INFO]	success login!
+2016-08-19 12:03:07,292	[INFO]	success login!
+2016-08-19 12:03:22,819	[INFO]	success login!
+2016-08-19 12:03:38,360	[INFO]	success login!
+2016-08-19 12:03:57,588	[INFO]	success login!
+2016-08-19 12:04:16,860	[INFO]	success login!
+2016-08-19 12:04:36,459	[INFO]	success login!
+2016-08-19 12:04:53,232	[INFO]	success login!
+2016-08-19 12:05:14,761	[INFO]	success login!
+2016-08-19 12:05:34,058	[INFO]	success login!
+2016-08-19 12:05:50,922	[INFO]	success login!
+2016-08-19 12:06:12,339	[INFO]	success login!
+2016-08-19 12:06:31,811	[INFO]	success login!
+2016-08-19 12:06:35,309	[INFO]	success login!
+2016-08-19 12:06:38,739	[INFO]	success login!
+2016-08-19 12:06:45,133	[INFO]	success login!
+2016-08-19 12:06:55,113	[INFO]	success login!
+2016-08-19 12:07:08,406	[INFO]	success login!
+2016-08-19 12:07:21,337	[INFO]	success login!
+2016-08-19 12:07:27,866	[INFO]	success login!
+2016-08-19 12:07:34,693	[INFO]	success login!
+2016-08-19 12:10:46,037	[INFO]	success login!
+2016-08-19 12:26:06,343	[INFO]	success login!
+2016-08-19 12:39:36,967	[INFO]	success login!
+2016-08-19 12:39:37,757	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Length': '339', 'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Type': 'text/html', 'Date': 'Fri, 19 Aug 2016 03:39:37 GMT'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 12:39:54,829	[INFO]	success login!
+2016-08-19 12:39:57,511	[INFO]	success login!
+2016-08-19 12:39:59,409	[INFO]	success login!
+2016-08-19 12:40:01,171	[INFO]	success login!
+2016-08-19 12:40:02,538	[INFO]	success login!
+2016-08-19 12:40:04,111	[INFO]	success login!
+2016-08-19 12:40:05,476	[INFO]	success login!
+2016-08-19 12:40:06,996	[INFO]	success login!
+2016-08-19 12:40:08,422	[INFO]	success login!
+2016-08-19 12:45:35,339	[INFO]	success login!
+2016-08-19 12:45:36,936	[INFO]	success login!
+2016-08-19 12:45:38,863	[INFO]	success login!
+2016-08-19 12:45:40,651	[INFO]	success login!
+2016-08-19 12:45:41,966	[INFO]	success login!
+2016-08-19 12:45:43,387	[INFO]	success login!
+2016-08-19 12:45:44,885	[INFO]	success login!
+2016-08-19 12:45:46,543	[INFO]	success login!
+2016-08-19 12:45:48,006	[INFO]	success login!
+2016-08-19 13:05:22,287	[INFO]	success login!
+2016-08-19 13:05:23,394	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Length': '339', 'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Type': 'text/html', 'Date': 'Fri, 19 Aug 2016 04:05:23 GMT'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 13:05:50,654	[INFO]	success login!
+2016-08-19 13:05:53,026	[INFO]	success login!
+2016-08-19 13:05:55,316	[INFO]	success login!
+2016-08-19 13:05:58,001	[INFO]	success login!
+2016-08-19 13:05:59,737	[INFO]	success login!
+2016-08-19 13:06:01,882	[INFO]	success login!
+2016-08-19 13:06:03,653	[INFO]	success login!
+2016-08-19 13:06:05,348	[INFO]	success login!
+2016-08-19 13:06:07,407	[INFO]	success login!
+2016-08-19 13:12:37,753	[INFO]	success login!
+2016-08-19 13:12:38,736	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Length': '339', 'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Type': 'text/html', 'Date': 'Fri, 19 Aug 2016 04:12:38 GMT'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 13:12:45,831	[INFO]	success login!
+2016-08-19 13:12:48,350	[INFO]	success login!
+2016-08-19 13:12:50,841	[INFO]	success login!
+2016-08-19 13:12:53,063	[INFO]	success login!
+2016-08-19 13:12:55,240	[INFO]	success login!
+2016-08-19 13:12:56,997	[INFO]	success login!
+2016-08-19 13:12:58,847	[INFO]	success login!
+2016-08-19 13:13:00,783	[INFO]	success login!
+2016-08-19 13:13:02,718	[INFO]	success login!
+2016-08-19 13:19:03,202	[INFO]	success login!
+2016-08-19 13:19:04,054	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Length': '339', 'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Type': 'text/html', 'Date': 'Fri, 19 Aug 2016 04:19:04 GMT'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 13:19:15,933	[INFO]	success login!
+2016-08-19 13:19:18,169	[INFO]	success login!
+2016-08-19 13:19:20,623	[INFO]	success login!
+2016-08-19 13:19:23,349	[INFO]	success login!
+2016-08-19 13:19:25,243	[INFO]	success login!
+2016-08-19 13:19:27,265	[INFO]	success login!
+2016-08-19 13:19:28,891	[INFO]	success login!
+2016-08-19 13:19:30,648	[INFO]	success login!
+2016-08-19 13:19:32,709	[INFO]	success login!
+2016-08-19 13:20:05,213	[INFO]	success login!
+2016-08-19 13:20:11,187	[INFO]	success login!
+2016-08-19 13:20:15,999	[INFO]	success login!
+2016-08-19 13:20:29,399	[INFO]	success login!
+2016-08-19 13:20:32,482	[INFO]	success login!
+2016-08-19 13:20:35,248	[INFO]	success login!
+2016-08-19 13:20:37,497	[INFO]	success login!
+2016-08-19 13:20:39,162	[INFO]	success login!
+2016-08-19 13:20:41,176	[INFO]	success login!
+2016-08-19 13:20:43,129	[INFO]	success login!
+2016-08-19 13:20:45,184	[INFO]	success login!
+2016-08-19 13:26:10,699	[INFO]	success login!
+2016-08-19 13:26:11,495	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Length': '339', 'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Type': 'text/html', 'Date': 'Fri, 19 Aug 2016 04:26:11 GMT'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 13:26:12,174	[INFO]	success login!
+2016-08-19 13:26:14,601	[INFO]	success login!
+2016-08-19 13:26:16,913	[INFO]	success login!
+2016-08-19 13:26:19,128	[INFO]	success login!
+2016-08-19 13:26:20,616	[INFO]	success login!
+2016-08-19 13:26:22,382	[INFO]	success login!
+2016-08-19 13:26:24,296	[INFO]	success login!
+2016-08-19 13:26:25,950	[INFO]	success login!
+2016-08-19 13:26:27,482	[INFO]	success login!
+2016-08-19 13:26:33,159	[INFO]	success login!
+2016-08-19 13:26:38,905	[INFO]	success login!
+2016-08-19 13:26:43,331	[INFO]	success login!
+2016-08-19 13:26:55,671	[INFO]	success login!
+2016-08-19 13:26:58,606	[INFO]	success login!
+2016-08-19 13:27:01,419	[INFO]	success login!
+2016-08-19 13:27:04,266	[INFO]	success login!
+2016-08-19 13:27:06,036	[INFO]	success login!
+2016-08-19 13:27:07,760	[INFO]	success login!
+2016-08-19 13:27:09,451	[INFO]	success login!
+2016-08-19 13:27:10,923	[INFO]	success login!
+2016-08-19 13:27:12,679	[INFO]	success login!
+2016-08-19 13:27:15,988	[INFO]	success login!
+2016-08-19 13:27:18,551	[INFO]	success login!
+2016-08-19 13:27:20,980	[INFO]	success login!
+2016-08-19 13:27:23,100	[INFO]	success login!
+2016-08-19 13:27:27,617	[INFO]	success login!
+2016-08-19 13:27:33,860	[INFO]	success login!
+2016-08-19 13:27:37,116	[INFO]	success login!
+2016-08-19 13:27:40,295	[INFO]	success login!
+2016-08-19 13:27:45,844	[INFO]	success login!
+2016-08-19 13:27:47,050	[INFO]	success login!
+2016-08-19 13:27:50,860	[INFO]	success login!
+2016-08-19 13:27:58,822	[INFO]	success login!
+2016-08-19 13:28:00,520	[INFO]	success login!
+2016-08-19 13:28:14,188	[INFO]	success login!
+2016-08-19 13:28:37,272	[INFO]	success login!
+2016-08-19 13:28:52,640	[INFO]	success login!
+2016-08-19 13:29:07,455	[INFO]	success login!
+2016-08-19 13:29:29,763	[INFO]	success login!
+2016-08-19 13:29:45,578	[INFO]	success login!
+2016-08-19 13:30:01,756	[INFO]	success login!
+2016-08-19 13:30:22,271	[INFO]	success login!
+2016-08-19 13:30:42,386	[INFO]	success login!
+2016-08-19 13:31:02,487	[INFO]	success login!
+2016-08-19 13:31:19,757	[INFO]	success login!
+2016-08-19 13:32:20,509	[INFO]	success login!
+2016-08-19 13:33:21,322	[INFO]	success login!
+2016-08-19 13:34:22,405	[INFO]	success login!
+2016-08-19 13:35:23,236	[INFO]	success login!
+2016-08-19 13:36:40,261	[INFO]	success login!
+2016-08-19 13:36:44,032	[INFO]	success login!
+2016-08-19 13:36:47,769	[INFO]	success login!
+2016-08-19 13:36:54,808	[INFO]	success login!
+2016-08-19 13:37:05,440	[INFO]	success login!
+2016-08-19 13:37:20,717	[INFO]	success login!
+2016-08-19 13:37:34,806	[INFO]	success login!
+2016-08-19 13:37:41,888	[INFO]	success login!
+2016-08-19 13:37:48,945	[INFO]	success login!
+2016-08-19 13:42:13,514	[INFO]	success login!
+2016-08-19 13:42:14,313	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Length': '339', 'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Type': 'text/html', 'Date': 'Fri, 19 Aug 2016 04:42:14 GMT'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 13:42:14,969	[INFO]	success login!
+2016-08-19 13:42:17,081	[INFO]	success login!
+2016-08-19 13:42:19,323	[INFO]	success login!
+2016-08-19 13:42:21,934	[INFO]	success login!
+2016-08-19 13:42:23,628	[INFO]	success login!
+2016-08-19 13:42:25,182	[INFO]	success login!
+2016-08-19 13:42:27,154	[INFO]	success login!
+2016-08-19 13:42:28,840	[INFO]	success login!
+2016-08-19 13:42:30,799	[INFO]	success login!
+2016-08-19 13:42:36,788	[INFO]	success login!
+2016-08-19 13:42:42,396	[INFO]	success login!
+2016-08-19 13:42:47,179	[INFO]	success login!
+2016-08-19 13:43:06,289	[INFO]	success login!
+2016-08-19 13:43:09,042	[INFO]	success login!
+2016-08-19 13:43:11,583	[INFO]	success login!
+2016-08-19 13:43:13,914	[INFO]	success login!
+2016-08-19 13:43:15,613	[INFO]	success login!
+2016-08-19 13:43:17,070	[INFO]	success login!
+2016-08-19 13:43:19,217	[INFO]	success login!
+2016-08-19 13:43:20,902	[INFO]	success login!
+2016-08-19 13:43:22,654	[INFO]	success login!
+2016-08-19 13:43:24,811	[INFO]	success login!
+2016-08-19 13:43:26,730	[INFO]	success login!
+2016-08-19 13:43:28,671	[INFO]	success login!
+2016-08-19 13:43:30,772	[INFO]	success login!
+2016-08-19 13:43:35,765	[INFO]	success login!
+2016-08-19 13:43:49,694	[INFO]	success login!
+2016-08-19 13:43:53,356	[INFO]	success login!
+2016-08-19 13:43:56,531	[INFO]	success login!
+2016-08-19 13:44:02,255	[INFO]	success login!
+2016-08-19 13:44:03,465	[INFO]	success login!
+2016-08-19 13:44:07,311	[INFO]	success login!
+2016-08-19 13:44:17,815	[INFO]	success login!
+2016-08-19 13:44:19,368	[INFO]	success login!
+2016-08-19 13:44:32,918	[INFO]	success login!
+2016-08-19 13:44:59,172	[INFO]	success login!
+2016-08-19 13:45:13,803	[INFO]	success login!
+2016-08-19 13:45:28,814	[INFO]	success login!
+2016-08-19 13:45:51,047	[INFO]	success login!
+2016-08-19 13:46:07,138	[INFO]	success login!
+2016-08-19 13:46:22,786	[INFO]	success login!
+2016-08-19 13:46:42,686	[INFO]	success login!
+2016-08-19 13:47:02,915	[INFO]	success login!
+2016-08-19 13:47:25,020	[INFO]	success login!
+2016-08-19 13:47:42,200	[INFO]	success login!
+2016-08-19 13:48:04,204	[INFO]	success login!
+2016-08-19 13:48:24,125	[INFO]	success login!
+2016-08-19 13:48:41,617	[INFO]	success login!
+2016-08-19 13:49:03,672	[INFO]	success login!
+2016-08-19 13:49:23,874	[INFO]	success login!
+2016-08-19 13:49:27,384	[INFO]	success login!
+2016-08-19 13:49:31,029	[INFO]	success login!
+2016-08-19 13:49:37,672	[INFO]	success login!
+2016-08-19 13:49:47,580	[INFO]	success login!
+2016-08-19 13:50:01,113	[INFO]	success login!
+2016-08-19 13:50:14,466	[INFO]	success login!
+2016-08-19 13:50:21,173	[INFO]	success login!
+2016-08-19 13:50:27,885	[INFO]	success login!
+2016-08-19 15:10:12,244	[INFO]	success login!
+2016-08-19 15:17:56,184	[INFO]	success login!
+2016-08-19 15:18:11,625	[INFO]	success login!
+2016-08-19 17:15:28,148	[INFO]	success login!
+2016-08-19 17:35:00,663	[INFO]	success login!
+2016-08-19 17:35:01,679	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 08:35:01 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 17:36:36,403	[INFO]	success login!
+2016-08-19 17:36:37,229	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 08:36:37 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 17:37:25,270	[INFO]	success login!
+2016-08-19 17:37:26,205	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 08:37:26 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 17:39:31,849	[INFO]	success login!
+2016-08-19 17:39:32,950	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 08:39:32 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 17:41:42,371	[INFO]	success login!
+2016-08-19 17:41:43,751	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 08:41:43 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 17:43:34,367	[INFO]	success login!
+2016-08-19 17:43:35,300	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 08:43:35 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 17:43:53,593	[INFO]	success login!
+2016-08-19 17:43:54,598	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 08:43:54 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 17:48:21,931	[INFO]	success login!
+2016-08-19 17:48:22,908	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 08:48:22 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 17:56:44,617	[INFO]	success login!
+2016-08-19 17:56:45,543	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 08:56:45 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 18:01:48,035	[INFO]	success login!
+2016-08-19 18:01:49,402	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 09:01:49 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 18:09:14,116	[INFO]	success login!
+2016-08-19 18:09:15,253	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 09:09:15 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 18:09:35,580	[INFO]	success login!
+2016-08-19 18:09:36,647	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 09:09:36 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 18:11:55,593	[INFO]	success login!
+2016-08-19 18:11:56,985	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 09:11:56 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 18:13:44,764	[INFO]	success login!
+2016-08-19 18:13:45,768	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 09:13:45 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 18:14:20,476	[INFO]	success login!
+2016-08-19 18:14:21,423	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'text/html', 'Content-Length': '339', 'Date': 'Fri, 19 Aug 2016 09:14:21 GMT', 'Server': 'Werkzeug/0.11.10 Python/3.5.1'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 18:22:48,857	[INFO]	success login!
+2016-08-19 18:22:49,924	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Type': 'text/html', 'Date': 'Fri, 19 Aug 2016 09:22:49 GMT', 'Content-Length': '339'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+
+2016-08-19 18:48:25,648	[INFO]	success login!
+2016-08-19 18:48:26,225	[INFO]	success login!
+2016-08-19 18:48:28,464	[INFO]	success login!
+2016-08-19 18:48:33,525	[INFO]	success login!
+2016-08-19 18:48:37,938	[INFO]	success login!
+2016-08-19 18:48:49,018	[INFO]	success login!
+2016-08-19 18:48:52,551	[INFO]	success login!
+2016-08-19 18:48:54,537	[INFO]	success login!
+2016-08-19 18:48:56,154	[INFO]	success login!
+2016-08-19 18:48:57,661	[INFO]	success login!
+2016-08-19 18:48:59,500	[INFO]	success login!
+2016-08-19 18:49:01,194	[INFO]	success login!
+2016-08-19 18:49:04,130	[INFO]	success login!
+2016-08-19 18:49:07,052	[INFO]	success login!
+2016-08-19 18:49:12,248	[INFO]	success login!
+2016-08-19 18:49:13,297	[INFO]	success login!
+2016-08-19 18:49:16,738	[INFO]	success login!
+2016-08-19 18:49:24,483	[INFO]	success login!
+2016-08-19 18:49:25,716	[INFO]	success login!
+2016-08-22 10:26:40,207	[INFO]	success login!
+2016-08-22 10:27:17,911	[INFO]	success login!
+2016-08-22 10:27:18,508	[INFO]	success login!
+2016-08-22 10:27:20,713	[INFO]	success login!
+2016-08-22 10:27:25,707	[INFO]	success login!
+2016-08-22 10:27:28,712	[INFO]	success login!
+2016-08-22 10:27:39,659	[INFO]	success login!
+2016-08-22 10:27:43,436	[INFO]	success login!
+2016-08-22 10:27:45,516	[INFO]	success login!
+2016-08-22 10:27:49,432	[INFO]	success login!
+2016-08-22 10:54:12,311	[INFO]	success login!
+2016-08-22 10:54:12,889	[INFO]	success login!
+2016-08-22 10:54:14,724	[INFO]	success login!
+2016-08-22 10:54:20,239	[INFO]	success login!
+2016-08-22 10:54:25,409	[INFO]	success login!
+2016-08-22 10:54:28,834	[INFO]	success login!
+2016-08-22 10:54:42,485	[INFO]	success login!
+2016-08-22 10:54:46,247	[INFO]	success login!
+2016-08-22 10:54:48,024	[INFO]	success login!
+2016-08-22 10:54:51,458	[INFO]	success login!
+2016-08-22 10:55:01,097	[INFO]	success login!
+2016-08-22 10:57:06,141	[INFO]	success login!
+2016-08-22 10:57:06,736	[INFO]	success login!
+2016-08-22 10:57:08,354	[INFO]	success login!
+2016-08-22 10:57:13,888	[INFO]	success login!
+2016-08-22 10:57:18,920	[INFO]	success login!
+2016-08-22 10:57:23,939	[INFO]	success login!
+2016-08-22 10:58:15,733	[INFO]	success login!
+2016-08-22 10:58:16,218	[INFO]	success login!
+2016-08-22 10:58:18,237	[INFO]	success login!
+2016-08-22 10:58:23,578	[INFO]	success login!
+2016-08-22 10:58:28,303	[INFO]	success login!
+2016-08-22 10:58:32,580	[INFO]	success login!
+2016-08-22 10:58:40,987	[INFO]	success login!
+2016-08-22 10:58:43,119	[INFO]	success login!
+2016-08-22 10:58:44,543	[INFO]	success login!
+2016-08-22 10:58:47,405	[INFO]	success login!
+2016-08-22 10:58:56,779	[INFO]	success login!
+2016-08-22 10:59:17,642	[INFO]	success login!
+2016-08-22 10:59:31,061	[INFO]	success login!
+2016-08-22 10:59:44,521	[INFO]	success login!
+2016-08-22 11:00:04,992	[INFO]	success login!
+2016-08-22 11:00:19,810	[INFO]	success login!
+2016-08-22 11:00:34,474	[INFO]	success login!
+2016-08-22 11:00:51,053	[INFO]	success login!
+2016-08-22 11:01:10,006	[INFO]	success login!
+2016-08-22 11:01:28,662	[INFO]	success login!
+2016-08-22 11:01:47,422	[INFO]	success login!
+2016-08-22 11:02:04,199	[INFO]	success login!
+2016-08-22 11:02:25,253	[INFO]	success login!
+2016-08-22 11:02:43,953	[INFO]	success login!
+2016-08-22 11:03:00,395	[INFO]	success login!
+2016-08-22 11:03:21,036	[INFO]	success login!
+2016-08-22 11:03:40,027	[INFO]	success login!
+2016-08-22 11:03:41,690	[INFO]	success login!
+2016-08-22 11:03:42,422	[INFO]	success login!
+2016-08-22 11:03:45,631	[INFO]	success login!
+2016-08-22 11:03:48,818	[INFO]	success login!
+2016-08-22 11:03:55,122	[INFO]	success login!
+2016-08-22 11:04:04,447	[INFO]	success login!
+2016-08-22 11:04:16,917	[INFO]	success login!
+2016-08-22 11:04:29,356	[INFO]	success login!
+2016-08-22 11:04:35,628	[INFO]	success login!
+2016-08-22 11:04:41,791	[INFO]	success login!
+2016-08-22 11:15:38,340	[INFO]	success login!
+2016-08-22 11:15:38,790	[INFO]	success login!
+2016-08-22 11:15:40,876	[INFO]	success login!
+2016-08-22 11:15:46,477	[INFO]	success login!
+2016-08-22 11:25:16,056	[INFO]	success login!
+2016-08-22 11:25:24,370	[INFO]	success login!
+2016-08-22 11:25:25,972	[WARNING]	(400)
+Reason: BAD REQUEST
+HTTP response headers: HTTPHeaderDict({'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Type': 'text/html; charset=utf-8', 'Date': 'Mon, 22 Aug 2016 02:25:25 GMT', 'Content-Length': '126'})
+HTTP response body: {"code": "xxx", "message": "\u65e2\u306b\u767b\u9332\u6e08\u307f\u306e\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9\u3067\u3059"}
+
+2016-08-22 11:25:26,198	[INFO]	success login!
+2016-08-22 11:25:33,264	[INFO]	success login!
+2016-08-22 11:25:36,540	[INFO]	success login!
+2016-08-22 11:25:46,278	[WARNING]	(400)
+Reason: BAD REQUEST
+HTTP response headers: HTTPHeaderDict({'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Type': 'text/html; charset=utf-8', 'Date': 'Mon, 22 Aug 2016 02:25:46 GMT', 'Content-Length': '126'})
+HTTP response body: {"code": "xxx", "message": "\u65e2\u306b\u767b\u9332\u6e08\u307f\u306e\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9\u3067\u3059"}
+
+2016-08-22 11:25:46,608	[INFO]	success login!
+2016-08-22 11:31:06,101	[WARNING]	creator login: (401)
+Reason: UNAUTHORIZED
+HTTP response headers: HTTPHeaderDict({'Server': 'Werkzeug/0.11.10 Python/3.5.1', 'Content-Type': 'text/html', 'Date': 'Mon, 22 Aug 2016 02:31:06 GMT', 'Content-Length': '339'})
+HTTP response body: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>401 Unauthorized</title>
+<h1>Unauthorized</h1>
+<p>The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
+
+

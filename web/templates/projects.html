@@ -1,0 +1,100 @@
+{% extends 'top_layout.html' %}
+
+{% block meta %}
+<title>プロジェクト一覧 | 【WIZY（ウィジー）】みんなの夢をかたちにしよう-アーティストとファンによる共創・体験型の音楽クラウドファンディングプラットフォーム</title>
+<meta name="keywords" content="クラウドファンディング,音楽,WIZY,ウィジー,共創,クラウドクリエイティング,レコチョク">
+<meta name="description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:title" content="プロジェクト一覧 | みんなの夢をかたちにしよう-アーティストとファンによる共創型クラウドクリエイティング | WIZY（ウィジー）">
+<meta property="og:description" content="音楽は、ただ”聴くこと”から”体験”として多様化し、そのサイクルをアーティスト（クリエイター）とファンが”共に創る”時代に。レコチョクが運営するWIZY(ウィジー)は、アーティストとファンの想いを繋ぎ、その実現をプロジェクトという形でサポートする共創型クラウドクリエイティングプラットフォームです。">
+<meta property="og:image" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:site_name" content="WIZY（ウィジー）">
+<meta property="og:type" content="article">
+<meta name="twitter:image:src" content="{{ 'image/logo/logo_m.png'|to_cdn }}">
+{% endblock %}
+
+{% block style %}
+  <link rel="stylesheet" href="{{ 'theme/css/top.css'|to_cdn }}" type="text/css"/>
+  <style>
+    {% for project in projects %}
+      .hvr-reveal.pickup0{{ loop.index }}:after {
+        border-bottom: 30px solid {{ project.accent_color }};
+      }
+
+      #pickup a .hvr-reveal.pickup0{{ loop.index }}:before {
+        border: 0 solid {{ project.accent_color }};
+      }
+
+      #pickup a:hover .hvr-reveal.pickup0{{ loop.index }}:before,
+      #pickup a:focus .hvr-reveal.pickup0{{ loop.index }}:before,
+      #pickup a:active .hvr-reveal.pickup0{{ loop.index }}:before {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        border-width: 4px;
+      }
+
+      .pickup li.asya0{{ loop.index }} {
+        background:{{ project.accent_color }};
+      }
+      #pickup a img {
+        transition: 0.3s;
+        vertical-align: bottom;
+      }
+      #pickup a:hover img,#pickup a:focus img,#pickup a:active img {
+        opacity: 0.8;
+      }
+    {% endfor %}
+
+    @media screen and (min-width: 768px) and (max-device-width: 980px) {
+    {% for project in projects %}
+      #pickup a .hvr-reveal.pickup0{{ loop.index }}:after {
+        border-bottom: 24px solid {{ project.accent_color }};
+      }
+    {% endfor %}
+    }
+
+    @media screen and (max-width: 640px) {
+    {% for project in projects %}
+      .hvr-reveal.pickup0{{ loop.index }}:after {
+        border-bottom: 35px solid {{ project.accent_color }};
+      }
+    {% endfor %}
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="wrapper" style="margin-top: 60px;">
+
+    <div id="pickup">
+      <div class="project inner clearfix">
+        <h2>ALL PROJECTS</h2>
+        <p class="projectbtn">
+          <a href="{{ url_for('front.home') }}">トップへ戻る</a>
+        </p>
+      </div>
+
+      <section class="inner">
+        {% for project in projects %}
+          <a href="{{ url_for('front.project', project_id=project.id) }}">
+            <ul class="pickup inner clearfix">
+              <li class="asya asya0{{ loop.index }}" >
+                <img class="image" src="{{ project.image|to_cdn('project') }}">
+              </li>
+              <li class="text">
+                <div class="hvr-reveal pickup0{{ loop.index }}">
+                  <div class=hwrap>
+                    <div class="ptitle"><h3>{{ project.title }}</h3></div>
+                    <div class="cname"><h3>{{ project.user_name }}</h3></div>
+                    <div class="pdetail">{{ project.summary }}</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </a>
+        {% endfor %}
+      </section>
+
+    </div>
+  </div>
+{% endblock %}

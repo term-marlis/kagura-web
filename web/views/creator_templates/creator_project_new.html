@@ -1,0 +1,114 @@
+{% extends "creator_layout.html" %}
+
+{% block meta %}
+<title>プロジェクト作成 - クリエイター</title>
+<meta property="og:title" content="プロジェクト作成 - クリエイター">
+{% endblock %}
+
+{% block body %}
+  <div class="ui container">
+    <div class="ui stackable grid">
+      <div class="sixteen wide column">
+        <a href="{{ url_for('creator.home') }}"
+           class="ui right floated tiny basic gold button">
+          <i class="icon remove"></i>Cancel
+        </a>
+        <div class="ui huge breadcrumb">
+          <a class="section" href="{{ url_for('creator.home') }}">My Projects</a>
+          <i class="right chevron icon divider"></i>
+          <div class="active section">New</div>
+        </div>
+        <div class="ui divider"></div>
+      </div>
+    </div>
+
+    <div class="sixteen wide column">
+      <div class="ui pointing secondary menu">
+        <a class="item active" data-tab="first"><i class="ui camera retro icon"></i>基本情報</a>
+      </div>
+      <form class="ui form" method="post" action="{{ url_for('creator.project_new') }}">
+        <div class="ui stackable grid">
+          {{ basic_form.hidden_tag() }}
+          <div class="ui eight wide column">
+            <div class="ui field">
+              {{ basic_form.title.label }}
+              {{ basic_form.title(placeholder='Title', maxlength=40) }}
+            </div>
+            <div class="ui field">
+              {{ basic_form.summary.label }}
+              {{ basic_form.summary(rows=3,  placeholder='Summary', maxlength=60) }}
+            </div>
+            <div class="ui two fields">
+              <div class="ui field">
+                {{ basic_form.start_date.label }}
+                <div class="ui input">
+                  {{ basic_form.start_date }}
+                </div>
+              </div>
+              <div class="ui field">
+                {{ basic_form.start_time.label }}
+                <div class="ui input">
+                  {{ basic_form.start_time }}
+                </div>
+              </div>
+            </div>
+            <div class="ui two fields">
+              <div class="ui field">
+                {{ basic_form.end_date.label }}
+                <div class="ui input">
+                  {{ basic_form.end_date }}
+                </div>
+              </div>
+              <div class="ui field">
+                {{ basic_form.end_time.label }}
+                <div class="ui input">
+                  {{ basic_form.end_time }}
+                </div>
+              </div>
+            </div>
+            {{ basic_form.submit(class='ui right floated gold button') }}
+          </div>
+          <div class="ui eight wide column">
+            <div class="ui two fields">
+              <div id="type_field" class="ui field">
+                {{ basic_form.type.label }}
+                {{ basic_form.type(class='ui dropdown') }}
+              </div>
+            </div>
+            <div class="ui two fields">
+              <div class="ui field">
+                {{ basic_form.target_amount.label }}
+                {{ basic_form.target_amount(type='number', min=1, max=999999999) }}
+              </div>
+              <div class="ui field">
+                {{ basic_form.target_amount.label }}
+                <div class="ui checkbox">
+                  {{ basic_form.open_amount }}
+                  {{ basic_form.open_amount.label }}
+                </div>
+              </div>
+            </div>
+            <div class="ui two fields">
+              <div id="color_field" class="ui field">
+                {{ basic_form.main_color.label }}
+                {{ basic_form.main_color(class='ui dropdown') }}
+              </div>
+              <div class="ui field">
+                {{ basic_form.accent_color.label }}
+                {{ basic_form.accent_color }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $(document).ready(function () {
+      $('.ui.dropdown').dropdown();
+    });
+  </script>
+{% endblock %}
